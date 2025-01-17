@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlowPress - Modern</title>
+    <script src="../vue.js"></script>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+    <div id="app">
+        <aside>
+            <button class="asideBtn" @click.prevent="agendamentos = false, publicar = true">ASCOM</button>
+            <button class="asideBtn">Transparência</button>
+            <button class="asideBtn" id="servicoSBtn" @click.prevent="agendamentos = true, publicar = false">Serviço Social</button>
+        </aside>
+        <header>
+            <p>Olá, {{usuario}}</p>
+        </header>
+        <main>
+            <form v-show="publicar">
+                <div id="unidadeNoticia">
+                    <p>{{publicacao.dt_publicacao}}</p>
+                    <div class="imgs">
+                        <label for="hemoseCheck">HEMOSE</label>
+                        <input type="radio" name="myCheck" id="hemoseCheck" value="2" v-model="publicacao.id_unidade">
+                    </div>
+                    <div class="imgs">
+                        <label for="lacenCheck">LACEN</label>
+                        <input type="radio" name="myCheck" id="lacenCheck" value="3" v-model="publicacao.id_unidade">
+                    </div>
+                    <div class="imgs">
+                        <label for="svoCheck">SVO</label>
+                        <input type="radio" name="myCheck" id="svoCheck" value="4" v-model="publicacao.id_unidade">
+                    </div>
+                    <div class="imgs">
+                        <label for="fsphCheck">FSPH</label>
+                        <input type="radio" name="myCheck" id="fsphCheck" value="1" v-model="publicacao.id_unidade">
+                    </div>
+                </div>
+                <div id="imgMateria">
+                    <div class="imgs">
+                        <label for="fotoCapa">Anexe a foto da Capa</label>
+                        <input type="file" id="fotoCapa" name="fotoCapa" @change="handleFileChange" ref="fotoCapa" required>
+                    </div>
+                    <div class="imgs">
+                        <label for="fotoMateria">Anexe a Primeira Foto da Materia</label>
+                        <input type="file" id="fotoMateria" name="fotoMateria" @change="handleFileChange" ref="fotoMateria" required>
+                    </div>
+                    <div class="imgs">
+                        <label for="fotoMateria2">Anexe a Segunda Foto da Materia</label>
+                        <input type="file" id="fotoMateria2" name="fotoMateria2" @change="handleFileChange" ref="fotoMateria2" required>
+                    </div>
+                </div>
+                <div class="titulos" id="tituloPrincipal">
+                    <label for="titulo">Título da Matéria</label>
+                    <input type="text" id="titulo" name="titulo" v-model="publicacao.titulo" placeholder="Digite o Titulo da Matéria">
+                </div>
+                <div class="titulos" id="primeiroParagrafo">
+                    <label for="paragrafo1">Primeiro Parágrafo</label>
+                    <textarea name="paragrafo1" id="paragrafo1" v-model="publicacao.paragrafo1" required class="paragrafos" placeholder="Digite o Primeiro Parágrafo"></textarea>
+                </div>
+                <div class="titulos" id="segundoParagrafo">
+                    <label for="paragrafo2">Segundo Parágrafo</label>
+                    <textarea name="paragrafo2" id="paragrafo2" v-model="publicacao.paragrafo2" required class="paragrafos" placeholder="Digite o Segundo Parágrafo"></textarea>
+                </div>
+                <div class="titulos" id="terceiroParagrafo">
+                    <label for="paragrafo3">Terceiro Parágrafo</label>
+                    <textarea name="paragrafo3" id="paragrafo3" v-model="publicacao.paragrafo3" required class="paragrafos" placeholder="Digite o Terceiro Parágrafo"></textarea>
+                </div>
+                <div class="titulos" id="quartoParagrafo">
+                    <label for="paragrafo4">Quarto Parágrafo</label>
+                    <textarea name="paragrafo4" id="paragrafo4" v-model="publicacao.paragrafo4" required class="paragrafos" placeholder="Digite o Quarto Parágrafo"></textarea>
+                </div>
+                <div class="titulos" id="subtitulo">
+                    <label for="titulo">Subtitulo da Matéria</label>
+                    <input type="text" id="subtitulo" name="subtitulo" v-model="publicacao.subtitulo" placeholder="Digite o Subtitulo da Matéria">
+                </div>
+                <div class="titulos" id="sub1">
+                    <label for="sub1">Primeiro Parágrafo Subtitulo</label>
+                    <textarea name="sub1" id="sub1" required class="paragrafos" v-model="publicacao.sub1" placeholder="Digite o Primeiro Parágrafo do Subtitulo"></textarea>
+                </div>
+                <div class="titulos" id="sub2">
+                    <label for="sub2">Segundo Parágrafo Subtitulo</label>
+                    <textarea name="sub2" id="sub2" required class="paragrafos" v-model="publicacao.sub2" placeholder="Digite o Segundo Parágrafo do Subtitulo"></textarea>
+                </div>
+                <div class="titulos" id="citacao">
+                    <label for="citacao">Citação</label>
+                    <textarea name="citacao" id="citacao" required class="paragrafos" v-model="publicacao.citacao" placeholder="Digite uma citação de um colaborador"></textarea>
+                </div>
+                <div class="titulos" id="pessoaCitada">
+                    <label for="pessoaCitada">Nome da Pessoa Citada</label>
+                    <input type="text" id="pessoaCitada" name="pessoaCitada" v-model="publicacao.pessoaCitada" placeholder="Nome e Cargo da Pessoa Citada">
+                </div>
+                <button id="botao" @click.prevent="publicarNoticia">Publicar</button>
+            </form>
+
+            <div class="table-container" v-show="agendamentos">
+                <table>
+                    <thead>
+                        <tr>
+                            <th v-for="(titulo) in titulos">{{titulo}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="item in publicacao.data" :key="item.id_agenda">
+                            <td>{{ item.tp_agenda }}</td>
+                            <td>{{ item.nome }}</td>
+                            <td>{{ item.cpf }}</td>
+                            <td>{{ item.contato }}</td>
+                            <td>{{item.email}}</td>
+                            <td>{{ item.qt_pessoas }}</td>
+                            <td>{{ item.dt_agenda }}</td>
+                            <td>{{ item.turno }} {{item.hr_agenda}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Colmeia - Fundação de Saúde Parreiras Horta</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta content="Fundação de Saúde Parreiras Horta" name="description" />
+  <meta content="Mannatthemes" name="author" />
+
+  <!-- App favicon -->
+  <link rel="shortcut icon" href="assets/images/logo-sm.png">
+
+  <link href="assets/plugins/dropify/css/dropify.min.css" rel="stylesheet">
+
+  <!-- animate -->
+  <link href="assets/plugins/animate/animate.css" rel="stylesheet" type="text/css">
+
+  <!-- crop -->
+  <link href="assets/plugins/cropper/css/cropper.css" rel="stylesheet">
+  <link href="assets/plugins/cropper/css/main.css" rel="stylesheet">
+
+  <!-- MultStep -->
+  <link href="assets/plugins/form-wizard/css/smart_wizard_theme_circles.css" rel="stylesheet" type="text/css" />
+  <link href="assets/plugins/form-wizard/css/smart_wizard.css" rel="stylesheet" type="text/css" />
+  <link href="assets/plugins/form-wizard/css/smart_wizard_theme_arrows.css" rel="stylesheet" type="text/css" />
+
+  <!-- App css -->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/icons.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/metismenu.min.css" rel="stylesheet" type="text/css" />
+  <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+
+  <script src="assets/js/vue.js"></script>
+  <script src="assets/js/noticiasPublicadas.js" defer></script>
+  <script src="assets/js/script.js" defer></script>
+  <script src="assets/js/mainPage.js" defer></script>
+
+
+
+</head>
+
+<body>
+
+
+  <!-- Top Bar Start -->
+  <div class="topbar">
+    <!-- Navbar -->
+    <nav class="navbar-custom">
+
+      <!-- LOGO -->
+      <div class="topbar-left">
+        <a href="mainPage.html" class="logo">
+          <span>
+            <img src="assets/images/novaLogoColmeia.png" alt="logo-small" class="logo-sm" style="height: 4rem !important;">
+          </span>
+          <span>
+            <img src="assets/images/logo-dark.png" alt="logo-large" class="logo-lg" style="height: auto; width: 6rem;">
+          </span>
+        </a>
+      </div>
+
+      <ul class="list-unstyled topbar-nav float-right mb-0">
+
+        <li class="dropdown">
+          <a class="nav-link dropdown-toggle arrow-none waves-light waves-effect" href="email-inbox.html" role="button">
+            <i class="mdi mdi-bell-outline nav-icon"></i>
+            <span class="badge badge-danger badge-pill noti-icon-badge"></span>
+          </a>
+
+        </li>
+
+
+      </ul>
+
+      <ul class="list-unstyled topbar-nav mb-0">
+
+        <li>
+          <button class="button-menu-mobile nav-link waves-effect waves-light">
+            <i class="mdi mdi-menu nav-icon"></i>
+          </button>
+        </li>
+
+        <li class="hide-phone app-search">
+          <form role="search" class="">
+            <input type="text" placeholder="Buscar..." class="form-control">
+            <a href=""><i class="fas fa-search"></i></a>
+          </form>
+        </li>
+
+      </ul>
+
+    </nav>
+    <!-- end navbar-->
+  </div>
+  <!-- Top Bar End -->
+  <div class="page-wrapper-img" id="mainPage">
+    <div class="page-wrapper-img-inner">
+      <div class="sidebar-user media">
+        <img src="assets/images/users/user-1.jpg" alt="user" class="rounded-circle img-thumbnail mb-1">
+        <span class="online-icon"><i class="mdi mdi-record text-success"></i></span>
+        <div class="media-body">
+          <h5 class="text-light">{{primeiroENomeFinal}} </h5>
+          <ul class="list-unstyled list-inline mb-0 mt-2">
+            <li class="list-inline-item">
+              <a href="page-profile.html" class=""><i class="mdi mdi-account text-light"></i></a>
+            </li>
+            <li class="list-inline-item">
+              <a href="javascript: void(0);" class=""><i class="mdi mdi-settings text-light"></i></a>
+            </li>
+            <li class="list-inline-item">
+              <a href="index.html" class=""><i class="mdi mdi-power text-danger"></i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Page-Title -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="page-title-box">
+            <h4 class="page-title mb-2"><i class="mdi mdi-monitor mr-2"></i>Noticias Publicadas</h4>
+            <div class="">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0);">Colmeia</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0);">CMS</a></li>
+                <li class="breadcrumb-item active">Noticias Publicadas</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end page title end breadcrumb -->
+    </div>
+  </div>
+
+  <div class="page-wrapper">
+    <div class="page-wrapper-inner">
+      <!-- Left Sidenav -->
+      <!-- Left Sidenav -->
+      <div class="left-sidenav">
+        <ul class="metismenu left-sidenav-menu" id="side-nav">
+          <li class="menu-title">Principal</li>
+
+          <!-- <li>
+                <a href="javascript: void(0);">
+                    <i class="mdi mdi-monitor"></i>
+                    <span>Dashboards</span>
+                    <span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
+                </a>
+                <ul class="nav-second-level" aria-expanded="false">
+                    <li>
+                        <a href="mainPage.html">Diretoria</a>
+                        
+                    </li>
+                    <li><a href="superHemose.html">Superintendência Hemose</a></li>
+                    <li><a href="#">Superintendência Lacen</a></li>
+                    <li><a href="#">Superintendência SVO</a></li>
+                    <li>
+                        <a href="#">Ambulatório</a>
+                        
+                    </li>
+                    <li><a href="#">Farmácia</a></li>
+                    <li><a href="#">Logistica / Produção</a></li>
+                    <li><a href="#">Contabilidade</a></li>
+                    <li><a href="#">Jurídico</a></li>
+                    <li><a href="#">Serviço Social</a></li>
+                </ul>
+            </li> -->
+
+          <li>
+            <a href="javascript: void(0);">
+              <i class="mdi mdi-apps"></i>
+              <span>Aplicativos</span>
+              <span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span>
+            </a>
+            <ul class="nav-second-level" aria-expanded="false">
+              <li>
+                <a href="#"><span>FSPH</span></a>
+                <ul class="nav-third-level" aria-expanded="false">
+                  <li><a href="https://suporte.fsph.se.gov.br" target="_blank">Suporte - GLPI</a></li>
+                  <li><a href="../qualicore/index.html" target="_blank">QualiCore</a></li>
+                  <li><a href="ascom.html">Publicar Noticia</a></li>
+                  <li><a href="blog.html">Noticias Ativas</a></li>
+                  <li><a href="agenda.html">Publicar Evento</a></li>
+                  <li><a href="depoimentos.html">Depoimentos</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="#"><span>HEMOSE</span></a>
+                <ul class="nav-third-level" aria-expanded="false">
+                  <li><a href="http://172.23.42.15:8080/hm" target="_blank">HemoFaces</a></li>
+                  <li><a href="servSocial.html">Captação</a></li>
+                  <li><a href="#">Ambulatório</a></li>
+                  <li><a href="https://redomeweb.inca.gov.br" target="_blank"><span>REDOME</span></a></li>
+                  <li><a href="https://notivisa.anvisa.gov.br/frmLogin.asp" target="_blank"><span>NOTIVISA</span></a></li>
+                  <li><a href="https://coagulopatiasweb.datasus.gov.br/" target="_blank"><span>Web Coagulopatias</span></a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="#"><span>SVO</span></a>
+                <ul class="nav-third-level" aria-expanded="false">
+                  <li><a href="http://172.23.9.19:82/sisvo" target="_blank"><span>SISVO</span></a></li>
+
+                </ul>
+              </li>
+              <li>
+                <a href="#"><span>LACEN</span></a>
+                <ul class="nav-third-level" aria-expanded="false">
+                  <li><a href="https://gal.sergipe.sus.gov.br/" target="_blank"><span>GAL</span></a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <a href="javascript: void(0);">
+              <i class="mdi mdi-email-variant"></i>
+              <span>Expresso</span>
+              <span class="badge badge-danger badge-pill float-right">9+</span>
+            </a>
+            <ul class="nav-second-level" aria-expanded="false">
+              <li>
+                <a href="email-inbox.html">Caixa de Entrada</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <!-- end left-sidenav-->
+      <!-- end left-sidenav-->
+      <!-- Page Content-->
+      <div class="page-content" id="noticiasPublicadas">
+        <div class="btn-group mb-2 mb-md-0 margin">
+          <button type="button" class="btn btn-soft-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filtro <i class="mdi mdi-chevron-down"></i></button>
+          <div class="dropdown-menu">
+            <label><input @change="handleAddFilter" value="ativo-1" type="checkbox" name="" id="">Ativo</label>
+            <label><input @change="handleAddFilter" value="ativo-0" type="checkbox" name="" id="">Inativo</label>
+            <label><input @change="handleAddFilter" value="unidade-1" type="checkbox" name="" id="">FSPH</label>
+            <label><input @change="handleAddFilter" value="unidade-2" type="checkbox" name="" id="">Hemose</label>
+            <label><input @change="handleAddFilter" value="unidade-3" type="checkbox" name="" id="">Lacen</label>
+            <label><input @change="handleAddFilter" value="unidade-4" type="checkbox" name="" id="">SVO</label>
+          </div>
+        </div>
+
+
+        <div v-show="filterAtivado && carregando" class="divLoader">
+          <div id="animationSandbox">
+            <div class="shadow-sm p-4 d-inline-block rounded-circle">
+              <img src="assets/images/novaLogoColmeia.png" width="100px" height="100px" alt="" class="center-block">
+            </div>
+          </div>
+        </div>
+
+        <div class="container-fluid">
+          <div class="row" v-show="noticiasFiltradas.length === 0 && !filterAtivado && !carregando" v-for="noticia in todasNoticias" :key="noticia.id_noticia">
+            <div class="col-lg-6">
+              <div class="card card-post-aside card-post-1 blog-card">
+                <div class="card-post-image">
+                  <img :src="noticia.foto_capa" :alt="`Notícia ${noticia.id_noticia}`" />
+                  <a href="#" class="card-post-category badge badge-info">
+                    {{ noticia.ativo ? 'Ativo' : 'Desativado' }}
+                  </a>
+                </div>
+                <div class="card-body">
+                  <h4 class="mt-2">
+                    <a href="#">{{ noticia.titulo }}</a>
+                  </h4>
+                  <div class="meta-box">
+                    <ul class="p-0 mt-4 list-inline">
+                      <li class="list-inline-item">
+                        {{ noticia.dt_noticia.split('T')[0].split('-').reverse().join('/') }}
+                      </li>
+                      <li class="list-inline-item">
+                        Por: <a href="#">{{ noticia.autor_noticia }}</a>
+                      </li>
+                      <li class="list-inline-item">
+                        <a href="#">
+                          {{
+                          noticia.id_unidade_fk === 1
+                          ? 'FSPH'
+                          : noticia.id_unidade_fk === 2
+                          ? 'HEMOSE'
+                          : noticia.id_unidade_fk === 3
+                          ? 'LACEN'
+                          : noticia.id_unidade_fk === 4
+                          ? 'SVO'
+                          : 'Unidade Desconhecida'
+                          }}
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <p class="text-muted">{{ noticia.subtitulo_pri_paragrafo }}</p>
+                  <div class="navBtnNoticias">
+                    <a href="#" @click="changeStatus(noticia.id_noticia, noticia.ativo)" class="text-primary">
+                      {{ noticia.ativo ? 'Desativar' : 'Ativar' }}
+                    </a>
+                    <div class="hrVertical"></div>
+                    <button class="text-primary waves-effect waves-light btnEditar" @click="handleGetNew(noticia.id_noticia)" data-toggle="modal" data-target=".bd-example-modal-xl">
+                      Editar
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row" v-show="noticiasFiltradas.length > 0 && filterAtivado && !carregando" v-for="noticia in noticiasFiltradas" :key="noticia.id_noticia">
+          <div class="col-lg-6">
+            <div class="card card-post-aside card-post-1 blog-card">
+              <div class="card-post-image">
+                <img :src="noticia.foto_capa" alt="noticia.id_noticia">
+                <a href="#" class="card-post-category badge  badge-info">{{noticia.ativo ? 'Ativo' : 'Desativado'}}</a>
+
+
+                <div class="card-post-author d-flex">
+
+                </div>
+              </div>
+              <div class="card-body">
+                <h4 class="mt-2">
+                  <a href="">{{noticia.titulo}}</a>
+                </h4>
+                <div class="meta-box">
+                  <ul class="p-0 mt-4 list-inline">
+                    <li class="list-inline-item">{{noticia.dt_noticia}}</li>
+                    <li class="list-inline-item">Por: <a href="">{{noticia.autor_noticia}}</a></li>
+                    <li class="list-inline-item"><a href="">{{noticia.id_unidade_fk === 1 ? 'FSPH' : noticia.id_unidade_fk === 2 ? 'HEMOSE' : noticia.id_unidade_fk === 3 ? 'LACEN' : noticia.id_unidade_fk === 4 ? 'SVO' : null}}</a></li>
+                  </ul>
+                </div>
+                <p class="text-muted">{{noticia.subtitulo_pri_paragrafo}}</p>
+                <div class="navBtnNoticias">
+                  <a href="#" @click="changeStatus(noticia.id_noticia,noticia.ativo)" class="text-primary">{{noticia.ativo ? "Desativar" : "Ativar"}}</a>
+                  <div class="hrVertical"></div>
+                  <button class="text-primary waves-effect waves-light btnEditar" @click="handleGetNew(noticia.id_noticia)" data-toggle="modal" data-target=".bd-example-modal-xl">Editar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div v-show="noticiasFiltradas.length == 0 && filterAtivado && !carregando" class="showErrFilter">
+          <h3>Filtro sem resultado</h3>
+        </div>
+
+        <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title mt-0" id="myModalLabel">Editar Noticias</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              </div>
+
+              <div class="modal-body">
+                <div class="">
+                  <div class="container-fluid">
+                    <div>
+                      <div>
+                        <div class="card">
+                          <div class="card-body">
+                            <div id="smart_wizard_circles">
+                              <ul>
+                                <li><a href="#step-9"><i class="far fa-user d-block"></i><small>Matéria</small></a></li>
+                                <li><a href="#step-10"><i class="far fa-heart d-block"></i><small>Fotos</small></a></li>
+                                <li><a href="#step-11"><i class="far fa-envelope d-block"></i><small>Revisão</small></a></li>
+                              </ul>
+
+                              <div class="p-3 sw-circle-content mb-3">
+                                <div id="step-9" class="">
+                                  <div class="">
+                                    <div class="">
+                                      <div class="">
+                                        <div class="">
+                                          <div class="divPreview scroll">
+                                            <form method="post">
+                                              <select v-model="publicacao.id_unidade">
+                                                <option value="" selected disabled>--Selecione--</option>
+                                                <option value="1">FSPH</option>
+                                                <option value="2">Hemose</option>
+                                                <option value="3">Lacen</option>
+                                                <option value="4">SVO</option>
+                                              </select>
+                                              <input type="text" name="titulo" id="titulo" v-model="publicacao.titulo" placeholder="Digite o Titulo da Matéria" class="form-control" style="margin-bottom: 1rem;">
+                                              <textarea id="elm1" v-model="publicacao.texto" name="area"></textarea>
+                                            </form>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <!-- Crop No Step2 -->
+                                <div id="step-10" class="container">
+                                  <div class="row">
+                                    <div class="col-md-9">
+                                      <!-- <h3>Demo:</h3> -->
+                                      <div class="docs-demo">
+                                        <div class="img-container">
+                                          <img src="images/picture.jpg" alt="Picture">
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                      <!-- <h3>Preview:</h3> -->
+                                      <div class="docs-preview clearfix">
+                                        <div class="img-preview preview preview-lg"></div>
+                                        <div class="img-preview preview-md">
+                                          <img id="img-1" src="" alt="">
+                                        </div>
+                                        <div class="img-preview preview-md">
+                                          <img id="img-2" src="" alt="">
+                                        </div>
+                                        <div class="img-preview preview-md">
+                                          <img id="img-3" src="" alt="">
+                                        </div>
+                                      </div>
+
+                                      <!-- <h3>Data:</h3> -->
+                                      <div class="docs-data">
+                                        <div v-show="crop">
+                                          <div class="input-group input-group-sm">
+                                            <span class="input-group-prepend">
+                                              <label class="input-group-text" for="dataX">X</label>
+                                            </span>
+                                            <input type="text" class="form-control" id="dataX" placeholder="x">
+                                            <span class="input-group-append">
+                                              <span class="input-group-text">px</span>
+                                            </span>
+                                          </div>
+                                          <div class="input-group input-group-sm">
+                                            <span class="input-group-prepend">
+                                              <label class="input-group-text" for="dataY">Y</label>
+                                            </span>
+                                            <input type="text" class="form-control" id="dataY" placeholder="y">
+                                            <span class="input-group-append">
+                                              <span class="input-group-text">px</span>
+                                            </span>
+                                          </div>
+                                        </div>
+                                        <div class="input-group input-group-sm">
+                                          <span class="input-group-prepend">
+                                            <label class="input-group-text" for="dataWidth">Largura</label>
+                                          </span>
+                                          <input type="text" class="form-control" id="dataWidth" placeholder="Largura">
+                                          <span class="input-group-append">
+                                            <span class="input-group-text">px</span>
+                                          </span>
+                                        </div>
+                                        <div class="input-group input-group-sm">
+                                          <span class="input-group-prepend">
+                                            <label class="input-group-text" for="dataHeight">Altura</label>
+                                          </span>
+                                          <input type="text" class="form-control" id="dataHeight" placeholder="Altura">
+                                          <span class="input-group-append">
+                                            <span class="input-group-text">px</span>
+                                          </span>
+                                        </div>
+                                        <div v-show="crop">
+                                          <div class="input-group input-group-sm">
+                                            <span class="input-group-prepend">
+                                              <label class="input-group-text" for="dataRotate">Rotate</label>
+                                            </span>
+                                            <input type="text" class="form-control" id="dataRotate" placeholder="rotate">
+                                            <span class="input-group-append">
+                                              <span class="input-group-text">deg</span>
+                                            </span>
+                                          </div>
+                                          <div class="input-group input-group-sm">
+                                            <span class="input-group-prepend">
+                                              <label class="input-group-text" for="dataScaleX">ScaleX</label>
+                                            </span>
+                                            <input type="text" class="form-control" id="dataScaleX" placeholder="scaleX">
+                                          </div>
+                                          <div class="input-group input-group-sm">
+                                            <span class="input-group-prepend">
+                                              <label class="input-group-text" for="dataScaleY">ScaleY</label>
+                                            </span>
+                                            <input type="text" class="form-control" id="dataScaleY" placeholder="scaleY">
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="divBtnsCrop" id="actions">
+                                    <div class="col-md-9 docs-buttons">
+                                      <!-- <h3>Toolbar:</h3> -->
+                                      <div class="btn-group">
+                                        <button type="button" class="btn btn-primary" data-method="setDragMode" data-option="move" title="Move">
+                                          <span class="docs-tooltip" data-toggle="tooltip" title="cropper.setDragMode(&quot;move&quot;)">
+                                            <span class="fa fa-arrows-alt"></span>
+                                          </span>
+                                        </button>
+                                        <button type="button" class="btn btn-primary" data-method="setDragMode" data-option="crop" title="Crop">
+                                          <span class="docs-tooltip" data-toggle="tooltip" title="cropper.setDragMode(&quot;crop&quot;)">
+                                            <span class="fa fa-crop-alt"></span>
+                                          </span>
+                                        </button>
+                                      </div>
+
+                                      <div class="btn-group">
+                                        <button type="button" class="btn btn-primary" data-method="zoom" data-option="0.1" title="Zoom In">
+                                          <span class="docs-tooltip" data-toggle="tooltip" title="cropper.zoom(0.1)">
+                                            <span class="fa fa-search-plus"></span>
+                                          </span>
+                                        </button>
+                                        <button type="button" class="btn btn-primary" data-method="zoom" data-option="-0.1" title="Zoom Out">
+                                          <span class="docs-tooltip" data-toggle="tooltip" title="cropper.zoom(-0.1)">
+                                            <span class="fa fa-search-minus"></span>
+                                          </span>
+                                        </button>
+                                      </div>
+
+                                      <div class="btn-group">
+                                        <button type="button" class="btn btn-primary" data-method="move" data-option="-10" data-second-option="0" title="Move Left">
+                                          <span class="docs-tooltip" data-toggle="tooltip" title="cropper.move(-10, 0)">
+                                            <span class="fa fa-arrow-left"></span>
+                                          </span>
+                                        </button>
+                                        <button type="button" class="btn btn-primary" data-method="move" data-option="10" data-second-option="0" title="Move Right">
+                                          <span class="docs-tooltip" data-toggle="tooltip" title="cropper.move(10, 0)">
+                                            <span class="fa fa-arrow-right"></span>
+                                          </span>
+                                        </button>
+                                        <button type="button" class="btn btn-primary" data-method="move" data-option="0" data-second-option="-10" title="Move Up">
+                                          <span class="docs-tooltip" data-toggle="tooltip" title="cropper.move(0, -10)">
+                                            <span class="fa fa-arrow-up"></span>
+                                          </span>
+                                        </button>
+                                        <button type="button" class="btn btn-primary" data-method="move" data-option="0" data-second-option="10" title="Move Down">
+                                          <span class="docs-tooltip" data-toggle="tooltip" title="cropper.move(0, 10)">
+                                            <span class="fa fa-arrow-down"></span>
+                                          </span>
+                                        </button>
+                                      </div>
+
+                                      <div class="btn-group">
+                                        <button type="button" class="btn btn-primary" data-method="rotate" data-option="-45" title="Rotate Left">
+                                          <span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(-45)">
+                                            <span class="fa fa-undo-alt"></span>
+                                          </span>
+                                        </button>
+                                        <button type="button" class="btn btn-primary" data-method="rotate" data-option="45" title="Rotate Right">
+                                          <span class="docs-tooltip" data-toggle="tooltip" title="cropper.rotate(45)">
+                                            <span class="fa fa-redo-alt"></span>
+                                          </span>
+                                        </button>
+                                      </div>
+
+                                      <div class="btn-group">
+                                        <button type="button" class="btn btn-primary" data-method="scaleX" data-option="-1" title="Flip Horizontal">
+                                          <span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleX(-1)">
+                                            <span class="fa fa-arrows-alt-h"></span>
+                                          </span>
+                                        </button>
+                                        <button type="button" class="btn btn-primary" data-method="scaleY" data-option="-1" title="Flip Vertical">
+                                          <span class="docs-tooltip" data-toggle="tooltip" title="cropper.scaleY(-1)">
+                                            <span class="fa fa-arrows-alt-v"></span>
+                                          </span>
+                                        </button>
+                                      </div>
+
+                                      <div class="btn-group">
+                                        <button type="button" class="btn btn-primary" data-method="crop" title="Crop">
+                                          <span class="docs-tooltip" data-toggle="tooltip" title="cropper.crop()">
+                                            <span class="fa fa-check"></span>
+                                          </span>
+                                        </button>
+                                        <button type="button" class="btn btn-primary" data-method="clear" title="Clear">
+                                          <span class="docs-tooltip" data-toggle="tooltip" title="cropper.clear()">
+                                            <span class="fa fa-times"></span>
+                                          </span>
+                                        </button>
+                                      </div>
+
+                                      <div class="btn-group">
+                                        <button type="button" class="btn btn-primary" data-method="disable" title="Disable">
+                                          <span class="docs-tooltip" data-toggle="tooltip" title="cropper.disable()">
+                                            <span class="fa fa-lock"></span>
+                                          </span>
+                                        </button>
+                                        <button type="button" class="btn btn-primary" data-method="enable" title="Enable">
+                                          <span class="docs-tooltip" data-toggle="tooltip" title="cropper.enable()">
+                                            <span class="fa fa-unlock"></span>
+                                          </span>
+                                        </button>
+                                      </div>
+
+                                      <div class="btn-group">
+                                        <button type="button" class="btn btn-primary" data-method="reset" title="Reset">
+                                          <span class="docs-tooltip" data-toggle="tooltip" title="cropper.reset()">
+                                            <span class="fa fa-sync-alt"></span>
+                                          </span>
+                                        </button>
+                                        <label class="btn btn-primary btn-upload" for="inputImage" title="Upload image file">
+                                          <input type="file" class="sr-only" id="inputImage" name="file" accept="image/*">
+                                          <span class="docs-tooltip" data-toggle="tooltip" title="Import image with Blob URLs">
+                                            <span class="fa fa-upload"></span>
+                                          </span>
+                                        </label>
+                                        <button type="button" class="btn btn-primary" data-method="destroy" title="Destroy">
+                                          <span class="docs-tooltip" data-toggle="tooltip" title="cropper.destroy()">
+                                            <span class="fa fa-power-off"></span>
+                                          </span>
+                                        </button>
+                                      </div>
+
+                                      <div class="btn-group btn-group-crop">
+                                        <button @click="handleCut" type="button" class="btn btn-success" data-method="getCroppedCanvas" data-option="{ &quot;maxWidth&quot;: 4096, &quot;maxHeight&quot;: 4096 }">
+                                          <span class="docs-tooltip" data-toggle="tooltip" title="cropper.getCroppedCanvas({ maxWidth: 4096, maxHeight: 4096 })">
+                                            Cortar
+                                          </span>
+                                        </button>
+                                      </div>
+
+
+                                      <!-- Show the cropped image in modal -->
+                                      <div class="modal fade docs-cropped" id="getCroppedCanvasModal" role="dialog" aria-hidden="true" aria-labelledby="getCroppedCanvasTitle" tabindex="-1">
+                                        <div class="modal-dialog">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="getCroppedCanvasTitle">Cropped</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                              </button>
+                                            </div>
+                                            <div class="modal-body"></div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                              <a class="btn btn-primary" id="download" href="javascript:void(0);" download="cropped.jpg">Download</a>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div><!-- /.modal -->
+                                    </div><!-- /.docs-buttons -->
+
+                                    <div class="col-md-3 docs-toggles">
+                                      <div class="dropdown dropup docs-options">
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="toggleOptions">
+                                          <li class="dropdown-item">
+                                            <div class="form-check">
+                                              <input class="form-check-input" id="responsive" type="checkbox" name="responsive" checked>
+                                              <label class="form-check-label" for="responsive">responsive</label>
+                                            </div>
+                                          </li>
+                                          <li class="dropdown-item">
+                                            <div class="form-check">
+                                              <input class="form-check-input" id="restore" type="checkbox" name="restore" checked>
+                                              <label class="form-check-label" for="restore">restore</label>
+                                            </div>
+                                          </li>
+                                          <li class="dropdown-item">
+                                            <div class="form-check">
+                                              <input class="form-check-input" id="checkCrossOrigin" type="checkbox" name="checkCrossOrigin" checked>
+                                              <label class="form-check-label" for="checkCrossOrigin">checkCrossOrigin</label>
+                                            </div>
+                                          </li>
+                                          <li class="dropdown-item">
+                                            <div class="form-check">
+                                              <input class="form-check-input" id="checkOrientation" type="checkbox" name="checkOrientation" checked>
+                                              <label class="form-check-label" for="checkOrientation">checkOrientation</label>
+                                            </div>
+                                          </li>
+                                          <li class="dropdown-item">
+                                            <div class="form-check">
+                                              <input class="form-check-input" id="modal" type="checkbox" name="modal" checked>
+                                              <label class="form-check-label" for="modal">modal</label>
+                                            </div>
+                                          </li>
+                                          <li class="dropdown-item">
+                                            <div class="form-check">
+                                              <input class="form-check-input" id="guides" type="checkbox" name="guides" checked>
+                                              <label class="form-check-label" for="guides">guides</label>
+                                            </div>
+                                          </li>
+                                          <li class="dropdown-item">
+                                            <div class="form-check">
+                                              <input class="form-check-input" id="center" type="checkbox" name="center" checked>
+                                              <label class="form-check-label" for="center">center</label>
+                                            </div>
+                                          </li>
+                                          <li class="dropdown-item">
+                                            <div class="form-check">
+                                              <input class="form-check-input" id="highlight" type="checkbox" name="highlight" checked>
+                                              <label class="form-check-label" for="highlight">highlight</label>
+                                            </div>
+                                          </li>
+                                          <li class="dropdown-item">
+                                            <div class="form-check">
+                                              <input class="form-check-input" id="background" type="checkbox" name="background" checked>
+                                              <label class="form-check-label" for="background">background</label>
+                                            </div>
+                                          </li>
+                                          <li class="dropdown-item">
+                                            <div class="form-check">
+                                              <input class="form-check-input" id="autoCrop" type="checkbox" name="autoCrop" checked>
+                                              <label class="form-check-label" for="autoCrop">autoCrop</label>
+                                            </div>
+                                          </li>
+                                          <li class="dropdown-item">
+                                            <div class="form-check">
+                                              <input class="form-check-input" id="movable" type="checkbox" name="movable" checked>
+                                              <label class="form-check-label" for="movable">movable</label>
+                                            </div>
+                                          </li>
+                                          <li class="dropdown-item">
+                                            <div class="form-check">
+                                              <input class="form-check-input" id="rotatable" type="checkbox" name="rotatable" checked>
+                                              <label class="form-check-label" for="rotatable">rotatable</label>
+                                            </div>
+                                          </li>
+                                          <li class="dropdown-item">
+                                            <div class="form-check">
+                                              <input class="form-check-input" id="scalable" type="checkbox" name="scalable" checked>
+                                              <label class="form-check-label" for="scalable">scalable</label>
+                                            </div>
+                                          </li>
+                                          <li class="dropdown-item">
+                                            <div class="form-check">
+                                              <input class="form-check-input" id="zoomable" type="checkbox" name="zoomable" checked>
+                                              <label class="form-check-label" for="zoomable">zoomable</label>
+                                            </div>
+                                          </li>
+                                          <li class="dropdown-item">
+                                            <div class="form-check">
+                                              <input class="form-check-input" id="zoomOnTouch" type="checkbox" name="zoomOnTouch" checked>
+                                              <label class="form-check-label" for="zoomOnTouch">zoomOnTouch</label>
+                                            </div>
+                                          </li>
+                                          <li class="dropdown-item">
+                                            <div class="form-check">
+                                              <input class="form-check-input" id="zoomOnWheel" type="checkbox" name="zoomOnWheel" checked>
+                                              <label class="form-check-label" for="zoomOnWheel">zoomOnWheel</label>
+                                            </div>
+                                          </li>
+                                          <li class="dropdown-item">
+                                            <div class="form-check">
+                                              <input class="form-check-input" id="cropBoxMovable" type="checkbox" name="cropBoxMovable" checked>
+                                              <label class="form-check-label" for="cropBoxMovable">cropBoxMovable</label>
+                                            </div>
+                                          </li>
+                                          <li class="dropdown-item">
+                                            <div class="form-check">
+                                              <input class="form-check-input" id="cropBoxResizable" type="checkbox" name="cropBoxResizable" checked>
+                                              <label class="form-check-label" for="cropBoxResizable">cropBoxResizable</label>
+                                            </div>
+                                          </li>
+                                          <li class="dropdown-item">
+                                            <div class="form-check">
+                                              <input class="form-check-input" id="toggleDragModeOnDblclick" type="checkbox" name="toggleDragModeOnDblclick" checked>
+                                              <label class="form-check-label" for="toggleDragModeOnDblclick">toggleDragModeOnDblclick</label>
+                                            </div>
+                                          </li>
+                                        </ul>
+                                      </div><!-- /.dropdown -->
+                                    </div><!-- /.docs-toggles -->
+                                  </div>
+                                </div>
+                                <div id="step-11">
+                                  <div class="containerStep-11">
+                                    <div class="divPreview scroll">
+                                      <div class="container-img">
+                                        <h3>Capa</h3>
+                                        <img class="previewImg" :src="publicacao.fotoCapa" alt="img-1">
+                                        <h3>Segunda imagem</h3>
+                                        <img class="previewImg" :src="publicacao.fotoMateria" alt="img-2">
+                                        <h3>Terceira imagem</h3>
+                                        <img class="previewImg" :src="publicacao.fotoMateria2" alt="img-3">
+                                      </div>
+
+                                      <div class="container-text">
+                                        <h3>Titulo</h3>
+                                        <h4>{{publicacao.titulo}}</h4>
+                                        <h3>Texto</h3>
+                                        <p v-html="publicacao.texto" class="scren"></p>
+                                      </div>
+                                    </div>
+                                    <button @click="handleEditNoticia" class="btnFinalizar">Editar</button>
+                                  </div>
+                                </div>
+                              </div><!--end /div-->
+                            </div> <!--end smartwizard-->
+                          </div><!--end card-body-->
+                        </div><!--end card-->
+                      </div><!--end col-->
+                    </div><!--end row-->
+                  </div><!-- container -->
+                </div>
+              </div>
+
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div>
+    </div>
+
+    <footer class="footer text-center text-sm-left">
+      &copy; 2025 Colmeia <span class="text-muted d-none d-sm-inline-block float-right">Criado por <i class="mdi mdi-heart text-danger"></i> FSPH</span>
+    </footer>
+  </div>
+  </div>
+  </div>
+
+
+
+  <!-- jQuery -->
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/metisMenu.min.js"></script>
+  <script src="assets/js/waves.min.js"></script>
+  <script src="assets/js/jquery.slimscroll.min.js"></script>
+
+  <!-- App js -->
+  <script src="assets/js/app.js"></script>
+
+  <!-- Plugins e Scripts adicionais -->
+  <script src="assets/plugins/dropify/js/dropify.min.js"></script>
+  <script src="assets/pages/jquery.form-upload.init.js"></script>
+
+  <script src="assets/plugins/form-wizard/js/jquery.smartWizard.min.js"></script>
+  <script src="assets/pages/jquery.form-wizard.init.js"></script>
+
+  <!-- Editor de texto -->
+  <script src="assets/plugins/tinymce/tinymce.min.js"></script>
+  <script src="assets/pages/jquery.form-editor.init.js"></script>
+
+  <!-- Crop -->
+  <script src="./assets/cropperjs-main/docs/js/cropper.js"></script>
+  <script src="./assets/cropperjs-main/docs/js/main.js"></script>
+
+
+</body>
+
+</html>
