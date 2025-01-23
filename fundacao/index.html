@@ -60,9 +60,9 @@
     <script src="assets/js/fetchs.js" defer></script>
     <script src="assets/js/noticiaDetalhada.js" defer></script>
     <script src="assets/js/footer.js" defer></script>
-
-
-
+    <script src="assets/js/fontSize.js" defer></script>
+    <script src="assets/js/toggleDark.js" defer></script>
+    <script src="assets/js/size.js" defer></script>
 
 </head>
 
@@ -78,7 +78,7 @@
     <!--==============================
     Sidemenu
 ============================== -->
-    <!-- <div class="sidemenu-wrapper sidemenu-info ">
+    <div class="sidemenu-wrapper sidemenu-info ">
         <div class="sidemenu-content">
             <button class="closeButton sideMenuCls"><i class="far fa-times"></i></button>
             <div class="widget  ">
@@ -91,27 +91,29 @@
                 </div>
             </div>
             <div class="widget  ">
-                <h3 class="widget_title">Portal do Colaborador</h3>
+                <h3 class="widget_title">Links Úteis</h3>
                 <div class="newsletter-widget">
-                    <p class="footer-text">Exclusivo para colaboradores FPSH</p>
-                    <form action="#" class="newsletter-form">
-                        <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Digite seu Email" required="">
-                            <input class="form-control" type="password" placeholder="Digite sua Senha" required="">
-                        </div>
-                        <button type="submit" class="submitBtn">Login</button>
-                    </form>
-                    <div class="form-group">
-                        <input type="checkbox" id="checkboxagree" name="checkboxagree">
-                        <label for="checkboxagree">Lembrar Senha</label>
-                    </div>
-                    <div class="btn-group">
-                        <a href="https://play.google.com/" class="img-btn">
-                            <img src="assets/img/normal/apple_store.png" alt="icon">
-                        </a>
-                        <a href="https://play.google.com/" class="img-btn">
-                            <img src="assets/img/normal/play_store.png" alt="icon">
-                        </a>
+                    <div class="btn-group links">
+                        <!-- Expresso -->
+                        <a href="https://expresso.se.gov.br/login.php" target="_blank" class="img-btn">Expresso</a>
+                        <!-- Compelac -->
+                        <a href="https://fsph.se.gov.br/index.php/compelac-2/" target="_blank" class="img-btn">COMPELAC - Comissão de Pesquisa do LACEN-SE</a>
+                        <!-- Contracheque -->
+                        <a href="https://agportal.agapesistemas.com.br/AgPortalServidorWeb/?alias=fsph" target="_blank" class="img-btn">Ágape</a>
+                        <!-- Contratos Covid-19 -->
+                        <a href="https://fsph.se.gov.br/index.php/covid-19/" target="_blank" class="img-btn">Contratos Covid-19</a>
+                        <!-- EDOC -->
+                        <a href="https://edoc.se.gov.br/docflow/xhtml/docflow/geral/login.jsf" target="_blank" class="img-btn">E-DOC</a>
+                        <!-- Transparência -->
+                        <a href="https://www.transparencia.se.gov.br/" target="_blank" class="img-btn">Transparência Sergipe</a>
+                        <!-- Licitações -->
+                        <a href="https://fsph.se.gov.br/index.php/avisos/" target="_blank" class="img-btn">Licitações</a>
+
+                        <a href="https://www.se.gov.br/setc/setc_lai_acesso_a_informacao" target="_blank" class="img-btn">Lei de Acesso à Informação Pública</a>
+
+                        <a href="#" target="_blank" class="img-btn">Plano de Contratações Anual</a>
+
+                        <a href="https://edoc.se.gov.br/docflow/xhtml/docflow/external/login/auth.jsf" target="_blank" class="img-btn">Protocolo Externo</a>
                     </div>
                 </div>
             </div>
@@ -123,7 +125,7 @@
             <input type="text" placeholder="O que você esta procurando ?">
             <button type="submit"><i class="fal fa-search"></i></button>
         </form>
-    </div> -->
+    </div>
     <!--==============================
     Mobile Menu
   ============================== -->
@@ -184,14 +186,18 @@
                     <li>
                         <a href="#">Ouvidoria</a>
                     </li>
+
                 </ul>
             </div>
         </div>
     </div><!--==============================
 	Header Area
 ==============================-->
+
+
     <header class="th-header header-layout1">
-        <div class="header-top">
+        <!-- Aqui adiciona o modo Dark com cor de fundo #555 -->
+        <div id="headerContatos" class="header-top">
             <div class="container">
                 <div class="row justify-content-center align-items-center gy-2">
                     <div class="col-auto d-none d-lg-block">
@@ -208,16 +214,16 @@
         </div>
         <div class="sticky-wrapper">
             <!-- Main Menu Area -->
-            <div class="menu-area" style="background-color: #164095;">
+            <div id="menuArea" class="menu-area">
                 <div class="container">
                     <div class="row align-items-center justify-content-between">
                         <div class="col-auto">
                             <div class="header-logo">
-                                <a href="index.html"><img src="assets/img/logoFsphSe.png" alt="Mediax" height="auto" width="300rem"></a>
+                                <a href="index.html"><img src="assets/img/logoSemFundo.png" alt="Mediax" height="auto" width="300rem"></a>
                             </div>
                         </div>
                         <div class="col-auto d-none d-lg-inline-block">
-                            <nav class="main-menu d-none d-lg-inline-block">
+                            <nav class="main-menu d-none d-lg-inline-block align-items-center">
                                 <ul>
                                     <li class="menu-item-has-children">
                                         <a href="home-medical-clinic.html">A Fundação</a>
@@ -276,14 +282,29 @@
                                     <li>
                                         <a href="contact.html">Ouvidoria</a>
                                     </li>
+                                    <li>
+                                        <button class="toggle" id="toggle">
+                                            <div class="toggle-thumb">
+                                                <svg class="icon" viewBox="0 0 20 20">
+                                                    <path fill="#fbbf24" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" />
+                                                </svg>
+                                            </div>
+                                        </button>
+                                    </li>
+
+
+                                    <li>
+                                        <button class="size-toggle" id="sizeToggle">Aa (1/3)</button>
+                                    </li>
                                 </ul>
+
                             </nav>
                         </div>
                         <div class="col-auto">
                             <div class="header-button">
-                                <!-- <button type="button" class="icon-btn searchBoxToggler d-none d-xl-inline-block"><i class="far fa-search"></i></button>
-                                <button type="button" class="icon-btn sideMenuInfo d-none d-xl-inline-block"><i class="far fa-bars"></i></button>
-                                <button type="button" class="th-menu-toggle d-block d-lg-none"><i class="far fa-bars"></i></button> -->
+                                <!-- <button type="button" class="icon-btn searchBoxToggler d-none d-xl-inline-block"><i class="far fa-search"></i></button> -->
+                                <button type="button" id="linksUteisDark" class="sideMenuInfo linksUteisBtn">Links Úteis</button>
+                                <button type="button" class="th-menu-toggle d-block d-lg-none"><i class="far fa-bars"></i>Links Úteis</button>
                             </div>
                         </div>
                     </div>
@@ -299,16 +320,16 @@
     <!--==============================
 Hero Area
 ==============================-->
-    <div class="th-hero-wrapper hero-2" id="hero" data-bg-src="assets/img/imgFundo/mulher.jpg">
+    <div id="heroDarkMode" class="th-hero-wrapper hero-2" id="hero" data-bg-src="assets/img/imgFundo/mulher.jpg">
         <div class="hero-inner">
             <div class="container">
                 <div class="hero-style2">
-                    <span class="sub-title"><img src="assets/img/favicons/favicon_48x48.png" alt="shape">Fundação de Saúde Parreiras Horta</span>
+                    <span id="fsphDark" class="sub-title"><img src="assets/img/favicons/favicon_48x48.png" alt="shape">Fundação de Saúde Parreiras Horta</span>
                     <h1 class="hero-title2">
                         <span class="title1">Cuidando da <span class="line-text">Saúde</span></span>
                         <span class="title2">Em cada detalhe</span>
                     </h1>
-                    <p class="hero-text">A Fundação de Saúde Parreiras Horta atua com excelência em exames laboratoriais, verificação de óbitos, coleta de doações de sangue e transfusões, promovendo saúde e solidariedade para salvar vidas.</p>
+                    <p id="textoHero" class="hero-text">A Fundação de Saúde Parreiras Horta atua com excelência em exames laboratoriais, verificação de óbitos, coleta de doações de sangue e transfusões, promovendo saúde e solidariedade para salvar vidas.</p>
                     <div class="btn-group justify-content-center">
                         <a href="../hemose/hemose.html" class="hemose-btn">HEMOSE</a>
                         <a href="#" class="lacen-btn">LACEN</a>
@@ -463,7 +484,7 @@ Area de História
                 <div class="col-xl-7 col-lg-9 space-extra">
                     <div class="title-area mb-32 p-3 mr-5">
                         <h2 class="sec-title text-white">Nossa História</h2>
-                        <p class="sec-text text-white" style="text-align: justify;">O Instituto Parreiras Horta, criado em 1922 e inaugurado em 1924, iniciou suas atividades com foco em vacinas e análises laboratoriais para fortalecer a saúde pública em Sergipe. Em 1981, tornou-se o Laboratório Central de Saúde Pública (LACEN) e, em 2004...</strong>.</p>
+                        <p class="sec-text text-white" style="text-align: justify;">A história da medicina moderna em Sergipe começou com a visão inovadora de dois homens: Graccho Cardoso e Parreiras Horta. Em um momento em que o Brasil carecia de estrutura e ciência no campo da saúde, eles trouxeram a modernidade e a cientificidade para Aracaju, transformando a forma como a medicina era praticada...</p>
                     </div>
                     <div class="btn-group justify-content-center">
                         <a href="#" class="continueLendoBtn saibaMais">Saiba Mais</a>
@@ -536,8 +557,8 @@ Horários
                             <h4 class="form-title">Agenda de Coletas Externas</h4>
                             <div class="row">
                                 <div class="form-group col-12 agendaFundacao" v-for="evento in eventosPublicados.data" :key="evento.id_evento">
-                                    <span>{{evento.evento}}</span>
-                                    <span>{{evento.dt_evento}}</span>
+                                    <span style="color: #000;">{{evento.evento}}</span>
+                                    <span style="color: #000;">{{evento.dt_evento}}</span>
                                 </div>
                             </div>
                             <p class="form-messages mb-0 mt-3"></p>
@@ -550,15 +571,15 @@ Horários
     <!--==============================
 	Footer Area
 ==============================-->
-    <footer class="footer-wrapper footer-layout1" data-bg-src="assets/img/bg/footer_bg_1.jpg">
-        <div class="widget-area">
+    <footer class="footer-wrapper footer-layout1">
+        <div class="widget-area" id="footerDark">
             <div class="container">
                 <div class="row justify-content-between">
                     <div class="col-md-6 col-xl-auto">
                         <div class="widget footer-widget">
                             <div class="th-widget-about">
                                 <div class="about-logo">
-                                    <a href="index.html"><img src="assets/img/logo 2.png" alt="Mediax"></a>
+                                    <a href="index.html"><img src="assets/img/logoSemFundo.png" alt="fsphLogo"></a>
                                 </div>
                                 <p class="about-text">Fundação de Saúde Parreiras Horta - Cuidando da saúde em cada detalhe.</p>
                                 <p class="footer-info">
@@ -634,7 +655,7 @@ Horários
                 </div>
             </div>
         </div>
-        <div class="copyright-wrap">
+        <div class="copyright-wrap" id="littleFooter">
             <div class="container">
                 <div class="row gy-2 align-items-center">
                     <div class="col-md-7">
@@ -657,6 +678,14 @@ Horários
         <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
             <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 307.919;"></path>
         </svg>
+    </div>
+
+    <!-- VLibras -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
     </div>
 
     <!--==============================
@@ -682,8 +711,13 @@ Horários
 
     <!-- Main Js File -->
     <script src="assets/js/main.js"></script>
-    <!-- Fetchs-->
+    <script src="assets/js/modoDark.js"></script>
 
+    <!-- VLibras -->
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
 </body>
 
 </html>

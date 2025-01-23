@@ -1,22 +1,19 @@
 const agendaEventos = new Vue({
   el: '#eventos',
   data: {
-    eventosPublicados: {}
+    verDetalhes:false,
+    eventosPublicados: {},
+    eventosDetalhados:{}
   },
   methods: {
     async puxarEventos() {
       try {
-        const resposta = await fetch('http://172.23.42.17:3002/apiagendamentoevento/pegar');
+        const resposta = await fetch('http://172.23.42.17:3002/apiagendamentoevento/pegar/2');
         const json = await resposta.json();
 
-        // Processa os dados para formatar as datas
-        this.eventosPublicados = {
-          ...json,
-          data: json.data.map(evento => ({
-            ...evento,
-            dt_evento: this.formatarData(evento.dt_evento) // Formata a data
-          }))
-        };
+        this.eventosPublicados = json.data  
+        
+      
         console.log(this.eventosPublicados);
       } catch (erro) {
         console.error('Erro ao puxar eventos:', erro);
@@ -29,6 +26,24 @@ const agendaEventos = new Vue({
       const mes = String(data.getMonth() + 1).padStart(2, '0');
       const ano = data.getFullYear();
       return `${dia}/${mes}/${ano}`;
+    },
+
+    async verMais (id_unidade_fk,id_aux_evento){
+      try {
+        const resJson = await fetch(`http://172.23.42.17:3002/apiagendamentoevento/pegardetalhado/${id_unidade_fk}/${id_aux_evento}`)
+
+        const res = await resJson.json()
+
+        this.eventosDetalhados = res.data
+
+        console.log(this.eventosDetalhados)
+
+        this.verDetalhes = true
+      } catch (error) {
+        
+      }
+
+
     }
   },
   mounted() {

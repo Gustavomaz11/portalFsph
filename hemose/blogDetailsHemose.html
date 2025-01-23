@@ -56,6 +56,9 @@
     <link rel="stylesheet" href="assets/css/hemose.css">
     <script src="assets/js/vue.js"></script>
     <script src="assets/js/noticiaDetalhada.js" defer></script>
+    <script src="assets/js/dark/detalhes.js" defer></script>
+    <script src="assets/js/toggleDark.js" defer></script>
+    <script src="assets/js/fontSize.js" defer></script>
 
 </head>
 
@@ -170,7 +173,7 @@
     <!--==============================
     Mobile Menu
   ============================== -->
-    <div class="th-menu-wrapper">
+    <!-- <div class="th-menu-wrapper">
         <div class="th-menu-area text-center">
             <button class="th-menu-toggle"><i class="fal fa-times"></i></button>
             <div class="mobile-logo">
@@ -205,7 +208,8 @@
 
             </div>
         </div>
-    </div><!--==============================
+    </div> -->
+    <!--==============================
 	Header Area
 ==============================-->
     <header class="th-header header-layout1">
@@ -258,8 +262,18 @@
                                     <li>
                                         <a href="medulaOssea.html">Cadastro de Medula Óssea</a>
                                     </li>
+
                                     <li>
-                                        <a href="#faq-sec">Perguntas Frequentes</a>
+                                        <button class="toggle" id="toggle">
+                                            <div class="toggle-thumb">
+                                                <svg class="icon" viewBox="0 0 20 20">
+                                                    <path fill="#fbbf24" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" />
+                                                </svg>
+                                            </div>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button class="size-toggle" id="sizeToggle">Aa (1/3)</button>
                                     </li>
                                 </ul>
                             </nav>
@@ -304,13 +318,12 @@
                         </div>
                         <div class="blog-content">
                             <div class="blog-meta">
-                                <a class="author" href="#"><i class="fal fa-user"></i>Por: {{noticias.autor_noticia}}</a>
-                                <a href="#"><i class="fal fa-calendar"></i>{{noticias.dt_noticia}}</a>
+                                <a class="author" href="#" :style="{color: estado ? '#fff' : 'var(--body-color)'}"><i class="fal fa-user" :style="{color: estado ? '#fff' : 'var(--body-color)'}"></i>Por: {{noticias.autor_noticia}}</a>
+                                <a href="#" :style="{color: estado ? '#fff' : 'var(--body-color)'}"><i class="fal fa-calendar" :style="{color: estado ? '#fff' : 'var(--body-color)'}"></i>{{noticias.dt_noticia}}</a>
                             </div>
-                            <h2 class="blog-title">{{noticias.titulo}}</h2>
+                            <h2 class="blog-title" :style="{color: estado ? '#fff' : 'var(--black-color)'}">{{noticias.titulo}}</h2>
                             <br>
-                            <p v-html="noticias.texto"></p>
-                            
+                            <p :class="{ paiEscuro: estado }" v-html="noticias.texto"></p>
 
                             <!-- <blockquote id="parecerColaborador">
                                 <p>{{noticias.comentario}}</p>
@@ -374,7 +387,7 @@
                                 </li> -->
                             </ul>
                         </div>
-                        
+
                         <div class="widget widget_tag_cloud  ">
                             <h3 class="widget_title">Palavras-Chaves</h3>
                             <div class="tagcloud">
@@ -516,6 +529,14 @@
         </svg>
     </div>
 
+    <!-- VLibras -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+
     <!--==============================
     All Js File
 ============================== -->
@@ -541,6 +562,11 @@
     <script src="assets/js/main.js"></script>
     <script src="assets/js/footer.js"></script>
     <script src="assets/js/outrasNoticias.js"></script>
+
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
 </body>
 
 </html>

@@ -57,6 +57,10 @@
     <script src="assets/js/footer.js" defer></script>
     <script src="assets/js/materias.js" defer></script>
     <script src="assets/js/vue.js"></script>
+    <script src="assets/js/dark/blog.js" defer></script>
+    <script src="assets/js/fontSize.js" defer></script>
+  <script src="assets/js/toggleDark.js" defer></script>
+
 
 </head>
 
@@ -71,39 +75,58 @@
     </div><!--==============================
     Sidemenu
 ============================== -->
-    <!-- <div class="sidemenu-wrapper sidemenu-info ">
+    <div class="sidemenu-wrapper sidemenu-info ">
         <div class="sidemenu-content">
             <button class="closeButton sideMenuCls"><i class="far fa-times"></i></button>
             <div class="widget  ">
                 <div class="th-widget-about">
                     <div class="about-logo">
                         <a href="index.html">
-                            <img src="assets/img/fsph_logoLAzul.png" alt="logoFSPH" width="150rem" height="auto">
+                            <img src="assets/img/fsph_logoLAzul.png" alt="Mediax" width="150rem" height="auto">
                         </a>
                     </div>
                 </div>
             </div>
             <div class="widget  ">
-                <h3 class="widget_title">Portal do Colaborador</h3>
+                <h3 class="widget_title">Links Úteis</h3>
                 <div class="newsletter-widget">
-                    <p class="footer-text">Exclusivo para colaboradores FPSH</p>
-                    <form action="#" class="newsletter-form">
-                        <div class="form-group">
-                            <input type="email" class="form-control" placeholder="Digite seu Email" required="">
-                            <input class="form-control" type="password" placeholder="Digite sua Senha" required="">
-                        </div>
-                        <button type="submit" class="submitBtn">Login</button>
-                    </form>
-                    <div class="form-group">
-                        <input type="checkbox" id="checkboxagree" name="checkboxagree">
-                        <label for="checkboxagree">Lembrar Senha</label>
-                    </div>
-                    <div class="btn-group">
-                        <a href="https://play.google.com/" class="img-btn">
-                            <img src="assets/img/normal/apple_store.png" alt="icon">
+                    <div class="btn-group links">
+                        <!-- Expresso -->
+                        <a href="https://expresso.se.gov.br/login.php" target="_blank" class="img-btn">
+                            <img src="assets/img/service/expresso.png" alt="expresso">
                         </a>
-                        <a href="https://play.google.com/" class="img-btn">
-                            <img src="assets/img/normal/play_store.png" alt="icon">
+                        <!-- Compelac -->
+                        <a href="https://fsph.se.gov.br/index.php/compelac-2/" target="_blank" class="img-btn">
+                            <img src="assets/img/service/compelac.png" alt="icon">
+                        </a>
+                        <!-- Contracheque -->
+                        <a href="https://agportal.agapesistemas.com.br/AgPortalServidorWeb/?alias=fsph" target="_blank" class="img-btn">
+                            <img src="assets/img/service/contracheque.png" alt="icon">
+                        </a>
+                        <!-- Contratos Covid-19 -->
+                        <a href="https://fsph.se.gov.br/index.php/covid-19/" target="_blank" class="img-btn">
+                            <img src="assets/img/service/covid-19-2.jpg" alt="icon">
+                        </a>
+                        <!-- EDOC -->
+                        <a href="https://edoc.se.gov.br/docflow/xhtml/docflow/geral/login.jsf" target="_blank" class="img-btn">
+                            <img src="assets/img/service/edoc.png" alt="icon">
+                        </a>
+                        <!-- Transparência -->
+                        <a href="https://www.transparencia.se.gov.br/" target="_blank" class="img-btn">
+                            <img src="assets/img/service//Transparencia.png" alt="icon">
+                        </a>
+                        <!-- Licitações -->
+                        <a href="https://fsph.se.gov.br/index.php/avisos/" target="_blank" class="img-btn">
+                            <img src="assets/img/service//lic-04.png" alt="icon">
+                        </a>
+                        <a href="https://www.se.gov.br/setc/setc_lai_acesso_a_informacao" target="_blank" class="img-btn">
+                            <img src="assets/img/service/lai.png" alt="icon">
+                        </a>
+                        <a href="#" target="_blank" class="img-btn">
+                            <img src="assets/img/service/Plano-de-Contratacao-Anual-Icone.png" alt="icon">
+                        </a>
+                        <a href="https://edoc.se.gov.br/docflow/xhtml/docflow/external/login/auth.jsf" target="_blank" class="img-btn">
+                            <img src="assets/img/service/protocolo_externo.jpeg" alt="icon">
                         </a>
                     </div>
                 </div>
@@ -113,10 +136,10 @@
     <div class="popup-search-box d-none d-lg-block">
         <button class="searchClose"><i class="fal fa-times"></i></button>
         <form action="#">
-            <input type="text" placeholder="O que você está procurando ?">
+            <input type="text" placeholder="O que você esta procurando ?">
             <button type="submit"><i class="fal fa-search"></i></button>
         </form>
-    </div> -->
+    </div>
     <!--==============================
     Sidemenu
 ============================== -->
@@ -240,7 +263,8 @@
 	Header Area
 ==============================-->
     <header class="th-header header-layout1">
-        <div class="header-top">
+        <!-- Aqui adiciona o modo Dark com cor de fundo #555 -->
+        <div id="headerContatos" class="header-top">
             <div class="container">
                 <div class="row justify-content-center align-items-center gy-2">
                     <div class="col-auto d-none d-lg-block">
@@ -257,12 +281,12 @@
         </div>
         <div class="sticky-wrapper">
             <!-- Main Menu Area -->
-            <div class="menu-area" style="background-color: #164095;">
+            <div id="menuArea" class="menu-area">
                 <div class="container">
                     <div class="row align-items-center justify-content-between">
                         <div class="col-auto">
                             <div class="header-logo">
-                                <a href="index.html"><img src="assets/img/logoFsphSe.png" alt="Mediax" height="auto" width="300rem"></a>
+                                <a href="index.html"><img src="assets/img/logoSemFundo.png" alt="Mediax" height="auto" width="300rem"></a>
                             </div>
                         </div>
                         <div class="col-auto d-none d-lg-inline-block">
@@ -278,12 +302,21 @@
                                         </ul>
                                     </li>
                                     <li class="menu-item-has-children">
+                                        <a href="#">Serviços</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="#">Serviços</a></li>
+                                            <li><a href="#">Serviços Detalhados</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="menu-item-has-children">
                                         <a href="#">Notícias</a>
                                         <ul class="sub-menu">
                                             <li><a href="blog.html">Notícias</a></li>
                                             <li><a href="blog-details.html">Notícias Detalhadas</a></li>
                                         </ul>
                                     </li>
+
                                     <li class="menu-item-has-children">
                                         <a href="#">Transparência</a>
                                         <ul class="sub-menu">
@@ -314,16 +347,28 @@
                                     </li>
 
                                     <li>
-                                        <a href="#">Ouvidoria</a>
+                                        <a href="contact.html">Ouvidoria</a>
+                                    </li>
+                                    <li>
+                                        <button class="toggle" id="toggle">
+                                            <div class="toggle-thumb">
+                                                <svg class="icon" viewBox="0 0 20 20">
+                                                    <path fill="#fbbf24" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" />
+                                                </svg>
+                                            </div>
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button class="size-toggle" id="sizeToggle">Aa (1/3)</button>
                                     </li>
                                 </ul>
                             </nav>
                         </div>
                         <div class="col-auto">
                             <div class="header-button">
-                                <!-- <button type="button" class="icon-btn searchBoxToggler d-none d-xl-inline-block"><i class="far fa-search"></i></button>
-                                <button type="button" class="icon-btn sideMenuInfo d-none d-xl-inline-block"><i class="far fa-bars"></i></button>
-                                <button type="button" class="th-menu-toggle d-block d-lg-none"><i class="far fa-bars"></i></button> -->
+                                <!-- <button type="button" class="icon-btn searchBoxToggler d-none d-xl-inline-block"><i class="far fa-search"></i></button> -->
+                                <button type="button" id="linksUteisDark" class="sideMenuInfo linksUteisBtn">Links Úteis</button>
+                                <button type="button" class="th-menu-toggle d-block d-lg-none"><i class="far fa-bars"></i>Links Úteis</button>
                             </div>
                         </div>
                     </div>
@@ -339,17 +384,18 @@
     <!--==============================
     Breadcumb
 ============================== -->
-    <div class="breadcumb-wrapper " data-bg-src="assets/img/bg/cta_bg_4.jpg">
+    <div class="breadcumb-wrapper ">
         <div class="container">
             <div class="breadcumb-content">
                 <h1 class="breadcumb-title" style="color: #fff;">Notícias</h1>
                 <ul class="breadcumb-menu">
-                    <li><a href="index.html" style="color: #fff;">Inicio</a></li>
-                    <li><a href="blog.html" style="color: #fff;">Notícias</a></li>
+                    <li><a href="index.html" style="color: #fff;">Inicio</a> <i class="bi bi-arrow-right" style="color: #fff;"></i></li>
+                    <li style="color: #fff;">Notícias</li>
                 </ul>
             </div>
         </div>
-    </div><!--==============================
+    </div>
+    <!--==============================
 Blog Area
 ==============================-->
     <section class="th-blog-wrapper space-top space-extra-bottom" id="areaNoticia">
@@ -365,19 +411,19 @@ Blog Area
                         </div>
                         <div class="blog-content">
                             <div class="blog-meta">
-                                <a class="author" href="#">
-                                    <i class="fal fa-user"></i> Por: {{ item.autor_noticia }}
+                                <a class="author" href="#" :style="{ color: modoDark ? '#fff' : '' }">
+                                    <i class="fal fa-user" :style="{ color: modoDark ? '#fff' : '' }"></i> Por: {{ item.autor_noticia }}
                                 </a>
-                                <a href="#">
-                                    <i class="fal fa-calendar"></i>
+                                <a href="#" class="dataNoticia" :style="{ color: modoDark ? '#fff' : '' }">
+                                    <i class="fal fa-calendar" :style="{ color: modoDark ? '#fff' : '' }"></i>
                                     {{ item.dt_noticia.split('T')[0].split('-').reverse().join('/') }}
                                 </a>
                             </div>
                             <h2 class="blog-title">
-                                <a href="blog-details.html">{{ item.titulo }}</a>
+                                <a href="blog-details.html" :style="{ color: modoDark ? '#fff' : '' }">{{ item.titulo }}</a>
                             </h2>
-                            <p class="blog-text">{{ item.titulo_seg_paragrafo }}</p>
-                            <button class="continueLendoBtn" @click.prevent="verNoticia(item.id_noticia)">
+                            <p class="blog-text paragrafo" :style="{ color: modoDark ? '#fff' : '' }">{{ item.titulo_seg_paragrafo }}</p>
+                            <button class="continueLendoBtn" :style="{ color: modoDark ? '#fff' : '' }" @click.prevent="verNoticia(item.id_noticia)">
                                 Continue Lendo
                             </button>
                         </div>
@@ -397,17 +443,6 @@ Blog Area
                 <!-- Sidebar -->
                 <div class="col-xxl-4 col-lg-5">
                     <aside class="sidebar-area">
-                        <!-- Busca -->
-                        <!-- <div class="widget widget_search">
-                            <form class="search-form">
-                                <input type="text" placeholder="Digite uma Palavra-Chave">
-                                <button type="submit">
-                                    <i class="far fa-search"></i>
-                                </button>
-                            </form>
-                        </div> -->
-
-                        <!-- Categorias -->
                         <div class="widget widget_categories">
                             <h3 class="widget_title">Categorias</h3>
                             <ul>
@@ -416,7 +451,6 @@ Blog Area
                             </ul>
                         </div>
 
-                        <!-- Notícias Mais Recentes -->
                         <div class="widget">
                             <h3 class="widget_title">Notícias Mais Recentes</h3>
                             <div class="recent-post-wrap">
@@ -427,10 +461,10 @@ Blog Area
                                         </a>
                                     </div>
                                     <div class="media-body">
-                                        <h4 class="post-title">
+                                        <h4 class="post-title tituloRecente">
                                             <a class="text-inherit" href="#" v-html="recente.titulo"></a>
                                         </h4>
-                                        <div class="recent-post-meta">
+                                        <div class="recent-post-meta dataNoticiaRecente">
                                             <a href="#">
                                                 <i class="fal fa-calendar"></i> {{ recente.dt_noticia.split('T')[0].split('-').reverse().join('/') }}
                                             </a>
@@ -445,18 +479,19 @@ Blog Area
         </div>
     </section>
 
+
     <!--==============================
 	Footer Area
 ==============================-->
-    <footer class="footer-wrapper footer-layout1" data-bg-src="assets/img/bg/footer_bg_1.jpg">
-        <div class="widget-area">
+    <footer class="footer-wrapper footer-layout1">
+        <div class="widget-area" id="footerDark">
             <div class="container">
                 <div class="row justify-content-between">
                     <div class="col-md-6 col-xl-auto">
                         <div class="widget footer-widget">
                             <div class="th-widget-about">
                                 <div class="about-logo">
-                                    <a href="index.html"><img src="assets/img/logo 2.png" alt="Mediax"></a>
+                                    <a href="index.html"><img src="assets/img/logoSemFundo.png" alt="fsphLogo"></a>
                                 </div>
                                 <p class="about-text">Fundação de Saúde Parreiras Horta - Cuidando da saúde em cada detalhe.</p>
                                 <p class="footer-info">
@@ -532,7 +567,7 @@ Blog Area
                 </div>
             </div>
         </div>
-        <div class="copyright-wrap">
+        <div class="copyright-wrap" id="littleFooter">
             <div class="container">
                 <div class="row gy-2 align-items-center">
                     <div class="col-md-7">
@@ -551,10 +586,17 @@ Blog Area
 	******************************** -->
 
     <!-- Scroll To Top -->
-    <div class="scroll-top">
+    <!-- <div class="scroll-top">
         <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
             <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" style="transition: stroke-dashoffset 10ms linear 0s; stroke-dasharray: 307.919, 307.919; stroke-dashoffset: 307.919;"></path>
         </svg>
+    </div> -->
+    <!-- VLibras -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
     </div>
 
     <!--==============================
@@ -580,6 +622,12 @@ Blog Area
 
     <!-- Main Js File -->
     <script src="assets/js/main.js"></script>
+
+    <!-- VLibras -->
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
 </body>
 
 </html>

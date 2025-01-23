@@ -41,8 +41,27 @@ const vm = new Vue({
     crop: false,
   },
   methods: {
+    async handleDeleteAgendamento (id_agenda){
+      try {
+        console.log(id_agenda)
+
+        const resJson = await fetch(`http://172.23.42.17:3002/apiagendamento/deletar/${id_agenda}`,{
+          method:'DELETE'
+        })
+  
+        const res = await resJson.json()
+        
+        console.log(res)
+
+        this.publicacao = res
+      } catch (error) {
+        console.log(error)
+      }
+    },
+
     handleCloseModal (evt){
       this.viewModal = false
+      document.body.classList.remove('modal-open')
     },
 
     async handleEditAgendamento (){
@@ -178,7 +197,9 @@ const vm = new Vue({
       }
     },
     base64ToFile(base64String, fileName) {
-      const mimeType = base64String.split('/:|;/')[1];
+      let regex = new RegExp(':|;','g')
+      const mimeType = base64String.split(regex)[1];
+
       // Remove o prefixo "data:image/png;base64," da string Base64, se presente
       const base64Data = base64String.split(',')[1];
 
@@ -235,7 +256,9 @@ const vm = new Vue({
       dados.append('titulo', this.currentPubli.titulo);
       dados.append('texto', this.texto);
       console.log(this.currentPubli);
+      console.log(this.base64ToFile(this.currentPubli.fotoCapa, date.getMilliseconds()))
       try {
+
         alert('aa');
         const resposta = await fetch(
           'http://172.23.42.17:3002/apinoticias/inserir',

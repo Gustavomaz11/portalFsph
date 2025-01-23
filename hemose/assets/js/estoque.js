@@ -1,7 +1,8 @@
 const estoque = new Vue({
   el: '#estoqueResponsivo',
   data: {
-    estoque: []
+    estoque: [],
+    dark: false
   },
   methods: {
     async puxarEstoque() {
@@ -15,9 +16,13 @@ const estoque = new Vue({
         console.error(`Erro: ${err}`)
       }
     },
+    modoDark() {
+      this.dark = (localStorage.getItem('dark') === 'true' || false)
+    }
     
   },
   mounted() {
     this.puxarEstoque()
+    this.modoDark()
   }
 })

@@ -2,7 +2,8 @@ const vm2 = new Vue({
   el: '#detalheNoticia',
   data: {
     noticias: [],
-    noticiaAtual: ''
+    noticiaAtual: '',
+    estado: false
   },
   methods: {
     async myFetch() {
@@ -20,10 +21,15 @@ const vm2 = new Vue({
     verNoticia(idNoticia) {
       this.noticiaAtual = Number(idNoticia)
       window.location.href = `blogDetailsHemose.html?id=${idNoticia}`;
+    },
+    puxarStorage() {
+      let estadoAtual = (localStorage.getItem('dark') === 'true')
+      this.estado = estadoAtual
     }
   },
   mounted() {
     this.myFetch(); 
+    this.puxarStorage()
   }
 });
 

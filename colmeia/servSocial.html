@@ -272,7 +272,7 @@
                                                 <div class="containerBtn">
                                                     <td>
                                                         <button @click="handleGetById(item.id_agenda)" type="button" class="btn btn-light footable-edit"><span class="fooicon fooicon-pencil"></span></button>
-                                                        <button type="button" class="btn btn-secondary footable-delete"><span class="fooicon fooicon-trash"></span></button>
+                                                        <button @click="handleDeleteAgendamento(item.id_agenda)" type="button" class="btn btn-secondary footable-delete"><span class="fooicon fooicon-trash"></span></button>
                                                     </td>
                                                 </div>
                                             </tr>
@@ -281,14 +281,13 @@
 
                                     <!--Editor-->
                                     <div v-show="viewModal" class="modal fade show" style="display: block;" id="editor-modal" tabindex="-1" role="dialog" aria-labelledby="editor-title">
-
                                         <div class="modal-dialog" role="document">
                                             <form class="modal-content form-horizontal" id="editor">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="editor-title">Adicionar</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                                                 </div>
-                                                <div class="modal-body">
+                                                <div class="modal-body fullScreen">
 
                                                     <div class="form-group required row">
                                                         <label for="firstName" class="col-sm-3 control-label">Nome</label>

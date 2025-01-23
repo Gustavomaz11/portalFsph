@@ -3,6 +3,7 @@ const vm = new Vue({
   data: {
     noticias: [],
     noticiaAtual: null,
+    estado: false
   },
   methods: {
     async myFetch() {
@@ -21,9 +22,14 @@ const vm = new Vue({
       this.noticiaAtual = Number(idNoticia);
       window.location.href = `blogDetailsHemose.html?id=${idNoticia}`;
     },
+    puxarStorage() {
+      let estadoAtual = (localStorage.getItem('dark') === 'true')
+      this.estado = estadoAtual
+    }
   },
   mounted() {
     this.myFetch();
+    this.puxarStorage()
   },
 });
 

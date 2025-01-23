@@ -2,7 +2,8 @@ const vm2 = new Vue({
   el: '#detalheNoticia',
   data: {
     noticias: [],
-    noticiaAtual: ''
+    noticiaAtual: '',
+    modoDark: false
   },
   methods: {
     async myFetch() {
@@ -20,10 +21,19 @@ const vm2 = new Vue({
     verNoticia(idNoticia) {
       this.noticiaAtual = Number(idNoticia)
       window.location.href = `blog-details.html?id=${idNoticia}`;
+    },
+    darkMode() {
+      const modoAtivo = (localStorage.getItem('dark') === 'true')
+      if(modoAtivo) {
+        this.modoDark = true
+      } else {
+        this.darkMode = false
+      }
     }
   },
   mounted() {
     this.myFetch(); 
+    this.darkMode();
   }
 });
 

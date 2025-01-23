@@ -26,22 +26,22 @@ addEventListener('DOMContentLoaded',async ()=>{
     noticias.map((noticia,index)=>{
         
         if(noticia.id_unidade_fk == 1){
-            textFsph.innerHTML = noticia.titulo_pri_paragrafo
+            textFsph.innerHTML = noticia.titulo
             img_fsph.src = noticia.foto_capa
         }
         
         else if(noticia.id_unidade_fk == 2){
-            textHemose.innerHTML = noticia.titulo_pri_paragrafo
+            textHemose.innerHTML = noticia.titulo
             img_hemose.src = noticia.foto_capa
         }
 
         else if (noticia.id_unidade_fk == 3){
-            textLacen.innerHTML = noticia.titulo_pri_paragrafo
+            textLacen.innerHTML = noticia.titulo
             img_lacen.src = noticia.foto_capa
         }
 
         else if (noticia.id_unidade_fk == 4){
-            textSvo.innerHTML = noticia.titulo_pri_paragrafo
+            textSvo.innerHTML = noticia.titulo
             img_svo.src = noticia.foto_capa
         }
     })

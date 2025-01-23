@@ -56,6 +56,9 @@
     <link rel="stylesheet" href="assets/css/hemose.css">
     <script src="assets/js/medula.js" defer></script>
     <script src="assets/js/footer.js" defer></script>
+    <script src="assets/js/toggleDark.js" defer></script>
+    <script src="assets/js/dark/medula.js" defer></script>
+    <script src="assets/js/fontSize.js" defer></script>
 
 
 </head>
@@ -206,7 +209,8 @@
 
             </div>
         </div>
-    </div><!--==============================
+    </div>
+    <!--==============================
 	Header Area
 ==============================-->
     <header class="th-header header-layout1">
@@ -260,7 +264,18 @@
                                         <a href="medulaOssea.html">Cadastro de Medula Óssea</a>
                                     </li>
                                     <li>
-                                        <a href="#faq-sec">Perguntas Frequentes</a>
+                                        <button class="toggle" id="toggle">
+                                            <div class="toggle-thumb">
+                                                <svg class="icon" viewBox="0 0 20 20">
+                                                    <path fill="#fbbf24" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" />
+                                                </svg>
+                                            </div>
+                                        </button>
+                                    </li>
+
+
+                                    <li>
+                                        <button class="size-toggle" id="sizeToggle">Aa (1/3)</button>
                                     </li>
                                 </ul>
                             </nav>
@@ -347,26 +362,26 @@
                             <span class="sub-title"><img src="assets/img/favicons/Favicon_40x40.png" alt="shape">Centro de Hemoterapia de Sergipe</span>
                             <p class="sec-text">Se cadastrar como doador de medula óssea é um ato de<span style="color: var(--theme-color); font-weight: bold; font-size: 20px !important;"> amor e esperança</span>. Com um gesto simples, você pode ser a única chance de salvar uma vida. A compatibilidade é rara, mas sua atitude pode transformar o desespero em alegria para quem mais precisa. Cadastre-se e faça a diferença!</p>
                         </div>
-                        <h3 class="box-title mb-20">O que você precisa para se cadastrar ?</h3>
+                        <h3 class="box-title modo1 mb-20">O que você precisa para se cadastrar ?</h3>
                         <div class="contact-process-wrap">
                             <div class="contact-process">
                                 <div class="box-number">01</div>
                                 <div class="media-body">
-                                    <h3 class="box-title">Maioridade</h3>
+                                    <h3 class="box-title modo1">Maioridade</h3>
                                     <p class="box-text" style="color: var(--title-color); width: 25vw !important;">Ter entre 18 e 35 anos (doação acontece até os 60 anos.)</p>
                                 </div>
                             </div>
                             <div class="contact-process">
                                 <div class="box-number">02</div>
                                 <div class="media-body">
-                                    <h3 class="box-title">Agende o Cadastramento</h3>
+                                    <h3 class="box-title modo1">Agende o Cadastramento</h3>
                                     <p class="box-text" style="color: var(--title-color); width: 25vw !important;">Agende a ida ao HEMOSE para realizar a coleta</p>
                                 </div>
                             </div>
                             <div class="contact-process">
                                 <div class="box-number">03</div>
                                 <div class="media-body">
-                                    <h3 class="box-title">Realize a Coleta</h3>
+                                    <h3 class="box-title modo1">Realize a Coleta</h3>
                                     <p class="box-text" style="color: var(--title-color); width: 25vw !important;">Será coletada uma amostra de sangue ou saliva para análise genética (tipagem HLA).</p>
                                 </div>
                             </div>
@@ -383,7 +398,7 @@
         <div class="container">
             <div class="title-area text-center">
                 <span class="sub-title3">Após o cadastro</span>
-                <h2 class="sec-title">O que acontece ?</h2>
+                <h2 id="unico" class="sec-title">O que acontece ?</h2>
             </div>
             <div class="process-box-wrap">
                 <div class="process-box">
@@ -393,7 +408,7 @@
                             <p class="box-number">01</p>
                         </div>
                     </div>
-                    <h3 class="box-title">Armazenamento dos Dados no REDOME</h3>
+                    <h3 class="box-title modo1">Armazenamento dos Dados no REDOME</h3>
                     <p class="box-text" style="color: var(--title-color);">Suas informações genéticas (tipagem HLA) são incluídas no Registro Nacional de Doadores Voluntários de Medula Óssea (REDOME). O registro é acessado por equipes médicas que buscam doadores compatíveis para pacientes em todo o Brasil e no exterior.</p>
                 </div>
                 <div class="process-box">
@@ -403,7 +418,7 @@
                             <p class="box-number">02</p>
                         </div>
                     </div>
-                    <h3 class="box-title">Busca por Compatibilidade</h3>
+                    <h3 class="box-title modo1">Busca por Compatibilidade</h3>
                     <p class="box-text" style="color: var(--title-color);">Sempre que um paciente precisar de um transplante, sua tipagem genética será comparada com os dados no REDOME. A compatibilidade é rara, podendo ocorrer apenas com uma ou duas pessoas em um universo de milhares.</p>
                 </div>
                 <div class="process-box">
@@ -413,7 +428,7 @@
                             <p class="box-number">03</p>
                         </div>
                     </div>
-                    <h3 class="box-title">Exames Complementares</h3>
+                    <h3 class="box-title modo1">Exames Complementares</h3>
                     <p class="box-text" style="color: var(--title-color);">Caso concorde, você realizará novos exames para confirmar a compatibilidade e avaliar sua saúde geral.</p>
                 </div>
                 <div class="process-box">
@@ -423,7 +438,7 @@
                             <p class="box-number">04</p>
                         </div>
                     </div>
-                    <h3 class="box-title">Doação</h3>
+                    <h3 class="box-title modo1">Doação</h3>
                     <p class="box-text" style="color: var(--title-color);">A doação será realizada em um hospital especializado, com acompanhamento de uma equipe médica. O processo é seguro e dura, em média, algumas horas.</p>
                 </div>
             </div>
@@ -540,6 +555,14 @@
         </svg>
     </div>
 
+    <!-- VLibras -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+
     <!--==============================
     All Js File
 ============================== -->
@@ -564,6 +587,11 @@
     <!-- Main Js File -->
     <script src="assets/js/main.js"></script>
     <script src="assets/js/vue.js"></script>
+
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
 </body>
 
 </html>

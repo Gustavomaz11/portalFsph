@@ -1918,7 +1918,7 @@ small {
 
 /*btn-primary*/
 .btn-primary {
-  display: none;
+  display: block;
   background-color: #e3ac31;
   border: 1px solid #e3ac31;
   -webkit-box-shadow: 0 2px 6px 0 rgba(87, 102, 218, 0.5);
@@ -2661,6 +2661,7 @@ button.bg-secondary:hover {
 .modal-content .modal-footer {
   border-color: #dee2e6;
   background-color: #f8f9fa;
+  width: 100%;
 }
 
 .modal-content .modal-header .modal-title,
@@ -7979,6 +7980,10 @@ tr:first-child > td > .fc-day-grid-event {
 .containerBtn {
   display: flex;
   gap: 5px;
+}
+
+.fullScreen {
+  width: 100%;
 }
 
 /* .appendModalPublicacao {

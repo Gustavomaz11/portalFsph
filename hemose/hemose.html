@@ -54,12 +54,20 @@
     <link rel="stylesheet" href="assets/css/jquery.datetimepicker.min.css">
     <!-- Theme Custom CSS -->
     <link rel="stylesheet" href="assets/css/hemose.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
     <script src="assets/js/slide.js" defer></script>
     <script src="assets/js/transicao.js" defer></script>
     <script src="assets/js/eventos.js" defer></script>
     <script src="assets/js/estoque.js" defer></script>
     <script src="assets/js/agendamento.js" defer></script>
 
+    <script src="assets/js/vue.js" defer></script>
+    <script src="assets/js/footer.js" defer></script>
+
+    <script src="assets/js/modoDark.js" defer></script>
+    <script src="assets/js/toggleDark.js" defer></script>
+    <script src="assets/js/fontSize.js" defer></script>
 
 </head>
 
@@ -115,7 +123,7 @@
     </div><!--==============================
 	Header Area
 ==============================-->
-    <header class="th-header header-layout1">
+    <header class="th-header header-layout1" id="headerContatos">
         <div class="header-top">
             <div class="container">
                 <div class="row justify-content-center align-items-center gy-2">
@@ -133,7 +141,7 @@
         </div>
         <div class="sticky-wrapper">
             <!-- Main Menu Area -->
-            <div class="menu-area" style="background-color: var(--white-color);">
+            <div class="menu-area">
                 <div class="container">
                     <div class="row align-items-center justify-content-between">
                         <div class="col-auto">
@@ -168,6 +176,20 @@
                                     <li>
                                         <a href="#faq-sec">Perguntas Frequentes</a>
                                     </li>
+                                    <li>
+                                        <button class="toggle" id="toggle">
+                                            <div class="toggle-thumb">
+                                                <svg class="icon" viewBox="0 0 20 20">
+                                                    <path fill="#fbbf24" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" />
+                                                </svg>
+                                            </div>
+                                        </button>
+                                    </li>
+
+
+                                    <li>
+                                        <button class="size-toggle" id="sizeToggle">Aa (1/3)</button>
+                                    </li>
                                 </ul>
                             </nav>
                         </div>
@@ -187,8 +209,9 @@
     <!--==============================
 Hero Area
 ==============================-->
-    <div class="th-hero-wrapper hero-1" id="hero" data-bg-src="assets/img/bg/bg_hero_hm.jpg">
+    <div class="th-hero-wrapper hero-1" id="hero">
         <div class="swiper th-slider" id="heroSlide1" data-slider-options='{"effect":"fade","autoHeight":true}'>
+            <!-- <img src="assets/img/bg/modoDarkHemoseHero.png" alt=""> -->
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
                     <div class="hero-inner">
@@ -256,18 +279,20 @@ Hero Area
                     <div class="swiper-slide" v-for="({ fatorrh, grupoabo, situacao }) in estoque.data" :key="grupoabo + fatorrh">
                         <div class="brand-box">
                             <div class="estoqueSangue">
-                                <i :class="situacao === 'Ideal' ? 'fa-solid fa-droplet' : 
-                                    situacao === 'Emergencia' ? 'fa-thin fa-droplet' : 
-                                    situacao === 'Alerta' ? 'fa-regular fa-droplet' : 
-                                    situacao === 'Critico' ? 'fa-light fa-droplet' : ''">
+                                <i :class="{
+                                    'fa-solid fa-droplet': situacao === 'Ideal',
+                                    'fa-thin fa-droplet': situacao === 'Emergencia',
+                                    'fa-regular fa-droplet': situacao === 'Alerta',
+                                    'fa-light fa-droplet': situacao === 'Critico'
+                                }" :style="{ color: dark ? '#fff' : '#D32F2F' }">
                                 </i>
-                                <span>{{ grupoabo }}{{ fatorrh === 'N' ? '-' : '+' }}</span>
+                                <span :style="{ color: dark ? '#fff' : '#D32F2F' }">{{ grupoabo }}{{ fatorrh === 'N' ? '-' : '+' }}</span>
                             </div>
-                            <span>{{ situacao }}</span>
+                            <span :style="{ color: dark ? '#fff' : '#D32F2F' }">{{ situacao }}</span>
                         </div>
                     </div>
                 </div>
-                <p style="text-align: end; color: var(--theme-color);">Nivel de estoque em: {{estoque.updated}}</p>
+                <p style="text-align: end;;" :style="{ color: dark ? '#fff' : '#D32F2F' }">Nivel de estoque em: {{estoque.updated}}</p>
 
             </div>
         </div>
@@ -275,174 +300,313 @@ Hero Area
     <!-- ===========================================
      Agendamento do Doador
      ============================================== -->
-    <div class="space" id="agendamento-doacao" data-bg-src="assets/img/bg/pattern_bg_7.png">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-6">
-                    <div class="form-shape-wrap">
-                        <div class="form-shape">
-                            <img src="assets/img/gallery/womanDonate.svg" alt="donateImg" id="slideImage" style="height: 62.5vh; width: 13vw;">
-                        </div>
-                        <div class="agendamentos">
-                            <form method="POST" class="faq-form2" id="agendamentoDoacaoIndividual" v-show="exibirDoacaoIndividual">
-                                <h4 class="box-title text-center">Agende Sua Doação</h4>
-                                <div class="row">
-                                    <div class="form-group col-12">
-                                        <input type="text" class="form-control" v-model="agendamentoIndividual.nomeCompletoIndividual" name="name" id="name" placeholder="Digite seu nome completo">
-                                        <i class="fal fa-user"></i>
-                                    </div>
-                                    <div class="form-group col-12">
-                                        <input type="email" class="form-control" v-model="agendamentoIndividual.emailIndividual" name="email" id="email" placeholder="Digite seu email">
-                                        <i class="fal fa-envelope"></i>
-                                    </div>
-                                    <div class="form-group col-12">
-                                        <input type="tel" class="form-control" v-model="agendamentoIndividual.telIndividual" name="number" id="number" placeholder="Melhor Contato">
-                                        <i class="fal fa-phone"></i>
-                                    </div>
-                                    <div class="form-group col-12">
-                                        <input type="text" class="form-control" v-model="agendamentoIndividual.cpfIndividual" name="name" id="cpf" placeholder="CPF">
-                                        <i class="fal fa-user"></i>
-                                    </div>
-                                    <div class="form-group col-6">
-                                        <input type="text" class="date-pick form-control" v-model="agendamentoIndividual.data" name="date" id="date-pick" placeholder="Data">
-                                        <i class="fal fa-calendar"></i>
-                                    </div>
-                                    <div class="form-group col-6">
-                                        <input type="text" class="time-pick form-control" v-model="agendamentoIndividual.hora" name="time" id="time-pick" placeholder="Hora">
-                                        <i class="fal fa-clock"></i>
-                                    </div>
-                                    <div class="form-btn col-12">
-                                        <button class="agendamentoBtn">Agendar</button>
-                                        <span id="alterarParaCampanha" @click="transicao">Clique aqui para agendar uma Campanha</span>
+    <div class="banner">
+        <div class="space" id="agendamento-doacao">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-7">
+                        <div class="form-shape-wrap">
+                            <div class="form-shape divImgRight">
+                                <img :src="imagemAtual" alt="donateImg" id="slideImage" :class="imagemClass">
+                            </div>
+                            <div class="agendamentos">
+                                <div class="carrosselAgendamento" v-show="exibirDoacaoIndividual">
+                                    <div class="appendCarrosselAgendamento">
+                                        <div class="itemCarrosselAgendamento">
+                                            <form class="faq-form2 fullScreen" id="preTriagem">
+                                                <h4 class="box-title text-center">Pré triagem doação</h4>
+                                                <div class="scrollY">
+                                                    <div class="form-group col-12">
+                                                        <h5>Primeira vez doando sangue ?</h5>
 
+                                                        <select v-model="agendamentoIndividual.primeiraVez" name="" id="primeiraVez" required>
+                                                            <option value="">--Selecione--</option>
+                                                            <option value="1">Sim</option>
+                                                            <option value="0">Não</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="form-group col-12">
+                                                        <h5>Pesa mais que 50Kg ?</h5>
+                                                        <select v-model="agendamentoIndividual.peso" name="" id="peso" required>
+                                                            <option value="">--Selecione--</option>
+                                                            <option value="1">Sim</option>
+                                                            <option value="0">Não</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group col-12">
+                                                        <h5>Fez uma tatuagem ou piercing em um local não controlado pela Vigilância Sanitária nos ultimos 12 meses?</h5>
+                                                        <select v-model="agendamentoIndividual.tatuPiercing" name="" id="temTatu" required>
+                                                            <option value="">--Selecione--</option>
+                                                            <option value="1">Sim</option>
+                                                            <option value="0">Não</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group col-12">
+                                                        <h5>Possui alguma doença transmissível pelo sangue</h5>
+                                                        <select v-model="agendamentoIndividual.doenca" name="" id="doencaTransmissivel" required>
+                                                            <option value="">--Selecione--</option>
+                                                            <option value="1">Sim</option>
+                                                            <option value="0">Não</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group col-12">
+                                                        <h5>Usou algum tipo de droga nos ultimos 12 meses ?</h5>
+                                                        <p>Sua resposta não será compartilhada</p>
+                                                        <select v-model="agendamentoIndividual.droga" name="" id="usuarioDroga" required>
+                                                            <option value="">--Selecione--</option>
+                                                            <option value="1">Sim</option>
+                                                            <option value="0">Não</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group col-12">
+                                                        <h5>Teve relaçao sexual com parceiro(a) desconhecido, sem proteção nos ultimos 12 meses ?</h5>
+                                                        <p>Sua resposta não será compartilhada</p>
+                                                        <select v-model="agendamentoIndividual.relacaoSexual" name="" id="sexoUltimoAno" required>
+                                                            <option value="">--Selecione--</option>
+                                                            <option value="1">Sim</option>
+                                                            <option value="0">Não</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group col-12">
+                                                        <h5>Sexo</h5>
+                                                        <select v-model="agendamentoIndividual.sexo" name="" id="sexo" required>
+                                                            <option value="">--Selecione--</option>
+                                                            <option value="masculino">Masculino</option>
+                                                            <option value="feminino">Feminino</option>
+                                                        </select>
+                                                    </div>
+                                                    <div v-if="agendamentoIndividual.sexo == 'feminino'" class="form-group col-12">
+                                                        <h5>Está passando por uma gestação ou amamentação ?</h5>
+                                                        <select v-model="agendamentoIndividual.gestacaoAmamentacao" name="123" id="gestacaoOuAmamentacao" required>
+                                                            <option value="">--Selecione--</option>
+                                                            <option value="1">Sim</option>
+                                                            <option value="0">Não</option>
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-btn col-12">
+                                                    <button @click="nextForm" type="button" class="agendamentoBtn">Próximo</button>
+                                                    <span id="alterarParaCampanha" @click="transicao">Clique aqui para agendar uma Campanha</span>
+                                                </div>
+                                                <p class="form-messages mb-0 mt-3"></p>
+                                            </form>
+                                        </div>
+                                        <div class="itemCarrosselAgendamento">
+                                            <form class="faq-form2 fullScreen" id="agendamentoDoacaoIndividual" v-show="exibirDoacaoIndividual">
+                                                <h4 class="box-title text-center">Agende Sua Doação</h4>
+                                                <div class="row">
+                                                    <div style="width: 100%;" class="scrollY">
+                                                        <div class="form-group col-12">
+                                                            <input type="text" class="form-control" required v-model="agendamentoIndividual.nomeCompletoIndividual" name="name" id="name" placeholder="Digite seu nome completo">
+                                                            <i class="fal fa-user"></i>
+                                                        </div>
+                                                        <div class="form-group col-12">
+                                                            <input type="text" @change="maskForDate" required class="date-pick form-control" v-model="agendamentoIndividual.dt_nascimento" name="dt_nascimento-uni" id="dateNascimento" placeholder="Data de nascimento">
+                                                            <i class="fal fa-calendar"></i>
+                                                        </div>
+                                                        <div v-if="agendamentoIndividual.menorIdade" class="form-group col-12 containerAutorizacao">
+                                                            <h5>Campo de autorização</h5>
+                                                            <p>baixe o arquivo do link abaixo, assine e mande-o nesse proprio formulario</p>
+                                                            <div class="form-group col-12">
+                                                                <a id="link-autorizacao" target="_blank" href="http://hemose.se.gov.br/wp-content/uploads/2019/01/FSPH-HC.03.RG008-00-Autoriza%C3%A7%C3%A3o-para-Doa%C3%A7%C3%A3o-de-Sangue-por-Menor-de-Idade.pdf">Autorização</a>
+                                                            </div>
+                                                            <div class="form-group col-12">
+                                                                <label id="label-autorizacao" for="file-autorizacao">Click aqui para enviar o documento assinado
+                                                                    <input @change="handleFileChange" type="file" name="file-autorizacao" id="file-autorizacao">
+                                                                </label>
+                                                                <p class="screenError"></p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-12">
+                                                            <input type="email" class="form-control" required v-model="agendamentoIndividual.emailIndividual" name="email" id="email" placeholder="Digite seu email">
+                                                            <i class="fal fa-envelope"></i>
+                                                        </div>
+                                                        <div class="form-group col-12">
+                                                            <input type="tel" class="form-control" required v-model="agendamentoIndividual.telIndividual" name="number" id="number" placeholder="Melhor Contato">
+                                                            <i class="fal fa-phone"></i>
+                                                        </div>
+                                                        <div class="form-group col-12">
+                                                            <input type="text" @change="maskForCpf" required class="form-control" v-model="agendamentoIndividual.cpfIndividual" name="name" id="cpf" placeholder="CPF">
+                                                            <i class="fal fa-user"></i>
+                                                        </div>
+                                                        <div class="containerDateHora">
+                                                            <div class="form-group col-6">
+                                                                <input type="text" @change="maskForDate" required class="date-pick form-control" v-model="agendamentoIndividual.data" name="data-uni" id="date-pick" placeholder="Data">
+                                                                <i class="fal fa-calendar"></i>
+                                                            </div>
+                                                            <div class="form-group col-6">
+                                                                <input type="text" @change="maskForHora" required class="time-pick form-control" v-model="agendamentoIndividual.hora" name="time" id="time-pick" placeholder="Hora">
+                                                                <i class="fal fa-clock"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-btn col-12 divControll">
+                                                        <button type="button" @click="handlePostDoacaoUni" class="agendamentoBtn">Agendar</button>
+                                                        <button type="button" @click="prevForm" class="agendamentoBtn">Voltar</button>
+                                                        <span id="alterarParaCampanha" @click="transicao">Clique aqui para agendar uma Campanha</span>
+                                                    </div>
+                                                </div>
+                                                <p class="form-messages mb-0 mt-3"></p>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
-                                <p class="form-messages mb-0 mt-3"></p>
-                            </form>
-                            <form class="faq-form2" id="agendamentoCampanha" v-show="!exibirDoacaoIndividual">
-                                <h4 class="box-title text-center">Agende Sua Campanha</h4>
-                                <div class="row">
-                                    <div class="form-group col-12">
-                                        <input type="text" class="form-control" name="name" id="nameCampanha" placeholder="Nome completo do responsavel da campanha">
-                                        <i class="fal fa-user"></i>
+                                <form class="faq-form2" id="agendamentoCampanha" v-show="!exibirDoacaoIndividual">
+                                    <h4 class="box-title text-center">Agende Sua Campanha</h4>
+                                    <div class="row">
+                                        <div class="form-group col-12">
+                                            <input required type="text" class="form-control" v-model="agendamentoCampanha.nomeResponsavel" name="name" id="nameCampanha" placeholder="Nome completo do responsável da campanha">
+                                            <i class="fal fa-user"></i>
+                                        </div>
+                                        <div class="form-group col-12">
+                                            <input required type="email" class="form-control" v-model="agendamentoCampanha.emailResponsavel" name="email" id="emailCampanha" placeholder="Email do responsável pela campanha">
+                                            <i class="fal fa-envelope"></i>
+                                        </div>
+                                        <div class="form-group col-12">
+                                            <input required minlength="11" maxlength="11" type="tel" class="form-control" v-model="agendamentoCampanha.telResponsavel" name="number" id="numeroCampanha" placeholder="Celular para contato do responsável pela campanha">
+                                            <i class="fal fa-phone"></i>
+                                        </div>
+                                        <div class="form-group col-12">
+                                            <input required type="number" class="form-control" v-model="agendamentoCampanha.qtdPessoas" name="name" id="qtdPessoas" placeholder="Quantidade de Pessoas">
+                                            <i class="fal fa-user"></i>
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <input required type="text" @change="maskForDate" class="date-pick form-control" v-model="agendamentoCampanha.data" name="data-cam" id="dataCampanha" placeholder="Data">
+                                            <i class="fal fa-calendar"></i>
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <select required name="turno" id="turno" v-model="agendamentoCampanha.turno">
+                                                <option value="" selected disabled>Selecione o Turno</option>
+                                                <option value="manha">Manhã</option>
+                                                <option value="tarde">Tarde</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-btn col-12">
+                                            <button @click="handlePostDoacaoCam" type="button" class="agendamentoBtn">Agendar Campanha</button>
+                                            <span id="alterarParaDoacao" @click="transicao">Clique aqui para agendar uma Doação Individual</span>
+                                        </div>
                                     </div>
-                                    <div class="form-group col-12">
-                                        <input type="email" class="form-control" name="email" id="emailCampanha" placeholder="Email do responsavel pela campanha">
-                                        <i class="fal fa-envelope"></i>
-                                    </div>
-                                    <div class="form-group col-12">
-                                        <input type="tel" class="form-control" name="number" id="numeroCampanha" placeholder="Celular para contato do responsavel pela camapanha">
-                                        <i class="fal fa-phone"></i>
-                                    </div>
-                                    <div class="form-group col-12">
-                                        <input type="text" class="form-control" name="name" id="qtdPessoas" placeholder="Quantidade de Pessoas">
-                                        <i class="fal fa-user"></i>
-                                    </div>
-                                    <div class="form-group col-6">
-                                        <input type="text" class="date-pick form-control" name="date" id="dataCampanha" placeholder="Data">
-                                        <i class="fal fa-calendar"></i>
-                                    </div>
-                                    <div class="form-group col-6">
-                                        <select name="turno" id="turno">
-                                            <option value="" selected disabled>Selecione o Turno</option>
-                                            <option value="manha">Manhã</option>
-                                            <option value="tarde">Tarde</option>
-                                        </select>
-
-                                    </div>
-                                    <div class="form-btn col-12">
-                                        <button class="agendamentoBtn">Agendar Campanha</button>
-                                        <span id="alterarParaDoacao" onclick="transicao()">Clique aqui para agendar uma Doação Individual</span>
-
-                                    </div>
-                                </div>
-                                <p class="form-messages mb-0 mt-3"></p>
-                            </form>
+                                    <p class="form-messages mb-0 mt-3"></p>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-6 mt-40 mt-xl-0">
-                    <div class="ps-xxl-5">
-                        <div class="title-area mb-32">
-                            <span class="sub-title"><img src="assets/img/favicons/Favicon_40x40.png" alt="shape">Centro de Hemoterapia de Sergipe</span>
-                            <p class="sec-text">A cada doação de sangue, você pode salvar até <span style="color: var(--theme-color); font-weight: bold; font-size: 20px !important;">4 vidas</span>. Agendar sua doação é rápido, fácil e transforma o seu tempo em um ato de amor e solidariedade.</p>
+                    <div class="col-xl-5 mt-40 mt-xl-0">
+                        <div class="ps-xxl-5 stepsDonation" v-show="exibirDoacaoIndividual">
+                            <div class="title-area mb-32">
+                                <span class="sub-title"><img src="assets/img/favicons/Favicon_40x40.png" alt="shape">Centro de Hemoterapia de Sergipe</span>
+                                <p class="sec-text">A cada doação de sangue, você pode salvar até <span style="font-weight: bold; font-size: 20px !important;">{{agendamentoCampanha.qtdPessoas ? agendamentoCampanha.qtdPessoas * 4 : 4}} vidas</span>. Agendar sua doação é rápido, fácil e transforma o seu tempo em um ato de amor e solidariedade.</p>
+                            </div>
+                            <h3 class="box-title mb-20">Como Agendar ?</h3>
+                            <div class="contact-process-wrap">
+                                <div class="contact-process">
+                                    <div class="box-number">01</div>
+                                    <div class="media-body">
+                                        <h3 class="box-title">Escolha seu Horário</h3>
+                                        <p class="box-text" style="width: 25vw !important;">De Segunda à Sexta-Feira das 07:00 às 17:00</p>
+                                    </div>
+                                </div>
+                                <div class="contact-process">
+                                    <div class="box-number">02</div>
+                                    <div class="media-body">
+                                        <h3 class="box-title">Dirija-se ao HEMOSE</h3>
+                                        <p class="box-text" style="width: 25vw !important;">Av. Prof. José Bonifácio Fortes Neto, 400 - Bloco 01 - Capucho CEP: 49095-000 Aracaju/SE</p>
+                                    </div>
+                                </div>
+                                <div class="contact-process">
+                                    <div class="box-number">03</div>
+                                    <div class="media-body">
+                                        <h3 class="box-title">Seja um herói no dia de alguém</h3>
+                                        <p class="box-text" style="width: 25vw !important;">Sua doação pode salvar vidas e trazer esperança a quem mais precisa. Faça a diferença!</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <h3 class="box-title mb-20">Como Agendar ?</h3>
-                        <div class="contact-process-wrap">
-                            <div class="contact-process">
-                                <div class="box-number">01</div>
-                                <div class="media-body">
-                                    <h3 class="box-title">Escolha seu Horário</h3>
-                                    <p class="box-text" style="color: var(--title-color); width: 25vw !important;">De Segunda à Sexta-Feira das 07:00 às 17:00</p>
-                                </div>
+                        <div class="ps-xxl-5 stepsDonation" v-show="!exibirDoacaoIndividual">
+                            <div class="title-area mb-32">
+                                <span class="sub-title"><img src="assets/img/favicons/Favicon_40x40.png" alt="shape">Centro de Hemoterapia de Sergipe</span>
+                                <p class="sec-text">Organizar uma campanha de doação de sangue é uma oporturnidade única de transformar solidariedade em ação. Mobilize sua comunidade, empresa ou instituição para fazer a diferença e trazer esperança para quem mais precisa <span v-if="agendamentoCampanha.qtdPessoas !== 1">salvando até: <span>{{agendamentoCampanha.qtdPessoas ? agendamentoCampanha.qtdPessoas * 4 : 4}} vidas</span></span></p>
+
                             </div>
-                            <div class="contact-process">
-                                <div class="box-number">02</div>
-                                <div class="media-body">
-                                    <h3 class="box-title">Dirija-se ao HEMOSE</h3>
-                                    <p class="box-text" style="color: var(--title-color); width: 25vw !important;">Av. Prof. José Bonifácio Fortes Neto, 400 - Bloco 01 - Capucho CEP: 49095-000 Aracaju/SE</p>
+                            <h3 class="box-title mb-20">Como organizar sua campanha ?</h3>
+                            <div class="contact-process-wrap">
+                                <div class="contact-process">
+                                    <div class="box-number">01</div>
+                                    <div class="media-body">
+                                        <h3 class="box-title">Escolha o Turno</h3>
+                                        <p class="box-text" style="width: 25vw !important;">De Segunda à Sexta-Feira manhã ou tarde</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="contact-process">
-                                <div class="box-number">03</div>
-                                <div class="media-body">
-                                    <h3 class="box-title">Seja um herói no dia de alguém</h3>
-                                    <p class="box-text" style="color: var(--title-color); width: 25vw !important;">Sua doação pode salvar vidas e trazer esperança a quem mais precisa. Faça a diferença!</p>
+                                <div class="contact-process">
+                                    <div class="box-number">02</div>
+                                    <div class="media-body">
+                                        <h3 class="box-title">Dirija-se ao HEMOSE</h3>
+                                        <p class="box-text" style="width: 25vw !important;">Av. Prof. José Bonifácio Fortes Neto, 400 - Bloco 01 - Capucho CEP: 49095-000 Aracaju/SE.</p>
+                                    </div>
                                 </div>
+                                <div class="contact-process">
+                                    <div class="box-number">03</div>
+                                    <div class="media-body">
+                                        <h3 class="box-title">Engaje seus participantes</h3>
+                                        <p class="box-text" style="width: 25vw !important;">Incentive amigos, colegas e familiares a se unirem nessa causa. Cada doação de sangue tem o potencial de salvar até 4 vidas!</p>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- =======================
+         depoimentos area
+         =========================== -->
+        <section class="overflow-hidden space" id="depoimentos">
+            <div class="testi-element-area">
+                <div class="row flex-row-reverse">
+                    <div class="col-xl-7 align-self-center">
+                        <div class="title-area text-center text-xl-start">
+                            <span class="sub-title"><img src="assets/img/favicons/Favicon_40x40.png" alt="shape">Depoimentos</span>
+                            <h2 class="sec-title text-white">O que os Doadores pensam?</h2>
+                        </div>
+                        <div class="swiper th-slider has-shadow" id="testiSlide1" data-slider-options='{"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":"1"},"768":{"slidesPerView":"1"},"992":{"slidesPerView":"2"},"1200":{"slidesPerView":"1.3"},"1500":{"slidesPerView":"1.8"}}}'>
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide" v-for="depoimento in depoimentos" :key="depoimento.id_depoimento">
+                                    <div class="testi-element">
+                                        <div class="box-profile">
+                                            <div class="box-img">
+                                                <img :src="depoimento.foto_criador" alt="Avater" height="80" width="80">
+                                            </div>
+                                            <div class="media-body">
+                                                <h3 class="box-title">{{ depoimento.nome_criador }}</h3>
+                                                <p class="box-desig">{{ depoimento.ocupacao_criador }}</p>
+                                            </div>
+                                        </div>
+                                        <div class="box-content">
+                                            <div class="box-quote">
+                                                <img src="assets/img/icon/quote_6.png" alt="Icon">
+                                            </div>
+                                            <div class="box-review">
+                                                <i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i>
+                                            </div>
+                                            <p class="box-text" style="color: var(--theme-color);">"{{depoimento.texto_depoimento}}"</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-5 mt-40 mt-xl-0">
+                        <div class="rounded-20">
+                            <img src="assets/img/imgFundo/womanAndNurse.svg" alt="image" class="w-100">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
-    <!-- =======================
-     depoimentos area
-     =========================== -->
-
-    <section class="overflow-hidden space" data-bg-src="assets/img/bg/depoimento.svg" id="depoimentos">
-        <div class="testi-element-area">
-            <div class="row flex-row-reverse">
-                <div class="col-xl-7 align-self-center">
-                    <div class="title-area text-center text-xl-start">
-                        <span class="sub-title"><img src="assets/img/favicons/Favicon_40x40.png" alt="shape">Depoimentos</span>
-                        <h2 class="sec-title text-white">O que os Doadores pensam?</h2>
-                    </div>
-                    <div class="swiper th-slider has-shadow" id="testiSlide1" data-slider-options='{"breakpoints":{"0":{"slidesPerView":1},"576":{"slidesPerView":"1"},"768":{"slidesPerView":"1"},"992":{"slidesPerView":"2"},"1200":{"slidesPerView":"1.3"},"1500":{"slidesPerView":"1.8"}}}'>
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide" v-for="depoimento in depoimentos" :key="depoimento.id_depoimento">
-                                <div class="testi-element">
-                                    <div class="box-profile">
-                                        <div class="box-img">
-                                            <img :src="depoimento.foto_criador" alt="Avater" height="80" width="80">
-                                        </div>
-                                        <div class="media-body">
-                                            <h3 class="box-title">{{ depoimento.nome_criador }}</h3>
-                                            <p class="box-desig">{{ depoimento.ocupacao_criador }}</p>
-                                        </div>
-                                    </div>
-                                    <div class="box-content">
-                                        <div class="box-quote">
-                                            <img src="assets/img/icon/quote_6.png" alt="Icon">
-                                        </div>
-                                        <div class="box-review">
-                                            <i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i><i class="fa-sharp fa-solid fa-star"></i>
-                                        </div>
-                                        <p class="box-text" style="color: var(--theme-color);">"{{depoimento.texto_depoimento}}"</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-5 mt-40 mt-xl-0">
-                    <div class="rounded-20">
-                        <img src="assets/img/imgFundo/womanAndNurse.svg" alt="image" class="w-100">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <div class="counter-sec2" data-overlay="theme2">
         <div class="container">
@@ -493,19 +657,34 @@ Hero Area
                     <p class="box-timing">Quinta-Feira: <span>07:30 - 17:00</span></p>
                     <p class="box-timing">Sexta-Feira: <span>07:30 - 17:00</span></p>
                 </div>
-                <div class="form-wrap">
-                    <div class="scrollAppointment-form">
-                        <form class="appointment-form" id="eventos">
-                            <h4 class="form-title">Agenda de Coletas Externas</h4>
-                            <div class="row">
-                                <div class="form-group col-12 agendaFundacao" v-for="evento in eventosPublicados.data" v-if="evento.id_unidade_fk === 2" :key="evento.id_evento">
-                                    <span>{{evento.evento}}</span>
-                                    <span>{{evento.dt_evento}}</span>
+                <div id="eventos" style="display: flex; flex-direction: column; align-items: center; justify-content: space-between;" class="form-wrap">
+                    <div class="scrollY">
+                        <div style="width: 100%;" class="scrollAppointment-form">
+                            <form v-show="!verDetalhes" class="appointment-form">
+                                <h4 class="form-title">Agenda de Coletas Externas</h4>
+                                <div class="row">
+                                    <div class="form-group col-12 agendaFundacao" v-for="evento in eventosPublicados" v-if="evento.id_unidade_fk === 2" :key="evento.id_evento">
+                                        <span>{{evento.nome_evento}}</span>
+                                        <span>{{evento.dt_min.split("T")[0].split('-').reverse().join('/')}} até {{evento.dt_max.split("T")[0].split('-').reverse().join('/')}}</span>
+                                        <button type="button" @click="verMais(evento.id_unidade_fk, evento.id_aux_evento)" class="btnVerMais">Ver mais</button>
+                                    </div>
                                 </div>
-                            </div>
-                            <p class="form-messages mb-0 mt-3"></p>
-                        </form>
+                                <p class="form-messages mb-0 mt-3">aaa</p>
+                            </form>
+                            <form v-show="verDetalhes" class="appointment-form">
+                                <h4 class="form-title">Agenda de Coletas Externas</h4>
+                                <div class="row">
+                                    <div class="form-group col-12 agendaFundacao" v-for="evento in eventosDetalhados" v-if="evento.id_unidade_fk === 2" :key="evento.id_evento">
+                                        <span>{{evento.id_unidade_fk == 1?"FSPH":evento.id_unidade_fk == 2?"Hemose":evento.id_unidade_fk == 3?"Lacen":"SVO"}}</span>
+                                        <span>{{evento.local}}</span>
+                                        <span>{{evento.dt_evento.split("T")[0].split('-').reverse().join('/')}}</span>
+                                    </div>
+                                </div>
+                                <p class="form-messages mb-0 mt-3">aaa</p>
+                            </form>
+                        </div>
                     </div>
+                    <button @click="verDetalhes = !verDetalhes" v-show="verDetalhes" class="btnVerMais">Voltar</button>
                 </div>
             </div>
         </div>
@@ -767,6 +946,14 @@ Perguntas Frequentes
         </svg>
     </div>
 
+    <!-- VLibras -->
+    <div vw class="enabled">
+        <div vw-access-button class="active"></div>
+        <div vw-plugin-wrapper>
+            <div class="vw-plugin-top-wrapper"></div>
+        </div>
+    </div>
+
     <!--==============================
     All Js File
 ============================== -->
@@ -791,13 +978,15 @@ Perguntas Frequentes
     <!-- Main Js File -->
     <script src="assets/js/main.js"></script>
 
-    <script src="assets/js/myFetch.js"></script>
-
-
     <script src="assets/js/vue.js"></script>
     <script src="assets/js/myvue.js"></script>
     <script src="assets/js/estatistica.js"></script>
     <script src="assets/js/footer.js"></script>
+
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
 
 
 

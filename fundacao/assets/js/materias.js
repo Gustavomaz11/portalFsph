@@ -25,36 +25,78 @@ let segundoParagrafoSubtituloMateria = document.querySelector(
   '#segundoParagrafoSubtituloMateria',
 );
 
-
 const vm = new Vue({
   el: '#areaNoticia',
   data: {
     noticias: [],
     noticiaAtual: null,
-    noticiasMaisRecentes: []
+    noticiasMaisRecentes: [],
+    modoDark: false, // Estado do modo escuro
   },
   methods: {
     async myFetch() {
       try {
-        const resposta = await fetch('http://172.23.42.17:3002/apinoticias/listar/0');
+        const resposta = await fetch(
+          'http://172.23.42.17:3002/apinoticias/listar/0',
+        );
         const json = await resposta.json();
-        this.noticias = json; 
-        this.noticiasMaisRecentes.push(json.data[0])
-        this.noticiasMaisRecentes.push(json.data[1])
-        this.noticiasMaisRecentes.push(json.data[2])
+        this.noticias = json;
+        this.noticiasMaisRecentes.push(json.data[0]);
+        this.noticiasMaisRecentes.push(json.data[1]);
+        this.noticiasMaisRecentes.push(json.data[2]);
       } catch (error) {
         console.error('Erro ao buscar notícias:', error);
       }
     },
     verNoticia(idNoticia) {
-      this.noticiaAtual = idNoticia
+      this.noticiaAtual = idNoticia;
       window.location.href = `blog-details.html?id=${idNoticia}`;
-      
-    }
+    },
+    darkPage() {
+      // Recupera o estado do modo escuro do localStorage
+      const darkMode = localStorage.getItem('dark') === 'true';
+      this.modoDark = darkMode;
+      this.applyDarkMode(darkMode);
+    },
+    applyDarkMode(isDark) {
+      // Atualiza as classes de acordo com o modo escuro
+      if (isDark) {
+        document.body.classList.add('darkAbsolute');
+        document.body.classList.remove('light');
+        // Aplica as classes para outros elementos
+        document.querySelector('#headerContatos')?.classList.add('dark');
+        document.querySelector('#menuArea')?.classList.add('darkAbsolute');
+        document.querySelector('#linksUteisDark')?.classList.add('btnInDark');
+        document
+          .querySelector('.breadcumb-wrapper')
+          ?.style.setProperty('background-color', '#555');
+        document.querySelector('#footerDark')?.classList.add('darkAbsolute');
+        document.querySelector('#littleFooter')?.classList.add('dark');
+      } else {
+        document.body.classList.add('light');
+        document.body.classList.remove('darkAbsolute');
+        // Reverte as classes para os outros elementos
+        document.querySelector('#headerContatos')?.classList.remove('dark');
+        document.querySelector('#menuArea')?.classList.remove('darkAbsolute');
+        document
+          .querySelector('#linksUteisDark')
+          ?.classList.remove('btnInDark');
+        document
+          .querySelector('.breadcumb-wrapper')
+          ?.style.setProperty('background-color', '#0a3c79');
+        document.querySelector('#footerDark')?.classList.remove('darkAbsolute');
+        document.querySelector('#littleFooter')?.classList.remove('dark');
+      }
+    },
+    toggleDarkMode() {
+      // Alterna o modo escuro
+      this.modoDark = !this.modoDark;
+      localStorage.setItem('dark', this.modoDark ? 'true' : 'false');
+      this.applyDarkMode(this.modoDark); // Aplica a alteração do modo escuro
+    },
   },
   mounted() {
-    this.myFetch(); 
-  }
+    this.myFetch();
+    this.darkPage(); // Verifica o modo escuro na inicialização
+  },
 });
-
-
