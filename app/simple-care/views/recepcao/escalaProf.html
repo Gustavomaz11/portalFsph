@@ -1,0 +1,357 @@
+<style>
+  
+  #card-tabela tr img {
+    cursor: pointer;
+  }
+
+  .pagination .page-link {
+    color: black;
+  }
+
+  #card-tabela{
+    height: 47em;
+    margin-top: 0.1em;
+  }
+
+  option {
+    font-size: 14px;
+  }
+
+  .card-escala:hover {
+    background-color: #eff5f5;
+  }
+
+ /* select {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+  }*/
+
+  .tools {
+   font-size: 12px;
+  }
+
+  /*.col {
+    height: 10em;
+    padding: 0;
+  }
+
+  input[type="time"], input[type="number"] {
+    font-size: 14px !important;
+    font-weight: 500 !important;
+  } */
+</style>
+
+<div class="card p-0" id="card-tabela">
+  
+    <div class="card-header bg-light">
+
+        <div class="row">
+        
+            <div class="d-flex col-lg-6 c-1">
+                <h5 class="sub-tit">Escala de Profissional</h5>
+            </div>
+            
+        </div>
+
+    </div>
+
+    <div class="card-body pt-2 px-1">        
+
+        <div class="card px-1 py-1 ms-1 me-1">
+  
+            <div class="row px-1 py-1" style="height:auto">
+
+                <div class="col col-sm-1">
+
+                    <div class="form-floating  pe-0">
+                        <input type="text" class="form-control form-control-sm text-center" id="txt-id" value="0" readonly style="width:5em">
+                        <label for="txt-id">ID :</label>
+                    </div>
+
+                </div>
+
+                <div class="col col-sm-5">
+
+                    <div class="form-floating">
+                        <input type="text" class="form-control form-control-sm" id="txt-nome-prof" value="0" readonly>
+                        <label for="txt-nome-prof">Nome Profissional :</label>
+                    </div>
+
+                </div>
+
+                <div class="col col-sm-2">
+
+                    <div class="form-floating">
+                        <input type="text" class="form-control form-control-sm" id="txt-vinculo" value="0" readonly>
+                        <label for="txt-vinculo">Vinculo :</label>
+                    </div>
+
+                </div>
+
+                <div class="col col-sm-2">
+
+                    <div class="form-floating">
+                        <input type="text" class="form-control form-control-sm text-center" id="txt-cg-hor" value="0" readonly>
+                        <label for="txt-cg-hor">Carga Horaria :</label>
+                    </div>
+
+                </div>
+
+                <div class="col col-sm-2">
+
+                    <div class="form-floating">
+                        <input type="text" class="form-control form-control-sm text-center" id="txt-saldo" value="0" readonly>
+                        <label for="txt-saldo">Saldo :</label>
+                    </div>
+
+                </div>
+            
+            </div>
+
+        </div>
+
+        <div class="card mt-2 ms-1 me-1">
+
+            <div class="d-flex">
+
+                <div class="d-flex p-2 w-50 justify-content-start">
+
+                    <button type="button" class="btn btn-sm me-5 p-0 tools" onclick="SelecionaProfissional()">
+                        <img src="assets/img/find.png" height="20" width="20"> Profissional
+                    </button>
+
+                    <button type="button" class="btn btn-sm me-5 p-0 tools" onclick="AddEscala()">
+                        <img src="assets/img/adicionar.png" height="20" width="20"> Novo    
+                    </button>
+
+                    <select class="form-select form-select-sm fw-bold" id="sel-mes" onchange="ListarEscala()"> 
+                        <option value="1">Janeiro</option>
+                        <option value="2">Fevereiro</option>
+                        <option value="3">Março</option>
+                        <option value="4">Abril</option>
+                        <option value="5">Maio</option>
+                        <option value="6">Junho</option>
+                        <option value="7">Julho</option>
+                        <option value="8">Agosto</option>
+                        <option value="9">Setembro</option>
+                        <option value="10">Outubro</option>
+                        <option value="11">Novembro</option>
+                        <option value="12">Dezembro</option>
+                    </select>
+
+                </div>
+
+                <div class="d-flex p-2 w-50 justify-content-end">
+
+                    <button type="button" class="btn btn-sm p-0 ms-4" onclick="">
+                        <img src="assets/img/exit.png" height="20" width="20">         
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+        
+        <div class="row ms-0 me-2 pb-0" id="card-ploter">
+        </div>
+
+    </div>
+
+    <div class="card-footer bg-light ps-4">
+
+        <nav aria-label="...">
+
+            <ul class="pagination pagination-sm" id="pag-escala">
+
+                <!--<li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+
+            </ul>
+
+        </nav>
+
+    </div>
+  
+</div>
+
+<!---------------------------------------
+  MODAL SELECIONA PROFISSIONAL
+----------------------------------------->
+<div id="modal-sel-prof" class="modal" role="dialog" tabindex="-1">
+
+    <div class="model-inner"  id="card">
+
+        <div class="card p-0">
+
+            <div class="card-header bg-light px-1 py-1">
+
+                <div class="row p-0" style="height: 24px;">
+
+                    <div class="col-lg-12 text-start">
+                        <h6 class="sub-tit mt-1 px-2" id="tit-modal" style="font-size: 13px;"></h6>
+                    </div>
+
+                </div>
+        
+            </div>
+
+            <div class="card-body py-1 px-3">
+
+                <div class="row p-1">
+
+                    <div class="col col-lg-7">
+                        <input type="text" class="form-control form-control-sm" id="txt-nm-prof" placeholder="digite nome profissional">
+                    </div>
+
+                    <div class="col-lg-3">
+                                
+                        <button type="button" class="btn btn-sm me-2 p-0" onclick="PesquisarProfissional(1,elem('txt-nm-prof').value)" style="height: 31px; width:30px">
+                            <img src="assets/img/find.png" height="16" width="16">       
+                        </button>
+
+                        <button type="button" class="btn btn-sm p-0" onclick="closeModal('modal-sel-prof')" style="height: 31px;width:30px">
+                            <img src="assets/img/exit.png" height="16" width="16">         
+                        </button>
+            
+                    </div>
+
+                </div>
+
+                <table class="table table-sm table-hover py-2 pb-0">
+        
+                    <thead>
+                
+                        <tr>
+                            <th align="center" scope="col">#</th>
+                            <th align="left" scope="col">Nome Profissional</th>          
+                            <th align="left" scope="col">Ação</th>
+                        </tr> 
+                
+                    </thead>
+                
+                    <tbody id='tbody-prof'>
+                
+                    </tbody>
+            
+                </table>
+
+            </div>
+
+            <nav class="px-2 mt-3 ms-1 pb-0">
+    
+                <ul class="pagination pagination-sm p-0" id="pag-sel-profissionais">
+                </ul>
+
+            </nav>
+                    
+        </div>
+
+    </div>
+
+</div>
+
+<!---------------------------------------
+  MODAL Inclusão/Altera Escala
+----------------------------------------->
+<div id="modal-escala" class="modal" role="dialog" tabindex="-1">
+
+    <div class="model-inner"  id="card-escala">
+
+        <div class="card p-0">
+
+            <div class="card-header bg-light px-1 py-1">
+
+                <div class="row p-0" style="height: 24px;">
+
+                    <div class="col-lg-12 text-start">
+                        <h6 class="sub-tit mt-1 px-2" id="tit-modal-upload" style="font-size: 13px;"></h6>
+                    </div>
+
+                </div>
+        
+            </div>
+
+            <div class="card-body py-1 px-3">
+
+                <div class="row p-1">
+
+                    <div class="col col-lg-4">
+                        <label for="txt-escala-id">ID :</label>
+                        <input type="text" class="form-control form-control-sm text-end" id="txt-escala-id" value="0" readonly>
+                    </div>
+
+                    <div class="col col-lg-8">
+                        <label for="txt-data">Data :</label>
+                        <input type="date" class="form-control form-control-sm" id="txt-data">
+                    </div>
+
+                </div>
+
+                <div class="row p-1">
+
+                    <div class="col col-lg-12">
+
+                        <label for="sel-turnos">Turnos :</label>
+                        <select class="form-select form-select-sm" id="sel-turnos" onchange="SelTurno(this)">
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <div class="row p-1">
+
+                    <div class="col col-lg-6">
+                        <label for="txt-hr-ini">Hora Ini :</label>
+                        <input type="time" class="form-control form-control-sm" id="txt-hr-ini" readonly>
+                    </div>
+
+                    <div class="col col-lg-6">
+                        <label for="txt-hr-fin">Hora Fim :</label>
+                        <input type="time" class="form-control form-control-sm" id="txt-hr-fin" readonly>
+                    </div>
+
+                </div>
+
+                <div class="row p-1">
+
+                    <div class="col col-lg-6">
+                        <label for="txt-qt-pac">Qtde Pacientes :</label>
+                        <input type="text" class="form-control form-control-sm text-end" id="txt-qt-pac" value="0">
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="card-footer py-1">
+                    
+                <div class="row py-0">
+
+                    <div class="d-flex col-lg-12">
+                                
+                        <button type="button" class="btn btn-sm me-2" onclick="SalvarEscala()">
+                            <img src="assets/img/salve.png" height="20" width="20">       
+                        </button>
+
+                        <button type="button" class="btn btn-sm" onclick="closeModal('modal-escala')">
+                            <img src="assets/img/exit.png" height="20" width="20">         
+                        </button>
+            
+                    </div>
+
+                </div>
+
+            </div>
+                    
+        </div>
+
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    Mens('teste');
+</script>

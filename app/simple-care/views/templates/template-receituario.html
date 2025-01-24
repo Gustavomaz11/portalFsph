@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeamPlate</title>
+</head>
+
+<style>
+  
+    h3 {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 24px;
+        color: rgb(5, 5, 141);
+        padding: 0;
+        top:0px !important;
+        margin-top: 0px;
+    }
+
+    .titulo {
+        display: flex;
+        width: 100vw;
+        text-align: center;
+        flex-direction: column;
+        justify-content: center;
+        top: 0px;
+        margin-top:0px;
+        padding-top: 5px;
+        padding-right: 8em;
+    }
+
+    main {
+        margin-left: 6em;
+        margin-top: 6em; 
+        height: 65vh;
+    }
+
+    #receita {
+        height: 40vh;
+        width: 90%;
+        border: none;
+        margin-top: 2em;
+        text-align: justify;
+        resize: none;
+    }
+
+    footer {
+        display: flex;
+        justify-content: center;
+        height: 13vh;
+        flex-direction: column;
+    }
+
+    h4{
+        margin-top: 2em;
+        font-size: 22px;
+    }
+
+    body {
+        border: 1px solid #616161;
+        padding-bottom: 15px !important;
+    }
+
+    span {
+        font-size: 18px;
+        font-family: Arial, Helvetica, sans-serif;
+        padding-top: 0;
+        margin-top: 0;
+    }
+
+    header {
+        display: flex;
+        flex-direction: row;
+        width: 100vw;
+    }
+
+    .logo {
+        display: flex;
+        flex-direction: column;
+        width: auto;
+        padding-top: 5px;
+    }
+
+    #prescricoes p {
+        padding-bottom: 1px;
+    }
+
+</style>
+
+<body>
+
+    <header>
+
+        <div class="logo">
+            <img id='logo' height="60vh" width="auto"  alt="logo marca">
+        </div>
+
+        <div class="titulo">
+            <h3>Hemocentro de Sergipe<br><span>Ambulatorio</span></h3>
+            <p style="font-size: 17px; font-family: Arial, Helvetica, sans-serif; margin-top: 0;"><strong>Receituario</strong></p>
+        </div>
+
+    </header>
+      
+    <main>
+        
+        <div>
+            <h4 id='nome-paciente'></h4>    
+        </div>
+
+        <div id="prescricoes">           
+        </div>
+
+    </main>
+
+   <footer>
+        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <span id="profissional" style="font-size: 18px;"><b></b></span>
+            <div style="display: flex; justify-content: center; align-items: center; width: 100vw;padding-top: 1em;">
+                <img id="qrcode" height="65" width="auto"  alt="" style="display: flex;">
+            </div>
+            <span style="padding-top: .5em;">Assinado Eletronicametne</span>            
+        </div>
+        <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+            <span style="padding-top: .5em;">Rua Quinze, 127 - Capucho, Aracaju - SE</span>
+        </div>
+   </footer>
+</body>
+</html>

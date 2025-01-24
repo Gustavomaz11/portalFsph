@@ -1,0 +1,64 @@
+<li class="border rounded w-100 p-0 ps-1 bg-light middle-menu">
+
+    <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle">                                    
+        <small class="ms-1 fw-bold cor-submenu fs-6">2. Recepção</small>
+    </a>
+
+    <ul id="submenu2" class="collapse nav flex-column ms-2 p-0 pb-1 pe-2 show" data-bs-parent="#menu">
+
+        <li class="mt-0 p-0">
+
+            <a href="#submenu21" data-bs-toggle="collapse" id="atendimentos" class="nav-link p-0 pb-1 align-middle bg-light">                                    
+                <small class="ms-1 fw-bold font-submenu cor-submenu">2.1 Atendimentos</small>
+            </a>
+        
+            <ul id="submenu21" class="collapse nav flex-column ms-2 p-0 pb-1 show" data-bs-parent="#submenu2">
+
+                <li class="w-100">
+                    <a href="#" class="nav-link p-0">
+                        <small class="ms-1 font-submenu cor-submenu" id="novo-atend" 
+                        onclick="LoadPage('recepcao/atendimentos','ploter');">2.1.1 Novo</small>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="nav-link p-0">
+                        <small class="ms-1 font-submenu cor-submenu" id="cons-atend" 
+                               onclick="LoadPage('recepcao/atendimentos/consulta_atendimentos','ploter',PeriodoConsultaAtend);">2.1.2 Consulta</small>
+                    </a>
+                </li>
+
+            </ul>
+
+            <a href="#submenu22" data-bs-toggle="collapse" id="agenda" class="nav-link p-0 pb-1 align-middle bg-light hide">                                    
+                <small class="ms-1 fw-bold font-submenu cor-submenu">2.2 Agenda Medica</small>
+            </a>
+        
+            <ul id="submenu22" class="collapse nav flex-column ms-2 p-0 pb-1 show" data-bs-parent="#submenu2">
+
+                <li class="w-100">
+                    <a href="#" class="nav-link p-0">
+                        <small class="ms-1 font-submenu cor-submenu" id="escala" 
+                        onclick="LoadPage('views/recepcao/escalaProf.php','ploter',BuscarTurnos);">2.2.1 Escala de Profissionais</small>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#" class="nav-link p-0">
+                        <small class="ms-1 font-submenu cor-submenu" id="cons-escala">2.2.2 Consulta Agenda</small>
+                    </a>
+                </li>
+
+            </ul>
+
+        </li>
+
+        <!-- <li>
+            <a href="#" class="nav-link px-0">
+                <small class="ms-1 font-submenu cor-submenu">2.2 Transferências</small>
+            </a>
+        </li> -->
+
+    </ul>
+
+</li>

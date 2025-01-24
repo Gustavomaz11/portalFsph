@@ -1,0 +1,317 @@
+<div class="card p-0" id="card-tabela">
+
+    <div class="card-header bg-light">
+            
+        <div class="d-flex">
+            <h5 class="sub-tit">Atendimentos</h5>
+        </div>
+
+    </div>
+
+    <div class="card-body">
+
+        <form>
+            
+            <div class="row border rounded p-2 tabs">
+
+                <div class="col col-lg-2 pe-0">
+                    <label class="form-label" id="lbl-Id-pac" for="txt-id">Prontuario :</label>  
+                    <input class="form-control text-end" type="text" id="txt-id" value="0" readonly>
+                </div>
+
+                <div class="col-lg-1 py-4 mt-2">
+                    <button type="button" class="btn btn-sm" onclick="PesqNomePaciente()">
+                        <img src="/img/find.png" height="20" width="20">
+                    </button>
+                </div>
+
+                <div class="col col-lg-6">
+                    <label class="form-label" id="lbl-nome" for="txt-nome">Nome Paciente :</label>  
+                    <input class="form-control" type="text" id="txt-nome" readonly>
+                </div>
+
+                <div class="col col-lg-3">
+                    <label class="form-label" id="lbl-dt-nasc" for="txt-dt-nasc">Data Nasc. :</label>  
+                    <input class="form-control" type="date" id="txt-dt-nasc" readonly>
+                </div>
+
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="paciente-tab" 
+                                data-bs-toggle="tab" 
+                                data-bs-target="#paciente" type="button" role="tab" aria-controls="paciente" aria-selected="true">Dados Paciente</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="atendimento-tab" 
+                                data-bs-toggle="tab" 
+                                data-bs-target="#atendimento" type="button" role="tab" aria-controls="atendimento" aria-selected="false">Dados Atendimento</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="upload-tab" 
+                                data-bs-toggle="tab" 
+                                data-bs-target="#upload" type="button" role="tab" aria-controls="upload" aria-selected="false">Encaminhamento & Exames</button>
+                    </li>
+        
+                </ul>
+        
+                <div class="tab-content border border-top-0" id="myTabContent">
+        
+                    <!-----------------------------------------------------------------------------------------------------
+                    | ABA COM DADOS DO PACIENTE
+                    ------------------------------------------------------------------------------------------------------->
+                    <div class="tab-pane pb-1 fade show active" id="paciente" role="tabpanel" aria-labelledby="paciente-tab">
+        
+                        <small class="ms-2 text-danger">Confirme os dados abaixo do paciente antes de salvar</small>
+        
+                        <form class="p-2" name="frm-paciente">
+                            
+                            <div class="row row-cols-2">
+                    
+                                <div class="col-lg-6 py-1">
+                                    <label class="form-label" for="txt-nm-mae">Nome Mãe :</label>        
+                                    <input class="form-control form-control-sm"  type="text" id="txt-nm-mae" maxlength="150">
+                                </div>
+        
+                                <div class="col-lg-6 py-1">
+                                    <label class="form-label" for="txt-nm-pai">Nome Pai :</label>      
+                                    <input class="form-control form-control-sm"  type="text" id="txt-nm-pai" maxlength="150">
+                                </div>
+        
+                            </div>
+        
+                            <div class="row row-cols-3">
+        
+                                <div class="col-lg-3 py-1">
+                                    <label class="form-label" for="sel-sexo">Sexo :</label>
+                                    <select class="form-select form-select-sm" id="sel-sexo"> 
+                                        <option value="">...</option>                       
+                                    </select>
+                                </div>
+        
+                                <div class="col-lg-3 py-1">
+                                    <label class="form-label" for="sel-raca">Raça :</label>
+                                    <select class="form-select form-select-sm" id="sel-raca">
+                                        <option value="">...</option>                        
+                                    </select>
+                                </div>
+        
+                                <div class="col-lg-3 py-1">
+                                    <label class="form-label" for="sel-est-civil">Estado Civil :</label>
+                                    <select class="form-select form-select-sm" id="sel-est-civil">
+                                        <option value="">...</option>                         
+                                    </select>
+                                </div>
+                                        
+                            </div>
+        
+                            <div class="row row-cols-3">
+        
+                                <div class="col-lg-6 py-1">
+                                    <label class="form-label" for="txt-endereco">Endereço :</label>        
+                                    <input class="form-control form-control-sm"  type="text" id="txt-endereco" maxlength="250">
+                                </div>
+        
+                                <div class="col-lg-2 py-1">
+                                    <label class="form-label" for="txt-numero">Numero :</label>        
+                                    <input class="form-control form-control-sm"  type="text" id="txt-numero" maxlength="10">
+                                </div>
+        
+                                <div class="col-lg-4 py-1">
+                                    <label class="form-label" for="txt-bairro">Bairro :</label>        
+                                    <input class="form-control form-control-sm"  type="text" id="txt-bairro" maxlength="120">
+                                </div>
+                                
+                            </div>
+        
+                            <div class="row row-cols-4">
+        
+                                <div class="col-lg-6 py-1">
+                                    <label class="form-label" for="txt-cidade">Cidade :</label>        
+                                    <input class="form-control form-control-sm"  type="text" id="txt-cidade" maxlength="120">
+                                </div>
+        
+                                <div class="col-lg-1 py-1">
+                                    <label class="form-label" for="txt-uf">UF :</label>        
+                                    <input class="form-control form-control-sm"  type="text" id="txt-uf" maxlength="2">
+                                </div>
+        
+                                <div class="col-lg-2 py-1 pe-0">
+                                    <label class="form-label" for="txt-cep">CEP :</label>        
+                                    <input class="form-control form-control-sm"  type="text" id="txt-cep" pattern=”\d{5}-?\d{3}”  required maxlength="12">
+                                </div>
+        
+                                <div class="col-lg-1 py-1">
+                                    <button type="button" class="btn btn-sm p-0" onclick="AbrirBuscaCEP('txt-cep','txt-endereco','txt-bairro','txt-cidade','txt-uf')" style="height: 30px;width:30px; margin-top:26px">
+                                        <img src="/img/find.png" height="16" width="16">
+                                    </button>
+                                </div>
+                                
+                            </div>
+        
+                            <div class="row row-cols-2">
+        
+                                <div class="col-lg-3 py-1">
+                                    <label class="form-label" for="txt-celular">Celular:</label>        
+                                    <input class="form-control form-control-sm"  type="text" id="txt-celular" maxlength="20">
+                                </div>
+        
+                                <div class="col-lg-3 py-1">
+                                    <label class="form-label" for="txt-celular_ii">2ª Celular :</label>        
+                                    <input class="form-control form-control-sm"  type="text" id="txt-celular_ii" maxlength="20">
+                                </div>
+        
+                            </div>
+                        
+                        </form>
+        
+                    </div>
+        
+                    <!-----------------------------------------------------------------------------------------------------
+                    | ABA COM DADOS DO ATENDIMENTO
+                    ------------------------------------------------------------------------------------------------------->
+                    <div class="tab-pane p-2 fade" id="atendimento" role="tabpanel" aria-labelledby="atendimento-tab">
+        
+                        <div class="row row-cols-2">
+        
+                            <div class="col-lg-2 py-1">
+                                <label for="txt-id-atend">Nr Atend. :</label>
+                                <input class="form-control form-control-sm fw-bold text-end" type="text" id="txt-id-atend" value="0" readonly>
+                            </div>
+                            
+                            <div class="col-lg-2 py-1">
+                                <label for="txt-dt-atend">Data Atend. :</label>
+                                <input class="form-control form-control-sm text-end" type="text" id="txt-dt-atend" value="<?php echo date('d/m/Y h:i') ?>" readonly>
+                            </div>
+        
+                        </div>
+        
+                        <div class="row row-cols-3">    
+        
+                            <div class="col-lg-3 py-1">
+                                <label class="form-label" for="sel-tp-atend">Tipo Atend :</label>
+                                <select class="form-select form-select-sm" id="sel-tp-atend">
+                                    <option value="0"></option>                       
+                                </select>
+                            </div>
+        
+                            <div class="col-lg-3 py-1">
+                                <label class="form-label" for="sel-rg-atend">Regime Atend :</label>
+                                <select class="form-select form-select-sm" id="sel-rg-atend">
+                                    <option value="0"></option>                            
+                                </select>
+                            </div>
+        
+                            <div class="col-lg-3 py-1">
+                                <label class="form-label" for="sel-esp-atend">Especialidade Atend :</label>
+                                <select class="form-select form-select-sm" id="sel-esp-atend">
+                                    <option value="0"></option>                             
+                                </select>
+                            </div>
+        
+                        </div>
+        
+                        <div class="row row-cols-1">
+        
+                            <div class="col-lg-6 py-1">
+                                <label class="form-label" for="txt-med-assist">Nome Medico Assistente :</label>
+                                <input class="form-control form-control-sm" type="text" id="txt-med-assist" maxlength="120">                        
+                            </div>
+        
+                            <div class="col-lg-2 py-1">
+                                <label class="form-label" for="txt-med-assist">CRM :</label>
+                                <input class="form-control form-control-sm" type="text" id="txt-crm-assist" maxlength="50">                        
+                            </div>
+        
+                            <div class="col-lg-3 py-1">
+                                <label class="form-label" for="txt-med-assist">Especialidade :</label>
+                                <input class="form-control form-control-sm" type="text" id="txt-esp-assist" maxlength="50">                        
+                            </div>
+                                    
+                        </div>
+        
+                        <div class="row row-cols-1">
+        
+                            <div class="col-lg-12 py-1">
+                                <label class="form-label" for="txt-observ">Observação :</label>
+                                <textarea class="form-control" id="txt-observ" rows="3" maxlength="250"></textarea>
+                            </div>
+                                    
+                        </div>
+        
+                        <div class="row row-cols-1">
+        
+                            <div class="col-lg-6 py-1">
+                                <label class="form-label" for="txt-acompanhante">Nome Acompanhante :</label>
+                                <input class="form-control form-control-sm" type="text" id="txt-acompanhante" maxlength="120">
+                            </div>
+                                    
+                        </div>
+        
+                    </div>
+        
+                    <!-----------------------------------------------------------------------------------------------------
+                    | ABA UPLOAD DE ARQUIVOS
+                    ------------------------------------------------------------------------------------------------------->
+                    <div class="tab-pane p-2 fade" id="upload" role="tabpanel" aria-labelledby="upload-tab">
+        
+                        <div class="row row-cols-1 p-2">
+        
+                            <div class="col col-lg-12 text-end pb-4">
+                                <button class="btn btn-sm" onclick="AddUpArquivo()">
+                                    <img src="/img/adicionar.png" height="20" width="20">&nbsp;&nbsp; Novo Exame
+                                </button>
+                            </div>
+        
+                            <div class="col col-lg-12 border">
+        
+                                <table class="table table-sm table-hover pb-0">
+                
+                                    <thead>
+                                
+                                        <tr>
+                                            <th align="center" scope="col">#</th>
+                                            <th align="left" scope="col">Nome Exame</th>
+                                            <th align="left" scope="col">Nome Arquivo</th>
+                                            <th align="left" scope="col">Ação</th>                                        
+                                        </tr> 
+                                
+                                    </thead>
+                                
+                                    <tbody id='tbody-exam'>
+                                
+                                    </tbody>
+                                
+                                </table>
+        
+                            </div>
+        
+                        </div>
+        
+                    </div>
+                    
+                </div>  
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="card-footer bg-light ps-4">
+
+        <div class="d-flex col-lg-12 justify-content-end">
+                                
+            <button type="button" class="btn btn-sm me-2 mt-1" id="btnAcao" onclick="SalvarAtend()">
+                <img src="/img/salve.png" height="24" width="23">       
+            </button>
+
+            <button type="button" class="btn btn-sm mt-1" id="btn-close" onclick="LimparPloter()">
+                <img src="/img/exit.png" height="24" width="23">         
+            </button>
+            
+        </div>
+
+    </div>
+
+</div>

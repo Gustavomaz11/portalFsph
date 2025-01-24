@@ -1,0 +1,171 @@
+<!------------------------
+    Modal Receituário
+------------------------->
+<div id="modal-receituario" class="modal" role="dialog" tabindex="-1">
+
+  <div class="model-inner" id="card-receituario">
+
+      <!-- Header Modal --> 
+      <div class="d-flex flex-row p-2 border rounded-1">
+        <span class="sub-tit" id="tit-modal-receituario"></span> 
+      </div>
+
+      <!-- Body Modal -->
+      <div class="d-flex flex-column p-2 mt-1 border rounded-1">
+
+          <div class="d-flex flex-row border rounded-1 p-1 mt-1">
+              
+              <div class="d-flex flex-row align-items-center">
+                  <label class="form-label pe-2">Médico :</label>
+                  <input id="txt-medico-receita" type="text" class="form-control form-control-sm h-px-1 w-auto h-px-14">
+              </div>
+
+              <div class="d-flex flex-row ms-3 align-items-center">
+                  <label class="form-label pe-2">Data/Hora :</label>
+                  <input id="txt-datahora-receita" type="datetime" class="form-control form-control-sm h-px-14 w-auto">
+              </div>
+          </div>
+        
+          <div class="d-flex flex-column border rounded-1 p-1 mt-1">
+                          
+              <div class="d-flex flex-row">
+
+                  <div class="w-100 p-0">
+                     
+                      <table class="table table-sm pb-0" id="tab">
+        
+                          <thead>
+                    
+                            <tr>
+                              <th width="2%" align="center" scope="col">#</th> 
+                              <th width="12%" align="left" scope="col">Prescrição</th>        
+                              <th width="2%" align="left" scope="col">Ações</th>
+                            </tr> 
+                    
+                          </thead>
+                    
+                          <tbody id='tbody-receita'></tbody>
+                    
+                        </table>
+
+                  </div>
+
+              </div>
+
+          </div>
+
+          <div class="d-flex flex-column border rounded-1 p-1 mt-1">
+
+              <div class="d-flex flex-row">
+
+                  <div class="w-60 mt-1">                                    
+                      <input class="form-control form-control-sm" id="txt-receita-nova">
+                  </div>
+
+                  <div class="w-40 mt-1 ms-1 d-flex align-items-center flex-row">
+            
+                      <button class="btn btn-sm text-start w-50"  onclick="AdicionarReceita()">
+                          <img src="img/adicionar.svg" height="20px" width="20px" alt="botão de adicionar prescrição">
+                          <span>Adicionar</span>
+                      </button>
+                      
+                      <button class="btn btn-sm text-start w-50 ms-1" onclick="limparTexto()">
+                          <img src="img/trash.svg" height="20px" width="20px" alt="botão de limpar o campo da prescrição">
+                          <span>Limpar</span>
+                      </button>
+
+                  </div>
+
+              </div>
+
+          </div>
+
+      </div>
+
+      <!-- Footer Modal -->
+      <div class="d-flex flex-column mt-1">
+
+        <div class="d-flex flex-row justify-content-end">
+
+          <button class="btn btn-sm me-2" onclick="PreviaImpressao()">
+            <img src="/img/print.svg" height="16" width="16">
+            <span>Imprimir</span>
+          </button>
+
+          <button class="btn btn-sm" onclick="closeModal('modal-receituario')">
+            <img src="/img/exit.svg" height="16" width="16">
+            <span>Fechar</span>
+          </button>
+
+        </div>
+
+      </div>
+
+  </div>  
+
+</div>
+
+<!------------------------
+  Modal Atestado
+------------------------->
+<div id="modal-atestado" class="modal" role="dialog" tabindex="-1">
+
+  <div class="model-inner" id="card-atestado">
+
+    <div class="d-flex flex-column border rounded-1 p-1">
+
+      <!-- Header Modal --> 
+      <div class="d-flex flex-row p-1 border rounded-1">
+        <span class="sub-tit" id="tit-modal-atestado"></span> 
+      </div>
+
+      <!-- Body Modal -->
+
+      <div class="d-flex flex-column p-2 mt-1 border rounded-1">
+        
+        <div class="d-flex flex-row row-cols-2">
+
+          <label class="col-form-label text-start vw-4" for="txt-medico-atestado">Médico :</label>
+          <div class="col w-45 p-0">
+            <input class="form-control form-control-sm" type="text" id="txt-medico-atestado" size="100" disabled>
+          </div>
+          
+          <label class="col-form-label text-end vw-5" for="txt-datahora-atestado">Data/Hora :</label>
+          <div class="col w-25 p-0">
+            <input class="form-control form-control-sm ms-1" type="datetime" id="txt-datahora-atestado" size="100" disabled>
+          </div>
+        
+        </div>
+
+        <div class="d-flex flex-column row-cols-1">
+          <div class="col p-0">
+            <label for="atestado" class="form-label ms-1">Atestado:</label>
+            <textarea class="form-control" id="txt-atestado" rows="8" cols="220"></textarea>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer Modal -->
+      <div class="d-flex flex-column mt-1">
+
+        <div class="d-flex flex-row justify-content-end">
+          <button class="btn btn-sm me-2" onclick="PreviaImpressao()">
+            <img src="/img/print.svg" height="16" width="16">
+            <span>Imprimir</span>
+          </button>
+
+          <button class="btn btn-sm" onclick="closeModal('modal-atestado')">
+            <img src="/img/exit.svg" height="16" width="16">
+            <span>Fechar</span>
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>  
+
+</div>

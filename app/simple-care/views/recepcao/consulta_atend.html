@@ -1,0 +1,408 @@
+<style>
+  
+  #local .btn {
+    border: 1px solid var(--bs-gray-300) !important;
+  }
+
+  #local .btn:active {
+    background-color: var(--bs-gray-200) !important;
+  }
+   
+</style>
+  
+<div class="d-flex flex-column border rounded-2 bg-white p-2 h-100" id="local">
+
+    <div class="d-flex flex-row border rounded-2 p-1">
+
+        <label class="pb-0 w-10 text-end col-form-label" for="txt-dt-ini">Dt Inicio :</label>
+        <div class="w-10"> 
+            <input class="form-control form-control-sm ms-1" type="date" id="txt-dt-ini" maxlength="10">
+        </div>
+
+        <label class="pb-0 w-10 text-end ms-2 col-form-label" for="txt-dt-fin">Dt Final :</label>
+        <div class="w-10"> 
+            <input class="form-control form-control-sm ms-1" type="date" id="txt-dt-fin" maxlength="10">
+        </div>
+
+        <label class="pb-0 w-10 text-end ms-2 col-form-label" for="txt-nome-pac">Paciente :</label> 
+        <div class="w-30">
+            <input class="form-control form-control-sm ms-1" type="text" id="txt-nome-pac" maxlength="150">
+        </div>
+
+        <div class="w-20 p-0 ms-3">
+
+            <button type="button" class="btn btn-sm" onclick="CarregarListaAtendimentos()" style="height: 31px;">
+                <img src="/img/find.svg" height="16" width="16">
+                <small class="fw-5">Pesquisar</small>
+            </button>
+
+            <button type="button" class="btn btn-sm" onclick="LimparPloter()" style="height: 31px;">
+                <img src="/img/exit.svg" height="16" width="16">
+                <small class="fw-5">Fechar</small>
+            </button>
+
+        </div>
+
+        <div class="d-flex flex-row justify-content-end w-20">
+            <small class="mt-2 text-muted">Paginacão :</small>
+            <select class="form-select form-select-sm ms-1" id="sel-paginacao" style="width: 45%; height: 32px;" onchange="ListarAtendimentos(this.value)"> 
+                <option value="0">...</option>                       
+            </select>
+          </div>
+
+    </div>
+
+    <div class="d-flex flex-column border rounded-2 mt-1 px-2">
+        
+        <table class="table table-sm table-hover pb-0">
+                
+            <thead>
+    
+            <tr>
+                <th align="center" scope="col">Nr</th>
+                <th align="left" scope="col">Data Atend</th>
+                <th align="left" scope="col">Prontuario</th>
+                <th align="left" scope="col">Nome Paciente</th>
+                <th align="left" scope="col">Nome Mãe</th>
+                <th align="left" scope="col">Situação</th>     
+                <th align="left" scope="col">Ações</th>
+            </tr> 
+    
+            </thead>
+    
+            <tbody id='tbody'>
+    
+            </tbody>
+    
+        </table>
+
+    </div>  
+
+</div>
+    
+<!---------------------------------------
+  MODAL ALTERAR ATENDIMENTO
+----------------------------------------->
+<div id="modal-edit-atend" class="modal" role="dialog" tabindex="-1">
+
+    <div class="model-inner w-60" id="card-edit-atend">
+
+         <!-- Header Modal --> 
+         <div class="d-flex flex-row p-1 border rounded-1">
+            <span class="sub-tit" id="tit-modal-edit-atend"></span> 
+          </div>
+
+        <!-- Body Modal -->  
+        <div class="d-flex flex-column">
+
+            <!-- Dados do Paciente -->
+            <div class="d-flex flex-column border rounded-1 mt-1">
+                
+                <div class="d-flex flex-row row-cols-3 pb-1">
+
+                    <div class="col col-lg-2 px-2">
+                        <label class="form-label" id="lbl-Id-pac" for="txt-prontuario">Nr Prontuario :</label>  
+                        <input class="form-control form-control-sm text-end" type="text" id="txt-prontuario" value="0" readonly>
+                    </div>
+    
+                    <div class="col col-lg-6 px-2">
+                        <label class="form-label" id="lbl-nome" for="txt-nome">Nome Paciente :</label>  
+                        <input class="form-control form-control-sm" type="text" id="txt-nome" readonly>
+                    </div>
+                    
+                    <div class="col col-lg-2 px-2">
+                        <label class="form-label" id="lbl-dt-nasc" for="txt-dt-nasc">Data Nasc. :</label>  
+                        <input class="form-control form-control-sm" type="date" id="txt-dt-nasc" readonly>
+                    </div>
+    
+                </div>
+
+            </div>
+
+            <!-- Dados do Atendimento -->
+            <div class="d-flex flex-column border rounded-1 mt-1">
+
+                <div class="d-flex flex-row row-cols-2 pb-1">
+
+                    <div class="col-lg-2 px-2">
+                        <label for="txt-id-atend">Nr Atend :</label>
+                        <input class="form-control form-control-sm fw-bold text-end" type="text" id="txt-id-atend" value="0" readonly>
+                    </div>
+                    
+                    <div class="col-lg-2 px-2">
+                        <label for="txt-dt-atend">Data Atend :</label>
+                        <input class="form-control form-control-sm text-end" type="text" id="txt-dt-atend" readonly >
+                    </div>
+
+                </div>
+
+                <div class="d-flex flex-row row-cols-3 pb-1">    
+
+                    <div class="col-lg-3 px-2">
+                        <label class="form-label" for="sel-tp-atend">Tipo Atend :</label>
+                        <select class="form-select form-select-sm" id="sel-tp-atend">
+                            <option value="0"></option>                       
+                        </select>
+                    </div>
+
+                    <div class="col-lg-3 px-2">
+                        <label class="form-label" for="sel-rg-atend">Regime Atend :</label>
+                        <select class="form-select form-select-sm" id="sel-rg-atend">
+                            <option value="0"></option>                            
+                        </select>
+                    </div>
+
+                    <div class="col-lg-3 px-2">
+                        <label class="form-label" for="sel-esp-atend">Especialidade Atend :</label>
+                        <select class="form-select form-select-sm" id="sel-esp-atend">
+                            <option value="0"></option>                             
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="d-flex flex-row row-cols-3 pb-1">
+
+                    <div class="col-lg-6 px-2">
+                        <label class="form-label" for="txt-med-assist">Nome Medico Assistente :</label>
+                        <input class="form-control form-control-sm" type="text" id="txt-med-assist" maxlength="120">                        
+                    </div>
+
+                    <div class="col-lg-2 px-2">
+                        <label class="form-label" for="txt-med-assist">CRM (medico assist) :</label>
+                        <input class="form-control form-control-sm" type="text" id="txt-crm-assist" maxlength="50">                        
+                    </div>
+
+                    <div class="col-lg-3 px-2">
+                        <label class="form-label" for="txt-med-assist">Especialidade (medico assist) :</label>
+                        <input class="form-control form-control-sm" type="text" id="txt-esp-assist" maxlength="50">                        
+                    </div>
+                            
+                </div>
+
+                <div class="d-flex flex-row row-cols-1 pb-1">
+
+                    <div class="col-lg-12 px-2">
+                        <label class="form-label" for="txt-observ">Observação :</label>
+                        <textarea class="form-control" id="txt-observ" rows="3" maxlength="250"></textarea>
+                    </div>
+                            
+                </div>
+
+                <div class="d-flex flex-row row-cols-1 pb-1">
+
+                    <div class="col-lg-6 px-2">
+                        <label class="form-label" for="txt-acompanhante">Nome Acompanhante :</label>
+                        <input class="form-control form-control-sm" type="text" id="txt-acompanhante" maxlength="120">
+                    </div>
+                            
+                </div>
+
+            </div>
+            
+        </div>
+
+        <!-- Footer Modal -->
+        <div class="d-flex flex-column mt-1">
+
+            <div class="d-flex flex-row justify-content-end">
+
+                <button class="btn btn-sm me-2" onclick="EditAtendSalvar()">
+                    <img src="/img/salvar.svg" height="16" width="16">
+                    <span>Salvar</span>
+                </button>
+
+                <button class="btn btn-sm" onclick="closeModal('modal-edit-atend')">
+                    <img src="/img/exit.svg" height="16" width="16">
+                    <span>Fechar</span>
+                </button>
+
+            </div>
+
+        </div>          
+
+    </div>
+
+</div>
+
+<!---------------------------------------
+  MODAL LISTAR EXAMES DOS ATENDIMENTOS
+----------------------------------------->
+<div id="modal-exam-atend" class="modal" role="dialog" tabindex="-1">
+
+    <div class="model-inner" id="card-exam-atend">
+
+        <div class="d-flex flex-column p-1 border rounded-1">
+
+            <!-- Header Modal -->
+            <div class="d-flex flex-row p-1 border rounded-1">
+
+                <div class="col-lg-12 text-start">
+                    <span class="sub-tit" id="tit-modal-exam-atend"></span>                    
+                </div>
+
+            </div>
+
+            <input type="hidden" id="txt-id-atend-pac">
+
+            <!-- Body Modal -->
+            <div class="d-flex flex-column mt-1">
+
+                <div class="d-flex flex-row row-cols-3 p-1 border rounded-1">
+
+                    <div class="col w-15 px-1">
+                        <label class="form-label" id="lbl-Id-pac" for="txt-pront-pac">Nr Prontuario :</label>  
+                        <input class="form-control form-control-sm text-end" type="text" id="txt-pront-pac" value="0" readonly>
+                    </div>
+    
+                    <div class="col w-65 px-1">
+                        <label class="form-label" id="lbl-nome" for="txt-nm-pac">Nome Paciente :</label>  
+                        <input class="form-control form-control-sm" type="text" id="txt-nm-pac" readonly>
+                    </div>
+                    
+                    <div class="col w-20 px-1">
+                        <label class="form-label" id="lbl-dt-nasc" for="txt-dtnasc-pac">Data Nasc. :</label>  
+                        <input class="form-control form-control-sm" type="date" id="txt-dtnasc-pac" readonly>
+                    </div>
+    
+                </div>
+
+                <div class="d-flex flex-row row-cols-1 mt-1 p-1 border rounded-1">
+
+                    <table class="table table-sm table-hover pb-0">
+          
+                        <thead>
+                    
+                            <tr>
+                                <th align="center" scope="col">#</th>
+                                <th align="left" scope="col">Dt Inclusao</th>
+                                <th align="left" scope="col">Nome Exame</th>
+                                <th align="left" scope="col">Nome Arquivo</th>
+                                <th align="left" scope="col">Ação</th>                                        
+                            </tr> 
+                    
+                        </thead>
+                    
+                        <tbody id='tbody-exam'>
+                    
+                        </tbody>
+                    
+                    </table>
+
+                </div>
+
+            </div>
+
+            <!-- Footer Modal -->
+            <div class="d-flex flex-column mt-1">
+
+                <div class="d-flex flex-row justify-content-end">
+
+                    <button class="btn btn-sm" onclick="AddArquivo()">
+                        <img src="/img/adicionar.svg" height="20" width="20"><span class="ms-2">Novo Arquivo</span>
+                    </button>
+                   
+                    <button type="button" class="btn btn-sm ms-2" id="btn-close" onclick="closeModal('modal-exam-atend')">
+                        <img src="/img/exit.svg" height="18" width="18"><span class="ms-2">Fechar</span>
+                    </button>
+
+                </div>
+
+            </div>      
+            
+        </div>
+
+    </div>
+
+</div>
+
+<!------------------------------------------
+  MODAL UPLOAD DE ENCAMINHAMENTO E EXAMES
+-------------------------------------------->
+<div id="modal-upload" class="modal" role="dialog" tabindex="-1">
+
+    <div class="model-inner" id="card-upload">
+
+        <div class="d-flex flex-column border rounded-1 p-1">
+
+            <!-- Header Modal --> 
+            <div class="d-flex flex-row p-1 border rounded-1">
+              <span class="sub-tit" id="tit-modal-upload"></span> 
+            </div>
+      
+            <!-- Body Modal -->
+            <div class="d-flex flex-column border rounded-1 mt-1 p-1">
+      
+              <div class="d-flex flex-row row-cols-1 m-1">
+                
+                <div class="col w-100 p-0">
+                    <label class="form-label pb-1" for="sel-tipo-arquivo">Tipo Arquivo :</label>
+                    <select class="form-select form-select-sm fs-6" id="sel-tipo-arquivo" onchange="this.value == 'EXM' ? elem('txt-nm-exame').removeAttribute('disabled') : elem('txt-nm-exame').setAttribute('disabled','disabled') ">
+                        <option value="0"></option>
+                        <option value="ENC">Encaminhamento</option>
+                        <option value="EXM">Exames</option>
+                    </select>
+                </div>
+
+              </div>
+      
+              <div class="d-flex flex-row row-cols-1 m-1">
+
+                <div class="col w-100 p-0">
+                    <label for="txt-nm-exam" class="form-label">Nome do Exame :</label>
+                    <input class="form-control form-control-sm" type="text" id="txt-nm-exame" disabled>
+                </div>
+              
+              </div>
+    
+              <div class="d-flex flex-row row-cols-1 m-1">
+
+                <div class="col w-100 p-0">
+                    <label for="txt-nm-arq" class="form-label">Arquivo :</label>
+                    <input class="form-control form-control-sm" type="text" id="txt-nm-arq" name="txt-nm-arq" disabled>
+                </div>
+                
+              </div>
+
+              <div class="d-flex flex-column m-1">
+
+                <div class="col w-100 p-0 text-center">
+                    <label for="arquivo" class="btn btn-sm">
+                        <img src="/img/select-file.svg" height="18" width="18">
+                        <span class="ms-1">Adicionar um Arquivo</span></label>
+                    <input class="form-control form-control-sm" hidden type="file" id="arquivo" name="arquivo" style="font-size: 13px;" onchange="elem('txt-nm-arq').value = this.files[0].name">
+                </div>
+
+                <div class="col w-100 p-0 text-center">
+                    <p class="text-center text-danger " style="margin-bottom: 0px;"><small>Tipo de arquivo permitido para upload JPEG, PNG e PDF.</small></p>
+                    <p class="text-center text-danger " style="margin-bottom: 0px;"><small>Tamanho maximo para o arquivo 350kb</small></p>
+                </div>
+
+              </div>
+      
+            </div>
+      
+            <!-- Footer Modal -->
+            <div class="d-flex flex-column mt-1">
+      
+              <div class="d-flex flex-row justify-content-end">
+      
+                <button type="button" class="btn btn-sm me-2" onclick="SalvarUpload()">
+                    <img src="/img/upload.svg" height="18" width="18">
+                    <span class="ms-1">Upload</span>
+                </button>
+
+                <button type="button" class="btn btn-sm" onclick="closeModal('modal-upload')">
+                    <img src="/img/exit.svg" height="18" width="18">
+                    <span class="ms-1">Fechar</span>
+                </button>
+      
+              </div>
+      
+            </div>
+      
+        </div>
+
+    </div>
+
+</div>

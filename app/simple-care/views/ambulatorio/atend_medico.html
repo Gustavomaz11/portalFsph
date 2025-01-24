@@ -1,0 +1,1025 @@
+<style>
+  
+  #local .btn {
+    border: 1px solid var(--bs-gray-300) !important;
+  }
+
+  #local .btn:active {
+    background-color: var(--bs-gray-200) !important;
+  }
+
+  #local label {
+    margin-bottom: 1px !important;
+  }
+  
+  #local .tab-content {
+    height: calc(100vh - 350px) !important;
+    
+  }
+
+  #local td {
+    vertical-align: middle !important;
+  }
+
+</style>
+
+<!-----------------------------------------------------------------------------------------------------
+| DADOS DO PACIENTES 
+------------------------------------------------------------------------------------------------------->
+<div class="d-flex flex-column p-1 border rounded-1 bg-white h-100" id="local">
+
+  <div class="d-flex flex-row p-1 border rounded-2">
+
+      <div class="w-10 pe-2">
+          <label class="form-label" for="txt-atend-id">Nr Atend :</label>  
+          <input class="form-control form-control-sm text-end" type="text" id="txt-atend-id" value="0" readonly>
+      </div>
+
+      <div class="w-10 pe-2">
+          <label class="form-label" for="txt-prontuario">Prontuario :</label>  
+          <input class="form-control form-control-sm text-end" type="text" id="txt-prontuario" value="0" readonly>
+      </div>
+      
+      <div class="w-45 pe-2">
+          <label class="form-label" for="txt-nome">Nome Paciente :</label>  
+          <input class="form-control form-control-sm" type="text" id="txt-nome" readonly>
+      </div>
+      
+      <div class="w-10">
+          <label class="form-label" for="txt-dt-nasc">Data Nasc. :</label>  
+          <input class="form-control form-control-sm" type="date" id="txt-dt-nasc" readonly>
+      </div>
+
+  </div>
+
+  <div class="d-flex flex-column mt-2 border rounded-2 p-1 h-100">
+
+    <div class="d-flex flex-row row-cols-4">
+
+      <div class="col w-5">
+          <label class="form-label" for="txt-cid">CID :</label>  
+          <input class="form-control form-control-sm" type="text" id="txt-cid" onblur="SelecionarCodigoCid(this.value)">
+      </div>
+
+      <div class="col w-5 px-1 pt-3">
+          <button type="button" class="btn btn-sm mt-2" onclick="PesquisarCIDs()">
+              <img src="/img/find.svg" height="14" width="14">
+          </button>
+      </div>
+      
+      <div class="col w-50 px-1">
+          <label class="form-label" for="txt-descr-cid">Descrição CID :</label>  
+          <input class="form-control form-control-sm" type="text" id="txt-descr-cid" readonly>
+      </div>
+
+      <div class="col w-40 px-1">
+        <label class="form-label" for="sel-esp-atend">Procedimento :</label>
+        <select class="form-select form-select-sm" id="sel-proc-atend">
+            <option value="0"></option>                             
+        </select>
+      </div>
+
+    </div>
+
+    <!-- ABAS -->
+    <div class="d-flex flex-column">
+
+        <ul class="nav nav-tabs mt-2" id="myTab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="anamnese-tab" 
+                    data-bs-toggle="tab" 
+                    data-bs-target="#anamnese" type="button" role="tab" 
+                    aria-controls="paciente" aria-selected="true">Anamnese</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="prescricao-tab" 
+                    data-bs-toggle="tab" 
+                    data-bs-target="#prescricao" type="button" role="tab" 
+                    aria-controls="atendimento" aria-selected="false">Prescrições</button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="snh-tab" 
+                    data-bs-toggle="tab" 
+                    data-bs-target="#snh" type="button" role="tab" 
+                    aria-controls="snh" aria-selected="false">SNH</button>
+          </li>
+        </ul>
+    
+        <div class="tab-content border border-top-0 rounded-2 rounded-top-0 h-100">
+
+            <!-- ABA COM DADOS DO PACIENTE -->
+            <div class="tab-pane p-2 pb-1 fade show active" id="anamnese" role="tabpanel" aria-labelledby="paciente-tab">
+
+              <div class="d-flex flex-row mt-1">
+
+                  <div class="w-100">
+  
+                      <label for="historico" class="form-label ms-1">Anamnese do paciente :</label>
+                      <textarea class="form-control" id="historico" rows="7" cols="220" ></textarea>
+  
+                  </div>
+  
+              </div>
+
+              <div class="d-flex flex-row">
+
+                  <div class="d-flex flex-column border rounded-2 p-1 mt-2 w-35">
+
+                      <span class="mt-0 text-center"><strong><small>Pressão Arterial</small></strong></span>
+
+                      <div class="d-flex flex-row pt-0 p-1 w-100">
+
+                          <div class="mt-1 w-50">
+                              <label class="form-label" for="txt-sist">Sistolica :</label>  
+                              <input class="form-control form-control-sm text-end" type="text" id="txt-sist" value="0">
+                          </div>
+
+                          <div class="mt-1 ms-1 w-50">
+                              <label class="form-label" for="txt-dias">Diastolica :</label>  
+                              <input class="form-control form-control-sm text-end" type="text" id="txt-dias" value="0">
+                          </div>
+
+                      </div>
+
+                  </div>
+
+                  <div class="d-flex flex-column border rounded-2 p-1 mt-2 ms-2 w-40">
+
+                      <span class="mt-0 text-center"><strong><small>Sinais Vitais</small></strong></span>
+
+                      <div class="d-flex flex-row pt-0 p-1 w-100">
+
+                          <div class="mt-1 w-33">
+                              <label class="form-label" for="txt-freq">Freq Cardiaca :</label>  
+                              <input class="form-control form-control-sm text-end" type="text" id="txt-feq" value="0">
+                          </div>
+
+                          <div class="mt-1 ms-1 w-33">
+                              <label class="form-label" for="txt-resp">Freq Respiratoria :</label>  
+                              <input class="form-control form-control-sm text-end" type="text" id="txt-resp" value="0">
+                          </div>
+
+                          <div class="mt-1 ms-1 w-33">
+                              <label class="form-label" for="txt-temp">Temperatura :</label>  
+                              <input class="form-control form-control-sm text-end" type="text" id="txt-temp" value="0">
+                          </div>
+
+                      </div>
+
+                  </div>
+
+                  <div class="d-flex flex-column border rounded-2 p-1 mt-2 ms-2 w-33">
+
+                      <span class="mt-0 text-center"><strong><small>Medidas Antropometricas</small></strong></span>
+
+                      <div class="d-flex flex-row pt-0 p-1 w-100">
+
+                          <div class="mt-1 w-50">
+                              <label class="form-label" for="txt-peso">Peso :</label>  
+                              <input class="form-control form-control-sm text-end" type="text" id="txt-peso" value="0">
+                          </div>
+
+                          <div class="mt-1 ms-1 w-50">
+                              <label class="form-label" for="txt-altu">Altura :</label>  
+                              <input class="form-control form-control-sm text-end" type="text" id="txt-altu" value="0">
+                          </div>
+
+                      </div>
+
+                  </div>
+
+              </div>
+
+            </div>
+
+            <!-- ABA COM DADOS DO ATENDIMENTO -->
+            <div class="tab-pane p-1 fade" id="prescricao" role="tabpanel" aria-labelledby="atendimento-tab">
+
+                <div class="d-flex flex-column p-1">
+            
+                    <div class="d-flex flex-row">
+    
+                        <div class="d-flex flex-row justify-content-start w-80 p-0">
+        
+                            <div class="p-0">
+                                <button type="button" class="btn btn-sm" onclick="ModalExames()">
+                                    <span>Exames</span>
+                                </button>
+                            </div>
+
+                            <div class="p-0">
+                                <button type="button" class="btn btn-sm ms-2" onclick="ModalPrescricaoAnterior()">
+                                    <span>Prescrições Anteriores</span>
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="d-flex flex-column border rounded-1 p-1 mt-1">
+                        
+                        <div class="d-flex flex-row">
+
+                            <div class="w-100">
+                                <label for="txt-prescricao" class="form-label ms-1">Prescrição :</label>
+                                <textarea class="form-control" id="txt-prescricao" rows="8" cols="220" disabled style="font-size: 12px;"></textarea>
+                            </div>
+
+                        </div>
+
+                        <div class="d-flex flex-row">
+
+                            <div class="w-90 mt-1">                                    
+                                <textarea class="form-control" id="txt-texto" rows="3" cols="220"></textarea>
+                            </div>
+
+                            <div class="w-10 mt-1 ms-1 d-flex align-items-center flex-column">
+
+                                <button class="btn btn-sm w-100 text-start h-60 d-flex flex-row align-items-center" onclick="AdicionarPrescricao()">
+                                    <img src="img/adicionar.svg" height="18vh" width="auto" alt="botão de adicionar prescrição" style="padding-right: 0.5em;">
+                                    <span>Adicionar</span>
+                                </button>
+
+                                <button class="btn btn-sm w-100 text-start mt-1 h-40 d-flex flex-row align-items-center" onclick="limparTexto()">
+                                    <img src="img/trash.svg" height="12vh" width="auto" alt="botão de limpar o campo da prescrição" style="padding-right: 0.5em;">
+                                    <span>Limpar</span>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+    
+                </div>
+
+            </div>
+
+            <!-- Aba SNH -->
+            <div class="tab-pane p-1 fade" id="snh" role="tabpanel" aria-labelledby="snh-tab">
+                <button class="btn btn-sm w-10 text-start mt-1 h-40 d-flex flex-row align-items-center justify-content-center" disabled onclick="Snh()">
+                    <img src="img/adicionar.svg" height="17vh" width="auto" alt="botão de limpar o campo da prescrição" style="padding-right: 0.5em;">
+                    <span>Nova SNH</span>
+                </button>
+
+                <div class="d-flex flex-row">
+                    <div class="w-100 p-0">
+                        <table class="table table-sm pb-0" id="tab">
+                            <thead>
+                                <tr>
+                                    <th width="25%" align="center" scope="col">#</th> 
+                                    <th width="25%" align="left" scope="col">Data/Hora</th>        
+                                    <th width="25%" align="left" scope="col">Médico</th>
+                                    <th width="25%" align="right" scope="col">Ação</th>
+                                </tr> 
+                            </thead>
+                            <tbody id='tbody-snh'></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    
+    <div class="d-flex flex-row justify-content-end py-2">
+
+      <button class="btn btn-sm me-2" onclick="">
+        <img src="/img/salvar.svg" height="16" width="16">
+        <span>Salvar</span>
+      </button>
+
+      <button class="btn btn-sm" onclick="LimparPloter()">
+        <img src="/img/exit.svg" height="16" width="16">
+        <span>Fechar</span>
+      </button>
+    </div>
+
+  </div>
+
+</div>
+
+<!---------------------------------------
+  MODAL PESQUISAR CIDs 
+----------------------------------------->
+<div id="modal-cid" class="modal" role="dialog" tabindex="-1">
+
+  <div class="model-inner"  id="card">
+
+    <div class="d-flex flex-column border rounded-1 p-1">
+
+      <!-- Header Modal --> 
+      <div class="d-flex flex-row p-1 border rounded-1">
+        <span class="sub-tit" id="tit-modal"></span> 
+      </div>
+
+      <!-- Body Modal -->
+      <div class="d-flex flex-column rounded-1 p-1 mt-1 border">
+                    
+        <div class="d-flex flex-row row-cols-3 h-100 barra">
+            
+          <div class="col w-35 p-0">
+            <input type="text" 
+              class="form-control form-control-sm m-0 botoes" id="txt-doenca" placeholder="digite o nome da doença">
+          </div>
+
+          <div class="col w-35 py-0">
+                          
+            <button type="button" class="btn btn-sm m-0 ms-2 botoes" onclick="CarregarCids(elem('txt-doenca').value)">
+                <img src="/img/find.svg" height="16" width="16"><small class="ms-1">Pesquisar</small>       
+            </button>
+
+            <button type="button" class="btn btn-sm px-2 botoes" id="btn-novo-cid" onclick="NovoCid()" disabled>
+                <img src="/img/adicionar.svg" height="16" width="16"><small class="ms-1">Novo</small>
+            </button>
+
+            <button type="button" class="btn btn-sm px-2 botoes" onclick="closeModal('modal-cid')">
+                <img src="/img/exit.svg" height="16" width="16"><small class="ms-1">Fechar</small>
+            </button>                    
+
+          </div>
+          
+          <div class="col w-30 p-0">
+
+            <div class="d-flex flex-row justify-content-end">
+
+              <small class="text-end text-muted w-45" style="margin-top: 10px;">Paginação :</small>
+              <select class="form-select form-select-sm ms-3 w-35" id="sel-paginacao-cid" style="height: 32px;" onchange="CidsListar(this.value)"> 
+                <option value="0">...</option>                       
+              </select>
+
+            </div>
+
+          </div>
+
+        </div>
+          
+        <div class="d-flex flex-row mt-1">
+          <div class="d-flex flex-column w-100 p-1 border rounded-1">
+            <table class="table table-sm table-hover pb-0" id="tab">
+  
+              <thead>
+        
+                <tr>
+                  <th align="center" scope="col">#</th>
+                  <th align="left" scope="col">Doença</th>
+                  <th align="left" scope="col">Codigo</th>          
+                  <th align="left" scope="col">Ações</th>
+                </tr> 
+        
+              </thead>
+        
+              <tbody id='tbody-cid'>
+              </tbody>
+          
+              </table>
+          </div>
+        </div>
+      
+      </div>
+
+      <!-- Footer Modal -->
+      <div class="d-flex flex-column mt-1">
+
+        <div class="d-flex flex-row justify-content-end">
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!---------------------------------------
+  MODAL Nova Doença (CIDs)
+----------------------------------------->
+<div id="modal-novo-cid" class="modal" role="dialog" tabindex="-1">
+
+  <div class="model-inner" id="card-novo-cid">
+
+    <div class="d-flex flex-column border rounded-1 p-1">
+
+      <!-- Header Modal --> 
+      <div class="d-flex flex-row p-1 border rounded-1">
+        <span class="sub-tit" id="tit-modal-novo-cid"></span> 
+      </div>
+
+      <!-- Body Modal -->
+      <div class="d-flex flex-column border rounded-1 mt-1">
+
+        <div class="d-flex flex-row row-cols-2 p-1">
+          
+          <label class="col-form-label w-25 text-end" for="txt-id">ID :</label>
+          <div class="col w-15 px-2">        
+            <input class="form-control form-control-sm text-end" type="text" id="txt-id" value="0" disabled>
+          </div>
+        
+        </div>
+
+        <div class="d-flex flex-row row-cols-1 p-1">
+        
+          <label class="col-form-label w-25 text-end" for="txt-descricao">Descrição:</label>
+          <div class="col w-70 px-2">
+              <input class="form-control form-control-sm" type="text" id="txt-descricao" size="100">
+          </div>
+
+        </div>
+
+        <div class="d-flex flex-row row-cols-1 p-1">
+          
+          <label class="col-form-label w-25 text-end" for="txt-codigo">Codigo:</label>
+          <div class="col w-20 px-2">
+              <input class="form-control form-control-sm" type="text" id="txt-codigo" size="100">
+          </div>
+  
+        </div>
+
+      </div>
+
+      <!-- Footer Modal -->
+      <div class="d-flex flex-column mt-1">
+
+        <div class="d-flex flex-row justify-content-end">
+
+          <button class="btn btn-sm me-2" onclick="SalvarCids()">
+            <img src="/img/salvar.svg" height="16" width="16">
+            <span>Salvar</span>
+          </button>
+
+          <button class="btn btn-sm" onclick="closeModal('modal-novo-cid')">
+            <img src="/img/exit.svg" height="16" width="16">
+            <span>Fechar</span>
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>  
+
+</div>
+
+<!------------------------
+    Modal Prescrições Anteriores
+------------------------->
+<div id="modal-prescricao-anterior" class="modal" role="dialog" tabindex="-1">
+
+    <div class="model-inner" id="card-prescricao-anterior">
+
+      <div class="d-flex flex-column border rounded-1 p-1">
+
+        <!-- Header Modal --> 
+        <div class="d-flex flex-row p-1 border rounded-1">
+          <span class="sub-tit" id="tit-modal-prescricao-anterior"></span> 
+        </div>
+  
+        <!-- Body Modal -->
+
+        <div class="d-flex flex-column p-2 mt-1 border rounded-1">
+          
+            <div class="d-flex flex-row row-cols-2 ">
+
+                <label class="col-form-label text-start w-10" for="txt-medico-prescricao-anterior">Médico :</label>
+                <div class="col p-0 w-20">
+                    <input class="form-control form-control-sm" type="text" id="txt-medico-prescricao-anterior" size="100" disabled>
+                </div>      
+    
+            </div>
+
+            <div class="d-flex flex-row mt-1 w-80">
+
+                <label class="col-form-label text-start vw-10" for="txt-datahora-prescricao-anterior">Data do Atendimento :</label>
+                <div class="col w-50 border rounded-1">
+                    <input class="form-control form-control-sm vw-9" type="datetime" id="txt-datahora-prescricao-anterior" size="100" disabled>
+                </div>
+                
+                <label class="form-label d-flex align-items-center ps-1" for="txt-atendimento-prescricao-anterior">Nº Atendimento :</label>
+                <div class="col pe-2 d-flex flex-row w-10 ">
+                    <input class="form-control form-control-sm align-items-center justify-content-end vw-3" type="number" id="txt-atendimento-prescricao-anterior" size="100" disabled>
+                </div>
+            </div>
+
+            <div class="d-flex flex-column row-cols-1">
+                <div class="col p-0">
+                    <label for="prescricao-anterior" class="form-label ms-1">Prescrição Anterior:</label>
+                    <textarea class="form-control" id="txt-prescricao-anterior" rows="8" cols="220" disabled></textarea>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="d-flex flex-column mt-1">
+  
+          <div class="d-flex flex-row justify-content-end">
+
+            <div class="d-flex flex-row w-50 justify-content-start">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                      <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                          <span aria-hidden="true">&laquo;</span>
+                        </a>
+                      </li>
+                
+                      <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                          <span aria-hidden="true">&raquo;</span>
+                        </a>
+                      </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="d-flex flex-row w-50 justify-content-end">
+              <button class="btn btn-sm me-2" onclick="">
+                <img src="/img/print.svg" height="16" width="16">
+                <span>Imprimir</span>
+              </button>
+              <button class="btn btn-sm" onclick="closeModal('modal-prescricao-anterior')">
+                <img src="/img/exit.svg" height="16" width="16">
+                <span>Fechar</span>
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+  
+      </div>
+
+    </div>  
+
+</div>
+
+<!------------------------
+    Modal Exames
+------------------------->
+<div id="modal-exames" class="modal" role="dialog" tabindex="-1">
+
+  <div class="model-inner" id="card-exames">
+
+    <!-- Header Modal --> 
+    <div class="d-flex flex-row p-2 border rounded-1">
+      <span class="sub-tit" id="tit-modal-exames"></span> 
+    </div>
+
+    <!-- Body Modal -->
+    <div class="d-flex flex-column p-2 mt-1 border rounded-1">
+
+      <!-- ABAS -->
+      <div class="d-flex flex-column">
+
+        <ul class="nav nav-tabs mt-2" id="myTab" role="tablist">
+
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="solicitados-tab" 
+              data-bs-toggle="tab" 
+              data-bs-target="#solicitados" type="button" role="tab" 
+              aria-controls="paciente" aria-selected="true">Solicitados
+            </button>
+
+          </li>
+
+          <li class="nav-item" role="presentation">
+
+            <button class="nav-link" id="resultados-tab" 
+              data-bs-toggle="tab" 
+              data-bs-target="#resultados" type="button" role="tab" 
+              aria-controls="atendimento" aria-selected="false">Resultados
+            </button>
+
+          </li>
+
+        </ul>
+
+        <div class="tab-content border border-top-0 rounded-2 rounded-top-0 h-100">
+
+          <!-- ABA COM DADOS DO PACIENTE -->
+          <div class="tab-pane p-2 pb-1 fade show active" id="solicitados" role="tabpanel" aria-labelledby="paciente-tab">
+
+            <div class="d-flex flex-row mt-1">
+
+              <div class="d-flex flex-column w-100 p-1 border rounded-1">
+
+                <table class="table table-sm table-hover pb-0" id="tab-exames">
+
+                  <thead>
+
+                    <tr>
+                      <th align="center" scope="col">#</th>
+                      <th align="left" scope="col">Data/Hora</th>
+                      <th align="left" scope="col">Médico</th>
+                      <th align="left" scope="col">Exame</th>          
+                      <th align="left" scope="col">Ações</th>
+                    </tr> 
+
+                  </thead>
+
+                  <tbody id='tbody-exames'></tbody>
+
+                </table>
+
+              </div>
+
+            </div>
+
+            <!-- Novo Exame -->
+            <div class="d-flex flex-column mt-1">
+
+              <div class="d-flex flex-row">
+
+                <div class="w-100 mt-1">
+
+                  <input class="form-control form-control-sm" id="txt-novo-exame">
+
+                </div>
+
+                <div class="w-40 mt-1 ms-1 d-flex align-items-center flex-row">
+
+                  <button class="btn btn-sm text-start w-60" onclick="NovoExame()">
+                    <img src="img/adicionar.svg" height="20px" width="20px" alt="botão de adicionar prescrição">  
+                    <span>Novo Exame</span>
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- ABA COM DADOS DO ATENDIMENTO -->
+          <div class="tab-pane p-1 fade" id="resultados" role="tabpanel" aria-labelledby="atendimento-tab">
+
+            <div class="tab-pane p-2 pb-1 fade show active" id="solicitados" role="tabpanel" aria-labelledby="paciente-tab">
+
+              <div class="d-flex flex-row mt-1">
+
+                <div class="d-flex flex-column w-100 p-1 border rounded-1">
+
+                  <table class="table table-sm table-hover pb-0" id="tab-exames-">
+                      
+                    <thead>
+
+                      <tr>
+
+                        <th align="center" scope="col">#</th>
+                        <th align="left" scope="col">Data/Hora</th>
+                        <th align="left" scope="col">Exame</th>
+                        <th align="left" scope="col">Ações</th>
+
+                      </tr> 
+
+                    </thead>
+
+                    <tbody id='tbody-exames-resultados'>
+                    </tbody>
+
+                  </table>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="d-flex flex-column mt-1">
+
+        <div class="d-flex flex-row" style="justify-content: end;">
+          <button class="btn btn-sm" onclick="closeModal('modal-exames')">
+            <img src="/img/exit.svg" height="16" width="16">
+            <span>Fechar</span>
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+  
+<!------------------------
+    Modal SNH
+------------------------->
+<div id="modal-snh" class="modal" role="dialog" tabindex="-1">
+
+  <div class="model-inner" id="card-snh">
+
+    <div class="d-flex flex-column border rounded-1 p-1 h-100">
+
+      <!-- Header Modal --> 
+      <div class="d-flex flex-row p-1 border rounded-1 justify-content-sm-between">
+  
+        <span class="sub-tit" id="tit-modal-snh"></span> 
+
+        <div class="d-flex flex-row w-50 justify-content-end">
+          
+          <button class="btn btn-sm me-2" onclick="">
+          <img src="/img/salvar.svg" height="16" width="16">
+          <span>Salvar</span>
+          </button>
+          
+          <button class="btn btn-sm" onclick="closeModal('modal-snh')">
+          <img src="/img/exit.svg" height="16" width="16">
+          <span>Fechar</span>
+          </button>
+
+        </div>
+
+      </div>
+
+      <!-- Body Modal -->
+      <div class="d-flex flex-row p-2 mt-1 border rounded-1 w-100 justify-content-sm-between">
+
+        <div class="d-flex flex-row w-15 pe-1">
+          <label class="col-form-label text-start" for="txt-codigo-snh">Cod:</label>
+          <input class="form-control form-control-sm" type="text" id="txt-codigo-snh" size="100" disabled>
+        </div>
+        
+        <div class="d-flex flex-row w-55 pe-1">
+          <label class="col-form-label text-start" for="txt-medico-snh">Médico:</label>
+          <input class="form-control form-control-sm" type="text" id="txt-medico-snh" size="100" disabled>
+        </div>
+        
+        <div class="d-flex flex-row w-25 pe-1">
+          <label class="col-form-label text-end" for="txt-datahora-snh">Data/Hora:</label>
+          <input class="form-control form-control-sm ms-1" type="datetime" id="txt-datahora-snh" size="100" disabled>
+        </div>
+
+      </div>
+    
+      <!-----------------------------------------------------------------------------------------------------
+      | ABA COM DADOS CLINICOS DO SNH
+      ------------------------------------------------------------------------------------------------------->
+      
+        <div class="d-flex p-2 flex-row border rounded-1 mt-1"> 
+        
+          <div class="mt-1 text-center">
+
+            <label class="form-check-label" for="flexRadioDefault1"><strong>Indicação de Urgência</strong></label>
+            
+            <div class="d-flex flex-column mt-1">
+            
+              <div class="d-flex flex-row form-check">
+                <input class="form-check-input ms-2 me-3" type="radio" name="urgencia" id="flexRadioDefault1"> Não Urgente
+              </div>
+            
+              <div class="d-flex flex-row form-check">
+                <input class="form-check-input ms-2 me-3" type="radio" name="urgencia" id="flexRadioDefault1"> Urgente
+              </div>
+            
+              <div class="d-flex flex-row form-check">
+                <input class="form-check-input ms-2 me-3" type="radio" name="urgencia" id="flexRadioDefault1"> Extrema Urgência
+              </div>
+            
+            </div>
+        
+          </div>
+
+          <div class="pe-2 text-center">
+
+            <label class="mt-1"><strong>Transfusões Prévias</strong></label>
+            
+            <div class="d-flex flex-column">
+            
+              <div class="d-flex flex-row form-check align-items-center">
+                <input class="form-check-input ms-2 me-3" type="radio" name="previas" id="flexRadioDefault1"> Sim
+                <input class="form-control form-control-sm ms-1 h-0" type="text" placeholder="Quando?" style="width: 6vw;">
+              </div>
+            
+              <div class="d-flex flex-row form-check align-items-center">
+                <input class="form-check-input ms-2 me-3" type="radio" name="previas" id="flexRadioDefault1" > Não
+              </div>
+            
+              <div class="d-flex flex-row form-check align-items-center">
+                <input class="form-check-input ms-2 me-3" type="radio" name="previas" id="flexRadioDefault1"> Ignorado
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="pe-2 text-center">
+
+            <label class="mt-1"><strong>Reações Transfusionais</strong></label>
+            
+            <div class="d-flex flex-column">
+            
+              <div class="d-flex flex-row form-check align-items-center">
+                <input class="form-check-input ms-2 me-3" type="radio" name="reacoes" id="flexRadioDefault1"> Sim
+                <input class="form-control form-control-sm ms-1 h-0" type="text" placeholder="Quando?" style="width: 6vw;">
+              </div>
+            
+              <div class="d-flex flex-row form-check align-items-center">
+                <input class="form-check-input ms-2 me-3" type="radio" name="reacoes" id="flexRadioDefault1" > Não
+              </div>
+            
+              <div class="d-flex flex-row form-check align-items-center">
+                <input class="form-check-input ms-2 me-3" type="radio" name="reacoes" id="flexRadioDefault1"> Ignorado
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="pe-2 text-center">
+
+            <label class="mt-1 text-center"><strong>Gestações</strong></label>
+            
+            <div class="d-flex flex-column">
+            
+              <div class="d-flex flex-row form-check align-items-center">
+                <input class="form-check-input ms-2 me-3" type="radio" name="gestacoes" id="flexRadioDefault1"> Sim
+                <input class="form-control form-control-sm ms-1 h-0" type="text" placeholder="Numero?" style="width: 6vw;">
+              </div>
+            
+              <div class="d-flex flex-row form-check align-items-center">
+                <input class="form-check-input ms-2 me-3" type="radio" name="gestacoes" id="flexRadioDefault1"> Não
+              </div>
+              
+              <label class="mt-1"><strong>Transfusão</strong></label>
+              
+              <div class="d-flex flex-row form-check align-items-center">
+                <input class="form-check-input ms-2 me-3" type="radio" name="trasnfusao" id="flexRadioDefault1"> Ambulatorial
+              </div>
+            
+              <div class="d-flex flex-row form-check align-items-center">
+                <input class="form-check-input ms-2 me-3" type="radio" name="trasnfusao" id="flexRadioDefault1"> Hospitalar
+              </div>
+            
+            </div>
+
+          </div>
+
+          <div class="text-center">
+
+            <label class="mt-1"><strong>Uso de Medicamentos</strong></label>
+            
+            <div class="d-flex flex-column">
+            
+              <div class="d-flex flex-row form-check align-items-center justify-content-sm-between">
+                <input class="form-check-input ms-2 me-3" type="checkbox" value="" id="defaultCheck1">Antibiótico
+                <input class="form-control form-control-sm ms-1 h-0 vw-6" type="text" placeholder="Qual?">
+              </div>
+            
+              <div class="d-flex flex-row form-check align-items-center justify-content-sm-between">
+                <input class="form-check-input ms-2 me-3" type="checkbox" value="" id="defaultCheck1"> Alfa-Metildopa
+                <input class="form-control form-control-sm ms-1 h-0 vw-6" type="text" placeholder="Qual?">
+              </div>
+              
+              <div class="d-flex flex-row form-check align-items-center justify-content-sm-between">
+                <input class="form-check-input ms-2 me-3" type="checkbox" value="" id="defaultCheck1"> Imunossupressor
+                <input class="form-control form-control-sm ms-1 h-0 vw-6" type="text" placeholder="Qual?">
+              </div>
+              
+              <div class="d-flex flex-row form-check align-items-center justify-content-sm-between">
+                <input class="form-check-input ms-2 me-3" type="checkbox" value="" id="defaultCheck1"> Quimioterápico
+                <input class="form-control form-control-sm ms-1 h-0 vw-6" type="text" placeholder="Qual?">
+              </div>
+              
+              <div class="d-flex flex-row form-check align-items-center justify-content-sm-between">
+                <input class="form-check-input ms-2 me-3" type="checkbox" value="" id="defaultCheck1"> Outros
+                <input class="form-control form-control-sm ms-1 h-0 vw-6" type="text" placeholder="Qual?">
+              </div> 
+            
+            </div>
+  
+          </div>
+          
+        </div>
+        
+        <div class="d-flex flex-column rounded-1 p-1 mt-1 border">
+                    
+          <div class="d-flex flex-row row-cols-3 h-100 barra">
+              
+            <div class="col w-35 py-0">
+                            
+              <button type="button" class="btn btn-sm botoes" id="btn-novo-snh" onclick="NovoHemocomponente()">
+                  <img src="/img/adicionar.svg" height="18" width="18"><small class="ms-1">Adicionar Hemocomponente</small>
+              </button>        
+    
+            </div>
+
+          </div>
+          
+          <div class="d-flex flex-row mt-1">
+
+            <div class="d-flex flex-column w-100 p-1 border rounded-1">
+
+              <table class="table table-sm table-hover pb-0" id="tab">
+        
+                <thead>
+          
+                  <tr>
+                    <th align="center" scope="col">#</th>
+                    <th align="center" scope="col">HEMOCOMPONENTES</th>
+                    <th align="left" scope="col">UNIDADES</th>
+                    <th align="left" scope="col">VOLUMES</th>          
+                    <th align="left" scope="col">TEMPO DE INFUSÃO</th>
+                  </tr> 
+          
+                </thead>
+          
+                <tbody id='tbody-snh'></tbody>
+                
+              </table>
+
+            </div>
+
+          </div>
+      
+        </div>
+      
+      
+    </div> 
+
+  </div>
+
+</div>
+
+<!------------------------
+    Modal NOVO HEMOCOMPONENTE
+------------------------->
+<div id="modal-novo-hemo" class="modal" role="dialog" tabindex="-1">
+
+  <div class="model-inner" id="card-novo-hemo">
+
+    <div class="d-flex flex-column border rounded-1 p-1 h-100">
+
+      <!-- Header Modal --> 
+      <div class="d-flex flex-row p-1 border rounded-1">
+        <span class="sub-tit" id="tit-modal-hemo"></span> 
+      </div>
+
+      <!-- Body Modal -->
+      <div class="d-flex flex-column p-1 border rounded-1 mt-1 h-100 w-100">
+
+        <div class="d-flex flex-row w-100">
+          
+          <div class="d-flex flex-row justify-content-start w-55 h-20">
+            
+            <input type="text" class="form-control form-control-sm" id="txt-novo-hemo" placeholder="digite o hemocomponente">
+
+            <button type="button" class="btn btn-sm w-15 ms-1 h-30" onclick="">
+              <img src="/img/find.svg" height="18" width="18">
+            </button>
+
+          </div>
+          
+          <div class="d-flex flex-row justify-content-end w-45">
+
+            <small class="text-muted mt-2">Página :</small>
+            <select class="form-select form-select-sm ms-1 w-25 h-30" id="sel-paginacao-hemocomponentes" onchange=""> 
+                <option value="0">...</option>                       
+            </select>
+
+            <button class="btn btn-sm ms-1 p-0 px-2 h-30" onclick="closeModal('modal-novo-hemo')">
+              <img src="/img/exit.svg" height="14" width="14">
+              <span>Fechar</span>
+            </button>
+
+          </div>
+
+        </div>
+
+        <div class="d-flex flex-column mt-1 p-1 border rounded-1">
+
+          <table class="table table-sm table-hover pb-0" id="tab-exames-">
+
+            <thead>
+              <tr>
+                <th align="center" scope="col">#</th>
+                <th align="left" scope="col">Hemocomponentes</th>
+                <th align="left" scope="col">Ações</th>
+              </tr> 
+            </thead>
+
+            <tbody id='tbody-hemocomponentes'></tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

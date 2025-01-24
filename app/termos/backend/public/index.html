@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+
+  <script type='text/javascript' src="assets/bootstrap/js/bootstrap.js" defer></script>
+
+  <script type='text/javascript' src="assets/js/geral.js" defer></script>
+  <script type='text/javascript' src="assets/js/main.js" defer></script>
+
+  <title>Cadastro de Termos de referência</title>
+
+</head>
+
+<body>
+
+  <div class="container-fuid">
+    
+    <div class="container p-2">
+
+      <div class="d-flex justify-content-center">
+
+        <p class="h1 mb-4">Termos de Referências</p>
+
+      </div>
+
+      <div class="d-flex flex-row p-2 border rounded-2 bg-light mb-2">
+        
+        <div class="d-flex flex-row w-75">
+
+          <input class="form-control w-50" id="descr" type="text" placeholder="digite descrição de um objeto">
+          
+          <button type="button" class="btn-term ms-2" onclick="PesquisarDados(elem('descr').value,elem('sel-status').value)">
+            <img src="assets/img/find.svg" height="18">
+          </button>
+          
+          <button type="button" class="btn-term ms-2" onclick="NovoTermo()">
+            <img src="assets/img/adicionar.svg" height="18">
+          </button>
+
+        </div>
+
+        <div class="d-flex flex-row w-25 justify-content-end">
+
+          <div class="w-100">
+            <select class="form-select form-control-sm" id="sel-status" onchange="PesquisarDados(elem('descr').value,elem('sel-status').value)">
+              <option value="TOD">Todos</option>
+              <option value="AFA">A Fazer</option>
+              <option value="EMA">Em Andamento</option>
+              <option value="CAN">Cancelado</option>
+              <option value="CON">Concluido</option>
+            </select>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="p-2 border rounded-2 bg-light table-responsive">
+
+        <table class="table table-hover mt-2">
+          
+          <thead>
+
+            <tr>
+              <th scope="col" width="2%" >#</th>
+              <th scope="col" width="5%">Nr Processo</th>
+              <th scope="col" width="5%">Data</th>
+              <th scope="col" width="20%">Objeto</th>
+              <th scope="col" width="10%">Valor Medio</th>
+              <th scope="col" width="8%">Ações</th>
+            </tr>
+
+          </thead>
+
+          <tbody id="tbody"></tbody>
+
+        </table>
+
+      </div>
+        
+    </div>
+
+  </div>
+
+</div>
+
+ <!---------------------------------------------------------------
+    Modal Inserir de Termos
+  ----------------------------------------------------------------->
+  <div class="modal" id="modal-termo-ins" tabindex="-1">
+    
+    <div class="modal-dialog modal-dialog-centered">
+      
+      <div class="modal-content">
+        
+        <div class="modal-header">
+          <h5 class="modal-title">Novo Termo</h5>
+          <button type="button" id="close-modal" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        
+        <div class="modal-body">
+          
+          <div class="d-flex flex-column">
+
+            <div class="row p-1">
+
+              <div class="col-5">
+                <label for="nr-processo-ins" class="form-label">Nr Processo :</label>
+                <input class="form-control form-control-sm" id="nr-processo-ins" type="text" >
+              </div>
+            
+              <div class="col-5">
+                <label for="dt-processo-ins" class="form-label">Dt Processo :</label>
+                <input class="form-control form-control-sm" id="dt-processo-ins" type="date" readonly >
+              </div>
+              
+            </div>
+
+            <div class="row p-1">
+
+              <div class="col-12">
+
+                <label for="objeto-ins" class="form-label">Descrição Objeto :</label>
+                <textarea class="form-control" id="objeto-ins" rows="3" wrap="soft" maxlength="230" ></textarea>
+                
+              </div>
+
+            </div>
+
+            <div class="row p-1">
+              
+              <div class="col-5">
+                <label for="val-medio-ins" class="form-label">Valor Medio :</label>
+                <input class="form-control form-control-sm text-end" id="val-medio-ins" type="text" value="0" >
+              </div>
+
+              <div class="col-5">
+                <label for="sel-status-ins">Status :</label>
+                <select class="form-select form-control-sm" id="sel-status-ins">
+                  <option value="0" disabled selected></option>
+                  <option value="AFA">A Fazer</option>
+                  <option value="EMA">Em Andamento</option>
+                  <option value="CAN">Cancelado</option>
+                  <option value="CON">Concluido</option>
+                </select>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-term btn-sm" onclick="InserirTermo()">Salvar</button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!---------------------------------------------------------------
+    Modal Editar de Termos
+  ----------------------------------------------------------------->
+  <div class="modal" id="modal-termo-upt" tabindex="-1">
+    
+    <div class="modal-dialog modal-dialog-centered">
+      
+      <div class="modal-content">
+        
+        <div class="modal-header">
+          <h5 class="modal-title">Editar Termo</h5>
+          <button type="button" id="close-modal" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        
+        <div class="modal-body">
+
+          <input type="hidden" id="id-objeto">
+          
+          <div class="d-flex flex-column">
+
+            <div class="row p-1">
+
+              <div class="col-5">
+                <label for="nr-processo-upt" class="form-label">Nr Processo :</label>
+                <input class="form-control form-control-sm" id="nr-processo-upt" type="text" >
+              </div>
+            
+              <div class="col-5">
+                <label for="dt-processo-upt" class="form-label">Dt Processo :</label>
+                <input class="form-control form-control-sm" id="dt-processo-upt" type="date" readonly >
+              </div>
+              
+            </div>
+
+            <div class="row p-1">
+
+              <div class="col-12">
+
+                <label for="objeto-upt" class="form-label">Descrição Objeto :</label>
+                <textarea class="form-control" id="objeto-upt" rows="3" wrap="soft" maxlength="230" ></textarea>
+                
+              </div>
+
+            </div>
+
+            <div class="row p-1">
+              
+              <div class="col-5">
+                <label for="val-medio-upt" class="form-label">Valor Medio :</label>
+                <input class="form-control form-control-sm text-end" id="val-medio-upt" type="text" value="0" >
+              </div>
+
+              <div class="col-5">
+                <label for="sel-status-upt">Status :</label>
+                <select class="form-select form-control-sm" id="sel-status-upt">
+                  <option value="" disabled selected></option>
+                  <option value="AFA">A Fazer</option>
+                  <option value="EMA">Em Andamento</option>
+                  <option value="CAN">Cancelado</option>
+                  <option value="CON">Concluido</option>
+                </select>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-term btn-sm" onclick="AtualizarTermo()">Salvar</button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!------------------------------------------
+  MODAL UPLOAD DE ENCAMINHAMENTO E EXAMES
+  -------------------------------------------->
+  <div class="modal" id="modal-upload" tabindex="-1">
+      
+    <div class="modal-dialog modal-dialog-centered">
+      
+      <div class="modal-content">
+        
+        <div class="modal-header">
+          <h5 class="modal-title">Upload de Arquivos</h5>
+          <button type="button" id="close-modal" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        
+        <div class="modal-body">
+
+          <input type="hidden" id="id-objeto-up">
+  
+          <div class="d-flex flex-column border rounded-1 mt-1 p-1">
+                  
+            <div class="d-flex flex-row row-cols-1 m-1">
+
+              <div class="col w-100 p-0">
+                  <label for="txt-nm-anexo" class="form-label">Nome do Anexo :</label>
+                  <input class="form-control form-control-sm" type="text" id="txt-nm-anexo">
+              </div>
+            
+            </div>
+
+            <div class="d-flex flex-row row-cols-1 m-1">
+
+              <div class="col w-100 p-0">
+                  <label for="txt-arquivo" class="form-label">Arquivo :</label>
+                  <input class="form-control form-control-sm" type="text" id="txt-arquivo" name="txt-arquivo" disabled>
+              </div>
+              
+            </div>
+
+            <div class="d-flex flex-column m-1">
+
+              <div class="col w-100 p-0 text-center">
+                  <label for="arquivo" class="btn btn-sm">
+                      <img src="assets/img/select-file.svg" height="18" width="18">
+                      <span class="ms-1">Adicionar um Arquivo</span></label>
+                  <input class="form-control form-control-sm" hidden type="file" id="arquivo" name="arquivo" style="font-size: 13px;" onchange="elem('txt-arquivo').value = this.files[0].name">
+              </div>
+
+              <div class="col w-100 p-0 text-center">
+                  <p class="text-center text-danger " style="margin-bottom: 0px;"><small>Tipo de arquivo permitido para upload JPEG, PNG e PDF.</small></p>
+                  <p class="text-center text-danger " style="margin-bottom: 0px;"><small>Tamanho maximo para o arquivo 350kb</small></p>
+              </div>
+
+            </div>
+    
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+          
+          <button type="button" class="btn-term me-2" onclick="Upload()">
+            <img src="assets/img/upload-file.svg" height="22" width="24">            
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!---------------------------------------------------------------
+    Modal Listar Anexos dos Termos
+  ----------------------------------------------------------------->
+  <div class="modal" id="modal-listar-anexos" tabindex="-1">
+    
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      
+      <div class="modal-content">
+        
+        <div class="modal-header">
+          <h5 class="modal-title">Lista de Anexos</h5>
+          <button type="button" id="close-modal" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        
+        <div class="modal-body">
+          
+          
+          <div class="p-1 border rounded-2 bg-light table-responsive" style="font-size: 12px;">
+
+            <table class="table table-hover mt-2">
+              
+              <thead>
+
+                <tr>
+                  <th scope="col" width="2%" >#</th>
+                  <th scope="col" width="40%">Nome Anexo</th>
+                  <th scope="col" width="40%">Nome Arquivo</th>
+                  <th scope="col" width="8%">Ações</th>
+                </tr>
+
+              </thead>
+
+              <tbody id="tbody-anexos"></tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+        <!--<div class="modal-footer">
+          <button type="button" class="btn-term btn-sm" onclick="InserirTermo()">Salvar</button>
+        </div> -->
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!---------------------------------------------------------------
+    Modal Exibir Anexo
+  ----------------------------------------------------------------->
+  <div class="modal" id="modal-anexo-content" tabindex="-1">
+    
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      
+      <div class="modal-content">
+        
+        <div class="modal-header">
+          <h5 class="modal-title">Exibir Anexo</h5>
+          <button type="button" id="close-modal" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        
+        <div class="modal-body">
+
+          <!-- 16:9 aspect ratio
+          <iframe id="imagem" style="width: 100%; height: 42rem;"></iframe> -->
+
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" id="imagem" style="width: 100%; height: 42rem;" ></iframe>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  
+
+</body>
+
+</html>
+

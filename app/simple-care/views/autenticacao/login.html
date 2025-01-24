@@ -1,0 +1,55 @@
+<style>
+    .container {
+        max-width: 25vw;
+        max-height: 40vh;
+        margin: 0 auto;
+        margin-top: 10px;
+        border: 2px outset #d9d9d9;
+        border-radius: 8px;
+        padding: 0;
+    }
+
+</style>
+
+<div class="container login">
+
+    <div class="d-flex flex-column">
+        <div class="align-middle fw-bold border-bottom bg-light text-dark text-center py-2 rounded-top" style="font-size: 14px;">
+        <span class="titulo mt-1">Autenticação</span>
+        </div>
+    </div>    
+
+    <div class="container-login justify-content-center p-4">
+
+        <div class="row mb-4 justify-content-center">
+
+            <dov class="col-sm-11">
+                <label class="form-label" for="">Usuario :</label>
+                <input class="form-control form-control-sm" type="text" id="usuario" value="obtneto">
+            </dov>
+
+        </div>
+
+        <div class="row mb-4 justify-content-center">
+
+            <div class="col-sm-11">
+                <label class="form-label" for="">Senha :</label>
+                <input class="form-control form-control-sm" type="password" name="senha" id="senha">
+            </div>
+
+        </div>
+
+        <div class="d-flex flex-row justify-content-end mt-3 mb-1 px-3">
+
+            <button class="btn btn-sm me-2" onclick="Login()">
+                <img src="/img/login.svg" alt="">
+                <span>Autenticar</span>
+            </button>
+            <button class="btn btn-sm" onclick="Cancelar()">Sair</button>
+    
+        </div>
+
+    </div>
+
+</div>
+

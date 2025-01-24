@@ -1,0 +1,894 @@
+<style>
+
+#local {
+    height: calc(100vh - 110px);
+}
+
+#local .btn {
+    border: 1px solid var(--bs-gray-300) !important;
+}
+
+#local .btn:active {
+    background-color: var(--bs-gray-200) !important;
+}
+  
+#tab-paciente {
+  height: calc(100vh - 330px);
+}
+
+#cep {
+  height: calc(100vh - 570px);
+}
+
+</style>
+
+<div class="d-flex flex-column border rounded-1 p-1 bg-white" id="local">
+
+    <div class="d-flex flex-row row-cols-4 border rounded-1 p-2">
+
+        <div class="col w-10 p-0">
+            <label class="form-label" id="lbl-Id-pac" for="txt-prontuario">Prontuario :</label>  
+            <input class="form-control form-control-sm text-end" type="text" id="txt-prontuario" value="0" readonly>
+        </div>
+
+        <div class="col w-5 mt-3 p-1 pt-2">
+            <button type="button" class="btn btn-sm" onclick="PesquisarPaciente()">
+                <img src="img/find.svg" height="18" width="18">
+            </button>
+        </div>
+
+        <div class="col w-45 p-0">
+            <label class="form-label" id="lbl-nome" for="txt-nome">Nome Paciente :</label>  
+            <input class="form-control form-control-sm" type="text" id="txt-nome" readonly>
+        </div>
+
+        <div class="col w-15 p-0 ms-2">
+            <label class="form-label" id="lbl-dt-nasc" for="txt-dt-nasc">Data Nasc. :</label>  
+            <input class="form-control form-control-sm" type="date" id="txt-dt-nasc" readonly>
+        </div>
+
+    </div>
+
+    <div class="d-flex flex-column border rounded-1 h-100 p-2 mt-1">
+
+        <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="paciente-tab" 
+                        data-bs-toggle="tab" 
+                        data-bs-target="#paciente" type="button" role="tab" aria-controls="paciente" aria-selected="true">Dados Paciente</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="atendimento-tab" 
+                        data-bs-toggle="tab" 
+                        data-bs-target="#atendimento" type="button" role="tab" aria-controls="atendimento" aria-selected="false">Dados Atendimento</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="upload-tab" 
+                        data-bs-toggle="tab" 
+                        data-bs-target="#upload" type="button" role="tab" aria-controls="upload" aria-selected="false">Encaminhamento & Exames</button>
+            </li>
+        </ul>
+
+        <div class="tab-content border border-top-0 rounded-top-0 rounded-1" id="tab-paciente">
+
+            <div class="tab-pane fade show active" id="paciente" role="tabpanel" aria-labelledby="paciente-tab">
+
+                <form class="p-2 pb-2" name="frm-paciente">
+                    
+                    <div class="d-flex flex-row row-cols-2">
+            
+                        <div class="col w-35 p-1">
+                            <label class="form-label" for="txt-nm-mae">Nome Mãe :</label>        
+                            <input class="form-control form-control-sm"  type="text" id="txt-nm-mae" maxlength="150">
+                        </div>
+
+                        <div class="col w-35 p-1">
+                            <label class="form-label" for="txt-nm-pai">Nome Pai :</label>      
+                            <input class="form-control form-control-sm"  type="text" id="txt-nm-pai" maxlength="150">
+                        </div>
+
+                    </div>
+
+                    <div class="d-flex flex-row row-cols-3">
+
+                        <div class="col w-20 p-1">
+                            <label class="form-label" for="sel-sexo">Sexo :</label>
+                            <select class="form-select form-select-sm" id="sel-sexo"> 
+                                <option value="0">...</option>                       
+                            </select>
+                        </div>
+
+                        <div class="col w-20 p-1">
+                            <label class="form-label" for="sel-racas">Raça :</label>
+                            <select class="form-select form-select-sm" id="sel-racas">
+                                <option value="0">...</option>                        
+                            </select>
+                        </div>
+
+                        <div class="col w-20 p-1">
+                            <label class="form-label" for="sel-est-civis">Estado Civil :</label>
+                            <select class="form-select form-select-sm" id="sel-est-civis">
+                                <option value="0">...</option>                         
+                            </select>
+                        </div>
+                                
+                    </div>
+
+                    <div class="d-flex flex-row row-cols-3">
+
+                        <div class="col w-40 p-1">
+                            <label class="form-label" for="txt-endereco">Endereço :</label>        
+                            <input class="form-control form-control-sm"  type="text" id="txt-endereco" maxlength="250">
+                        </div>
+
+                        <div class="col w-5 p-1">
+                            <label class="form-label" for="txt-numero">Num :</label>        
+                            <input class="form-control form-control-sm"  type="text" id="txt-numero" maxlength="10">
+                        </div>
+
+                        <div class="col w-25 p-1">
+                            <label class="form-label" for="txt-bairro">Bairro :</label>        
+                            <input class="form-control form-control-sm"  type="text" id="txt-bairro" maxlength="120">
+                        </div>
+                        
+                    </div>
+
+                    <div class="d-flex flex-row row-cols-4">
+
+                        <div class="col w-25 p-1">
+                            <label class="form-label" for="txt-cidade">Cidade :</label>        
+                            <input class="form-control form-control-sm"  type="text" id="txt-cidade" maxlength="120">
+                        </div>
+
+                        <div class="col w-5 p-1">
+                            <label class="form-label" for="txt-uf">UF :</label>        
+                            <input class="form-control form-control-sm"  type="text" id="txt-uf" maxlength="2">
+                        </div>
+
+                        <div class="col w-10 p-1 pe-0">
+                            <label class="form-label" for="txt-cep">CEP :</label>        
+                            <input class="form-control form-control-sm"  type="text" id="txt-cep" pattern=”\d{5}-?\d{3}”  required maxlength="12">
+                        </div>
+
+                        <div class="col w-5 p-1">
+                            <button type="button" class="btn btn-sm p-0" onclick="AbrirBuscaCEP('txt-cep','txt-endereco','txt-bairro','txt-cidade','txt-uf')" style="height: 30px;width:30px; margin-top:26px">
+                                <img src="/img/find.svg" height="16" width="16">
+                            </button>
+                        </div>
+                        
+                    </div>
+
+                    <div class="d-flex flex-row row-cols-3">
+
+                        <div class="col w-15 p-1">
+                            <label class="form-label" for="txt-celular">Celular:</label>        
+                            <input class="form-control form-control-sm"  type="text" id="txt-celular" maxlength="20">
+                        </div>
+
+                        <div class="col w-15 p-1">
+                            <label class="form-label" for="txt-celular_ii">2ª Celular :</label>        
+                            <input class="form-control form-control-sm"  type="text" id="txt-celular_ii" maxlength="20">
+                        </div>
+
+                        <div class="col w-15 p-1">
+                            <label class="form-label" for="txt-cpf">CPF :</label>
+                            <input class="form-control form-control-sm" type="text" id="txt-cpf" maxlength="25" oninput="mascara_cpf(this)" >
+                        </div>
+
+                    </div>
+                  
+                </form>
+
+                <p class="m-2 text-danger">* Confirme os dados do paciente antes do preenchimento dos dados do atendimento</p>
+
+            </div>
+
+            <div class="tab-pane p-2 fade" id="atendimento" role="tabpanel" aria-labelledby="atendimento-tab">
+
+                <div class="d-flex flex-row row-cols-3">
+
+                    <div class="col w-15 p-1">
+                        <label class="form-label" for="txt-id-atend">Nr Atendimento :</label>
+                        <input class="form-control form-control-sm fw-bold text-end" type="text" id="txt-id-atend" value="0" readonly>
+                    </div>
+                    
+                    <div class="col w-15 p-1">
+                        <label class="form-label" for="txt-dt-atend">Data Atendimento :</label>
+                        <input class="form-control form-control-sm text-end" type="text" id="txt-dt-atend" readonly >
+                    </div>
+
+                    <div class="col w-10 p-1">
+                        <label class="form-label" for="sel-preferencial">Preferencial :</label>
+                        <select class="form-select form-select-sm" id="sel-preferencial">
+                            <option value="0"></option>
+                            <option value="1">Não</option>
+                            <option value="2">Sim</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="d-flex flex-row row-cols-3">    
+
+                    <div class="col w-25 p-1">
+                        <label class="form-label" for="sel-tp-atend">Tipo Atendimento :</label>
+                        <select class="form-select form-select-sm" id="sel-tp-atend">
+                            <option value="0"></option>                       
+                        </select>
+                    </div>
+
+                    <div class="col w-25 p-1">
+                        <label class="form-label" for="sel-rg-atend">Regime Atendimento :</label>
+                        <select class="form-select form-select-sm" id="sel-rg-atend">
+                            <option value="0"></option>                            
+                        </select>
+                    </div>
+
+                    <div class="col w-25 p-1">
+                        <label class="form-label" for="sel-esp-atend">Especialidade Atendimento :</label>
+                        <select class="form-select form-select-sm" id="sel-esp-atend">
+                            <option value="0"></option>                             
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="d-flex flex-row row-cols-3">
+
+                    <div class="col w-35 p-1">
+                        <label class="form-label" for="txt-med-assist">Nome Medico Assistente :</label>
+                        <input class="form-control form-control-sm" type="text" id="txt-med-assist" maxlength="120">                        
+                    </div>
+
+                    <div class="col w-15 p-1">
+                        <label class="form-label" for="txt-med-assist">CRM (medico assistente) :</label>
+                        <input class="form-control form-control-sm" type="text" id="txt-crm-assist" maxlength="50">                        
+                    </div>
+
+                    <div class="col w-25 p-1">
+                        <label class="form-label" for="txt-med-assist">Especialidade (medico assistente) :</label>
+                        <input class="form-control form-control-sm" type="text" id="txt-esp-assist" maxlength="50">                        
+                    </div>
+                            
+                </div>
+
+                <div class="d-flex flex-row row-cols-1">
+
+                    <div class="col w-100 p-1">
+                        <label class="form-label" for="txt-observ">Observação :</label>
+                        <textarea class="form-control" id="txt-observ" rows="3" maxlength="250"></textarea>
+                    </div>
+                            
+                </div>
+
+                <div class="d-flex flex-row row-cols-1">
+
+                    <div class="col w-35 p-1">
+                        <label class="form-label" for="txt-acompanhante">Nome Acompanhante :</label>
+                        <input class="form-control form-control-sm" type="text" id="txt-acompanhante" maxlength="120">
+                    </div>
+                            
+                </div>
+
+            </div>
+
+            <div class="tab-pane p-2 fade" id="upload" role="tabpanel" aria-labelledby="upload-tab">
+
+                <div class="d-flex flex-row row-cols-1 px-2">
+
+                    <div class="col col-lg-12 text-end p-0 pb-2">
+                        <button class="btn btn-sm" onclick="AddArquivo()">
+                            <img src="/img/adicionar.svg" height="20" width="20">&nbsp;Novo Arquivo                            
+                        </button>
+                    </div>
+
+                </div>
+
+                <div class="d-flex flex-row row-cols-1 px-2">
+
+                    <div class="col col-lg-12 border">
+
+                        <table class="table table-sm table-hover pb-0">
+          
+                            <thead>
+                        
+                                <tr>
+                                    <th align="center" scope="col">#</th>
+                                    <th align="left" scope="col">Nome Exame</th>
+                                    <th align="left" scope="col">Nome Arquivo</th>
+                                    <th align="left" scope="col">Ação</th>                                        
+                                </tr> 
+                        
+                            </thead>
+                        
+                            <tbody id='tbody-exam'>
+                        
+                            </tbody>
+                        
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+            
+        </div>
+
+    </div>
+
+    <div class="d-flex flex-row pt-1 justify-content-end">
+                                    
+        <button type="button" class="btn btn-sm me-2" id="btn-save" onclick="SalvarAtendimento()">
+            <img src="/img/salvar.svg" height="22" width="22"><span class="p-2">Salvar</span>
+        </button>
+
+        <button type="button" class="btn btn-sm" id="btn-close" onclick="LimparPloter()">
+            <img src="/img/exit.svg" height="22" width="22"><span class="p-2">Fechar</span>
+        </button>
+        
+    </div>
+
+</div>
+   
+<!------------------------------------------
+  MODAL UPLOAD DE ENCAMINHAMENTO E EXAMES
+-------------------------------------------->
+<div id="modal-upload" class="modal" role="dialog" tabindex="-1">
+
+    <div class="model-inner" id="card-upload">
+
+        <div class="d-flex flex-column border rounded-1 p-1">
+
+            <!-- Header Modal --> 
+            <div class="d-flex flex-row p-1 border rounded-1">
+              <span class="sub-tit" id="tit-modal-upload"></span> 
+            </div>
+      
+            <!-- Body Modal -->
+            <div class="d-flex flex-column border rounded-1 mt-1 p-1">
+      
+              <div class="d-flex flex-row row-cols-1 m-1">
+                
+                <div class="col w-100 p-0">
+                    <label class="form-label pb-1" for="sel-tipo-arquivo">Tipo Arquivo :</label>
+                    <select class="form-select form-select-sm fs-6" id="sel-tipo-arquivo" onchange="this.value == 'EXM' ? elem('txt-nm-exame').removeAttribute('disabled') : elem('txt-nm-exame').setAttribute('disabled','disabled') ">
+                        <option value="0"></option>
+                        <option value="ENC">Encaminhamento</option>
+                        <option value="EXM">Exames</option>
+                    </select>
+                </div>
+
+              </div>
+      
+              <div class="d-flex flex-row row-cols-1 m-1">
+
+                <div class="col w-100 p-0">
+                    <label for="txt-nm-exam" class="form-label">Nome do Exame :</label>
+                    <input class="form-control form-control-sm" type="text" id="txt-nm-exame" disabled>
+                </div>
+              
+              </div>
+    
+              <div class="d-flex flex-row row-cols-1 m-1">
+
+                <div class="col w-100 p-0">
+                    <label for="txt-nm-arq" class="form-label">Arquivo :</label>
+                    <input class="form-control form-control-sm" type="text" id="txt-nm-arq" name="txt-nm-arq" disabled>
+                </div>
+                
+              </div>
+
+              <div class="d-flex flex-column m-1">
+
+                <div class="col w-100 p-0 text-center">
+                    <label for="arquivo" class="btn btn-sm">
+                        <img src="/img/select-file.svg" height="18" width="18">
+                        <span class="ms-1">Adicionar um Arquivo</span></label>
+                    <input class="form-control form-control-sm" hidden type="file" id="arquivo" name="arquivo" style="font-size: 13px;" onchange="elem('txt-nm-arq').value = this.files[0].name">
+                </div>
+
+                <div class="col w-100 p-0 text-center">
+                    <p class="text-center text-danger " style="margin-bottom: 0px;"><small>Tipo de arquivo permitido para upload JPEG, PNG e PDF.</small></p>
+                    <p class="text-center text-danger " style="margin-bottom: 0px;"><small>Tamanho maximo para o arquivo 350kb</small></p>
+                </div>
+
+              </div>
+      
+            </div>
+      
+            <!-- Footer Modal -->
+            <div class="d-flex flex-column mt-1">
+      
+              <div class="d-flex flex-row justify-content-end">
+      
+                <button type="button" class="btn btn-sm me-2" onclick="UpArquivo()">
+                    <img src="/img/upload.svg" height="22" width="24">
+                    <span class="ms-0">Upload</span>
+                </button>
+
+                <button type="button" class="btn btn-sm" onclick="closeModal('modal-upload')">
+                    <img src="/img/exit.svg" height="18" width="18">
+                    <span class="ms-1">Fechar</span>
+                </button>
+      
+              </div>
+      
+            </div>
+      
+        </div>
+
+    </div>
+
+</div>
+
+<!---------------------------------------
+  MODAL SELECIONA PACIENTE
+----------------------------------------->
+<div id="modal-sel-pac" class="modal" role="dialog" tabindex="-1">
+
+    <div class="model-inner" id="card">
+
+        <div class="d-flex flex-column border rounded-1 p-1" style="height: calc(100vh - 350px);">
+
+            <!-- Header Modal --> 
+            <div class="d-flex flex-row p-1 border rounded-1">
+              <span class="sub-tit" id="tit-modal"></span> 
+            </div>
+      
+            <!-- Body Modal -->
+            <div class="d-flex flex-column border rounded-1 mt-1 p-0">
+      
+              <div class="d-flex flex-row row-cols-3 h-100 barra">
+                
+                    <div class="col w-35 p-0">
+                        <input type="text" 
+                            class="form-control form-control-sm m-0 botoes" id="txt-nm-pac" 
+                            placeholder="digite o nome do paciente para pesquisar" 
+                            style="margin-top: 2px; height: 32px;">
+                    </div>
+
+                    <div class="col w-35 py-0">
+                                    
+                        <button type="button" class="btn btn-sm ms-1 botoes" onclick="CarregarPacientes()">
+                            <img src="/img/find.svg" height="16" width="16"><small class="ms-1">Pesquisar</small>       
+                        </button>
+
+                        <button type="button" class="btn btn-sm botoes" id="btn-novo-pac" onclick="AddPaciente()" disabled>
+                            <img src="/img/adicionar.svg" height="16" width="16"><small class="ms-1">Novo Paciente</small>
+                        </button>
+
+                        <button type="button" class="btn btn-sm botoes" onclick="closeModal('modal-sel-pac')">
+                            <img src="/img/exit.svg" height="16" width="16"><small class="ms-1">Fechar</small>
+                        </button>                    
+            
+                    </div>
+                    
+                    <div class="col w-30 p-0">
+
+                        <div class="d-flex flex-row justify-content-end">
+
+                            <small class="text-end text-muted w-45" style="margin-top: 10px;">Paginação :</small>
+                            <select class="form-select form-select-sm ms-3 w-35" id="sel-paginacao" style="height: 32px;"> 
+                                <option value="0">...</option>                       
+                            </select>
+
+                        </div>
+
+                    </div>
+
+              </div>
+            
+            </div>  
+
+            <div class="d-flex flex-column border rounded-1 mt-1">  
+
+              <div class="d-flex flex-row row-cols-1 m-1">
+
+                <table class="table table-sm table-hover pb-0">
+          
+                    <thead>
+                
+                        <tr>
+                            <th align="center" scope="col">#</th>
+                            <th align="left" scope="col">Nome Paciente</th>
+                            <th align="left" scope="col">Data Nascimento</th>
+                            <th align="left" scope="col">Nome Mãe</th>              
+                            <th align="left" scope="col">Ação</th>
+                        </tr> 
+                
+                    </thead>
+                
+                    <tbody id='tbody'>
+                
+                    </tbody>
+            
+                </table>
+                
+              </div>
+      
+            </div>
+          
+        </div>
+
+    </div>
+
+</div>
+
+<!---------------------------------------
+  MODAL CADASTRO DE PACIENTES
+----------------------------------------->
+<div id="modal-cad-pac" class="modal" role="dialog" tabindex="-1">
+
+    <div class="model-inner" id="card-cad-pac">
+
+        <div class="d-flex flex-column p-1 border rounded-1">
+
+             <!-- Header Modal --> 
+             <div class="d-flex flex-row p-1 border rounded-1">
+                <span class="sub-tit" id="tit-modal-cad-pac"></span> 
+              </div>
+
+              <!-- body Modal -->
+              <div class="d-flex flex-column p-1 border rounded-1 mt-1">
+
+                <ul class="nav nav-tabs mt-1" id="tab-cad-pac" role="tablist">
+
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="pessoal-tab" 
+                                data-bs-toggle="tab" 
+                                data-bs-target="#pessoal" type="button" role="tab" aria-controls="pessoal" aria-selected="true">Pessoais</button>
+                    </li>
+
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="endereco-tab" 
+                                data-bs-toggle="tab" 
+                                data-bs-target="#endereco" type="button" role="tab" aria-controls="endereco" aria-selected="false">Endereço</button>
+                    </li>
+
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="documentos-tab" 
+                                data-bs-toggle="tab" 
+                                data-bs-target="#documentos" type="button" role="tab" aria-controls="documentos" aria-selected="false">Documentos</button>
+                    </li>
+
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="contatos-tab" 
+                                data-bs-toggle="tab" 
+                                data-bs-target="#contatos" type="button" role="tab" aria-controls="contatos" aria-selected="false">Contatos</button>
+                    </li>
+
+                </ul>
+
+                <div class="tab-content border border-top-0 rounded-1 rounded-top-0 p-1" id="tab-content-pac"  style="height: 18em;">
+
+                    <div class="tab-pane p-1 show active" id="pessoal" role="tabpanel" aria-labelledby="pessoal-tab">
+                
+                        <div class="d-flex flex-row row-cols-3 pb-2">
+
+                            <div class="col w-15 px-2">
+                                <label class="form-label" for="txt-id-pac">Prontuario :</label>
+                                <input class="form-control form-control-sm text-end" type="text" id="txt-id-pac" value="0" readonly>
+                            </div>
+
+                            <div class="col w-40 px-2">
+                                <label class="form-label" for="txt-nome-pac">Nome Paciente :</label>
+                                <input class="form-control form-control-sm" type="text" id="txt-nome-pac" maxlength="150">
+                            </div>
+
+                            <div class="col w-20 px-3">
+                                <label class="form-label" for="txt-dtnasc-pac">Data Nasc. :</label>
+                                <input class="form-control form-control-sm" type="date" id="txt-dtnasc-pac">
+                            </div>
+
+                        </div>
+
+                        <div class="d-flex flex-row row-cols-2 pb-2">
+
+                            <div class="col w-40 px-2">
+                                <label class="form-label" for="txt-nm-mae-pac">Nome Mãe :</label>
+                                <input class="form-control form-control-sm" type="text" id="txt-nm-mae-pac" maxlength="150">
+                            </div>
+
+                            <div class="col w-40 px-2">
+                                <label class="form-label" for="txt-nm-pai-pac">Nome Pai :</label>
+                                <input class="form-control form-control-sm" type="text" id="txt-nm-pai-pac" maxlength="150">
+                            </div>
+
+                        </div>
+
+                        <div class="d-flex flex-row row-cols-3">
+
+                            <div class="col w-15 px-2">
+                                <label class="form-label" for="sel-sexo-pac">Sexo :</label>
+                                <select class="form-select form-select-sm" id="sel-sexo-pac">
+                                    <option value="0"></option>                         
+                                </select>
+                            </div>
+
+                            <div class="col w-15 px-2">
+                                <label class="form-label" for="sel-raca-pac">Raça :</label>
+                                <select class="form-select form-select-sm" id="sel-raca-pac">
+                                    <option value="0"></option>                          
+                                </select>
+                            </div>
+
+                            <div class="col w-15 px-2">
+                                <label class="form-label" for="sel-est-civil-pac">Estado Civil :</label>
+                                <select class="form-select form-select-sm" id="sel-est-civil-pac">                        
+                                </select>
+                            </div>
+                                        
+                        </div>
+
+                        <div class="d-flex flex-row row-cols-2">
+
+                            <div class="col w-30 px-2">
+                                <label class="form-label" for="txt-natur-pac">Naturalidade :</label>
+                                <input class="form-control form-control-sm" type="text" id="txt-natur-pac" maxlength="90">
+                            </div>
+
+                            <div class="col w-30 px-2">
+                                <label class="form-label" for="txt-nacio-pac">Nacionalidade :</label>
+                                <input class="form-control form-control-sm" type="text" id="txt-nacio-pac" maxlength="90">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="tab-pane p-2 pb-1" id="endereco" role="tabpanel" aria-labelledby="endereco-tab">
+
+                        <div class="d-flex flex-row row-cols-2 pb-2">
+
+                            <div class="col w-40 px-2">
+                                <label class="form-label" for="txt-ender-pac">Endereço :</label>
+                                <input class="form-control form-control-sm" type="text" id="txt-ender-pac" maxlength="150">
+                            </div>
+
+                            <div class="col w-10 px-2">
+                                <label class="form-label" for="txt-num-pac">Numero :</label>
+                                <input class="form-control form-control-sm" type="text" id="txt-num-pac" maxlength="10">
+                            </div>
+
+                            <div class="col w-30 px-2">
+                                <label class="form-label" for="txt-bairro-pac">Bairro :</label>
+                                <input class="form-control form-control-sm" type="text" id="txt-bairro-pac" maxlength="120">
+                            </div>
+
+                        </div>
+
+                        <div class="d-flex flex-row row-cols-3 pb-2">
+
+                            <div class="col w-25 px-2">
+                                <label class="form-label" for="txt-cidade-pac">Cidade :</label>
+                                <input class="form-control form-control-sm" type="text" id="txt-cidade-pac" maxlength="120">
+                            </div>
+
+                            <div class="col w-10 px-2">
+                                <label class="form-label" for="txt-uf-pac">UF :</label>
+                                <input class="form-control form-control-sm" type="text" id="txt-uf-pac" maxlength="2">
+                            </div>
+
+                            <div class="col w-10 px-2">
+                                <label class="form-label" for="txt-cep">CEP :</label>        
+                                <input class="form-control form-control-sm" type="text" id="txt-cep-pac" maxlength="12">
+                            </div>
+
+                            <div class="col w-10 p-0" style="height: 34px; margin-top: 23px;">
+                                <button type="button" class="btn btn-sm" onclick="AbrirBuscaCEP('txt-cep-pac','txt-ender-pac','txt-bairro-pac','txt-cidade-pac','txt-uf-pac')">
+                                    <img src="/img/find.svg" height="16" width="16">
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="tab-pane p-2 pb-1" id="documentos" role="tabpanel" aria-labelledby="documentos-tab">
+
+                        <div class="d-flex flex-row row-cols-2 pb-2">
+                        
+                            <div class="col w-25 px-2">
+                                <label class="form-label" for="txt-rg-pac">Nr Identidade</label>
+                                <input class="form-control form-control-sm" type="text" id="txt-rg-pac" maxlength="20">
+                            </div>
+
+                            <div class="col w-10 px-2">
+                                <label class="form-label" for="txt-org-pac">Orgão :</label>
+                                <input class="form-control form-control-sm" type="text" id="txt-org-pac" maxlength="15">
+                            </div>
+
+                        </div>
+
+                        <div class="d-flex flex-row row-cols-1 pb-2">
+
+                            <div class="col w-25 px-2">
+                                <label class="form-label" for="txt-cns-pac">Cartão SUS :</label>
+                                <input class="form-control form-control-sm" type="text" id="txt-cns-pac" maxlength="20">
+                            </div>
+
+                        </div>
+
+                        <div class="d-flex flex-row row-cols-1 pb-2">
+
+                            <div class="col w-25 px-2">
+                                <label class="form-label" for="txt-cpf-pac">CPF :</label>
+                                <input class="form-control form-control-sm" type="text" id="txt-cpf-pac" maxlength="25" oninput="mascara_cpf(this)">
+                            </div>
+
+                        </div>
+                        
+                    </div>
+
+                    <div class="tab-pane p-2 pb-1 fade" id="contatos" role="tabpanel" aria-labelledby="contatos-tab">
+
+                        <div class="d-flex flex-row row-cols-1 pb-2">
+
+                            <div class="col w-20 px-2">
+                                <label class="form-label" for="txt-cel-1-pac">Celular Principal :</label>
+                                <input class="form-control form-control-sm" type="text" id="txt-cel-1-pac" maxlength="20">
+                            </div>
+
+                        </div>
+
+                        <div class="d-flex flex-row row-cols-1 pb-2">
+
+                            <div class="col w-20 px-2">
+                                <label class="form-label" for="txt-cel-2-pac">Celular Secundario :</label>
+                                <input class="form-control form-control-sm" type="text" id="txt-cel-2-pac" maxlength="20">
+                            </div>
+
+                        </div>
+
+                        <div class="d-flex flex-row row-cols-1 pb-2">
+
+                            <div class="col w-35 px-2">
+                                <label class="form-label" for="txt-email-pac">Email :</label>
+                                <input class="form-control form-control-sm" type="text" id="txt-email-pac" maxlength="100">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+              </div>
+
+              <div class="d-flex flex-row justify-content-end py-1">
+
+                <button type="button" class="btn btn-sm me-2" onclick="SalvarPaciente()">                                                                               
+                    <img src="/img/salvar.svg" height="18" width="18">
+                    <span class="ms-1">Salvar</span>       
+                </button>
+
+                <button type="button" class="btn btn-sm" onclick="closeModal('modal-cad-pac')">
+                    <img src="/img/exit.svg" height="18" width="18">         
+                    <span class="ms-1">Fechar</span>
+                </button>
+
+              </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!---------------------------------------
+  MODAL BUSCA CEP's 
+----------------------------------------->
+<div id="modal-sel-cep" class="modal" role="dialog" tabindex="-1">
+
+    <div class="model-inner" id="card-cep">
+
+        <div class="d-flex flex-column p-1 border rounded-1">
+
+            <!-- Header Modal --> 
+            <div class="d-flex flex-row p-1 border rounded-1">
+                <span class="sub-tit" id="tit-modal-cep"></span> 
+            </div>
+
+            <!-- body Modal --> 
+            <div class="d-flex flex-column mt-1" id="cep">
+
+                <input type="text" hidden id="tag-cep">
+                <input type="text" hidden id="tag-ender">
+                <input type="text" hidden id="tag-bai">
+                <input type="text" hidden id="tag-cid">
+                <input type="text" hidden id="tag-uf">
+
+                <div class="d-flex flex-column pb-2 border rounded-1">
+
+                    <div class="d-flex flex-row row-cols-3">
+                        
+                        <div class="col w-20 px-2">
+                            <label class="form-label" for="sel-tp-log">Tipo :</label>
+                            <select class="form-select form-select-sm" id="sel-tp-log">
+                                <option value="0"></option>
+                                <option value="RUA">Rua</option>
+                                <option value="AVENIDA">Avenida</option>
+                                <option value="TRAVESSA">Travessa</option>
+                                <option value="PRACA">Praça</option>
+                                <option value="QUADRA">Quadra</option>
+                                <option value="LOTEAMENTO">Loteamento</option>
+                                <option value="LARGO">Largo</option>
+                                <option value="ESTRADA">Estrada</option>
+                                <option value="POVOADO">Povoado</option>
+                            </select>
+                        </div>
+
+                        <div class="col w-50 px-2">
+                            <label class="form-label" for="txt-log">Logradouro :</label>
+                            <input class="form-control form-control-sm" type="text" id="txt-log" maxlength="120">
+                        </div>
+
+                        <div class="col w-30 p-0">
+                                    
+                            <button type="button" class="btn btn-sm p-0" onclick="BuscarCEP()" style="height: 31px; width:85px;margin-top:24px">
+                                <img src="/img/find.svg" height="16" width="16">
+                                <small class="ms-1">Pesquisar</small>       
+                            </button>
+
+                            <button type="button" class="btn btn-sm p-0" onclick="closeModal('modal-sel-cep')" style="height: 31px;width:75px;margin-top:24px">
+                                <img src="/img/exit.svg" height="16" width="16">         
+                                <small class="ms-1">Fechar</small>       
+                            </button>
+                
+                        </div>
+
+                    </div>
+
+                    <div class="d-flex flex-row row-cols-2 pb-1">
+
+                        <div class="col w-40 px-2">
+                            <label class="form-label" for="txt-cid">Cidade :</label>
+                            <input class="form-control form-control-sm" type="text" id="txt-cid" maxlength="120">
+                        </div>
+
+                        <div class="col w-15 px-2">
+                            <label class="form-label" for="txt-uf-cep">UF :</label>
+                            <input class="form-control form-control-sm" type="text" id="txt-uf-cep" maxlength="2">
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="d-flex flex-column mt-1 p-1 border rounded-1">
+
+                    <div class="d-flex flex-row row-cols-1 p-1 mt-1 border rounded-1 scroll-cep">
+
+                        <table class="table table-sm table-hover m-0 p-1">
+            
+                            <thead>
+                        
+                                <tr>
+                                    <th align="left" scope="col">CEP</th>
+                                    <th align="left" scope="col">Lograduoro</th>
+                                    <th align="left" scope="col">Bairro</th>
+                                    <th align="left" scope="col">Complemento</th>
+                                    <th align="left" scope="col">UF</th>              
+                                    <th align="left" scope="col">Ação</th>
+                                </tr> 
+                        
+                            </thead>
+                        
+                            <tbody id='tbody-cep'>
+                        
+                            </tbody>
+                    
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

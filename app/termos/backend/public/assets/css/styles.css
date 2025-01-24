@@ -1,0 +1,58 @@
+input[placeholder]::placeholder {
+  color:#bfbfbf !important;
+}
+
+.btn-term {
+  border: 1px solid #bfbfbf;
+  border-radius: 6px;
+  padding: 6px 12px;
+  background: transparent;
+}
+
+.btn-term:hover {
+  background: #bdbdbd;
+}
+
+/* Imagens na Tabela */
+img {
+  cursor: pointer;
+  transition:  0.2s ease;
+}
+
+img:hover {
+  transform: scale(1.33,1.33) !important;
+}
+
+
+input:focus, textarea:focus, select:focus {
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  border: 1px solid var(--bs-gray-500) !important;
+}
+
+.modal-content {
+  border: 2px outset var(--bs-gray-500);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
+}
+
+#sel-status-upt, #sel-status-ins {
+  font-size: 12px;
+}
+
+label {
+  font-size: 13px;
+  margin-bottom: .1rem !important;
+}
+
+textarea {
+  resize: none;
+}
+
+.modal-header {
+  height: 3rem !important;
+}
+
+.modal-footer {
+  height: 3.5rem;
+  padding: 4px;
+}

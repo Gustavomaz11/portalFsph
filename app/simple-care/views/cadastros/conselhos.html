@@ -1,0 +1,150 @@
+<style>
+  
+  #local .btn {
+    border: 1px solid var(--bs-gray-300) !important;
+    width: auto !important;
+  }
+
+  #local .btn:active {
+    background-color: var(--bs-gray-200) !important;
+  }
+  
+</style>
+
+<div class="d-flex flex-column border p-2 rounded-2 p-1 h-100 bg-white" id="local">
+  
+  <div class="d-flex flex-row border rounded-2 p-1">
+
+    <div class="d-flex flex-row justify-content-start w-50">
+
+      <input class="form-control form-control-sm w-55" placeholder="digite o nome do conselho para pesquisar" type="text" id="txt-pesq"> 
+                  
+      <button type="button" class="btn btn-sm ms-1 w-10" onclick="ConselhosCarregar(elem('txt-pesq').value,0)">
+        <img src="/img/find.svg" height="18" width="18">
+        <span>Pesquisar</span>
+      </button>
+
+      <button type="button" class="btn btn-sm ms-1 w-10" onclick="ConselhosAdicionar()">
+        <img src="/img/adicionar.svg" height="18" width="18">
+        <span>Novo</span>
+      </button>
+
+      <button type="button" class="btn btn-sm ms-1 w-10" onclick="LimparPloter()">
+        <img src="/img/exit.svg" height="18" width="18">         
+        <span>Fechar</span>
+      </button>
+
+    </div>
+
+    <div class="d-flex flex-row justify-content-end w-50">
+      <small class="mt-2 text-muted">Paginacão :</small>
+      <select class="form-select form-select-sm ms-1 w-15" id="sel-paginacao" onchange="ConselhosListar(this.value)"> 
+          <option value="0">...</option>                       
+      </select>
+    </div>
+    
+  </div>
+
+  <div class="d-flex flex-row mt-1">
+
+    <div class="d-flex flex-row border rounded-2 w-100 p-1">
+
+      <table class="table table-sm table-hover pb-0" id="tab">
+          
+        <thead>
+  
+          <tr>
+            <th align="center" scope="col">#</th>
+            <th align="left" scope="col">Conselhos</th>
+            <th align="left" scope="col">Sigla</th>          
+            <th align="left" scope="col">Ações</th>
+          </tr> 
+  
+        </thead>
+  
+        <tbody id='tbody'>
+        </tbody>
+  
+      </table>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!---------------------------------------
+  MODAL Inclui/Atualiza Conselhos 
+----------------------------------------->
+<div id="modal-padrao" class="modal" role="dialog" tabindex="-1">
+
+    <div class="model-inner" id="card">
+
+      <div class="d-flex flex-column border rounded-1 p-1">
+
+        <!-- Header Modal --> 
+        <div class="d-flex flex-row p-1 border rounded-1">
+          <span class="sub-tit" id="tit-modal"></span> 
+        </div>
+  
+        <!-- Body Modal -->
+        <div class="d-flex flex-column border rounded-1 mt-1">
+  
+          <div class="d-flex flex-row row-cols-2 p-1">
+            
+            <label class="col-form-label w-25 text-end" id="lblId" for="txt-id">ID :</label>
+            <div class="col w-15 px-2">        
+              <input class="form-control form-control-sm text-end" type="text" id="txt-id" value="0" disabled>
+            </div>
+  
+            <label class="col-form-label w-15 text-end" id="lblId" for="txt-id">Ativo :</label>
+            <div class="col form-check form-switch w-10 ms-2 py-1">
+              <input class="form-check-input" type="checkbox" role="switch" id="chk-ativo" checked>
+            </div>
+          
+          </div>
+  
+          <div class="d-flex flex-row row-cols-1 p-1">
+          
+            <label class="col-form-label w-25 text-end" id="lbl-nome" for="txt-nome">Nome :</label>
+            <div class="col w-70 px-2">
+                <input class="form-control form-control-sm" type="text" id="txt-nome" size="100">
+            </div>
+
+          </div>
+
+          <div class="d-flex flex-row row-cols-1 p-1">
+            
+            <label class="col-form-label w-25 text-end" id="lbl-sigla" for="txt-sigla">Sigla :</label>
+            <div class="col w-20 px-2">
+                <input class="form-control form-control-sm" type="text" id="txt-sigla" size="100">
+            </div>
+    
+          </div>
+  
+        </div>
+  
+        <!-- Footer Modal -->
+        <div class="d-flex flex-column mt-1">
+  
+          <div class="d-flex flex-row justify-content-end">
+  
+            <button class="btn btn-sm me-2" onclick="ConselhosSalvar()">
+              <img src="/img/salvar.svg" height="16" width="16">
+              <span>Salvar</span>
+            </button>
+  
+            <button class="btn btn-sm" onclick="closeModal('modal-padrao')">
+              <img src="/img/exit.svg" height="16" width="16">
+              <span>Fechar</span>
+            </button>
+  
+          </div>
+  
+        </div>
+  
+      </div>
+
+    </div>  
+
+</div>
